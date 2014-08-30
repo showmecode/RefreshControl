@@ -11,6 +11,17 @@
 
 @interface UIScrollView (RefreshControl)
 
+@property (nonatomic, strong) NSString *topRefreshControlPullToRefreshingText;
+@property (nonatomic, strong) NSString *topRefreshControlPullReleaseToRefreshingText;
+@property (nonatomic, strong) NSString *topRefreshControlpullRefreshingText;
+
+@property (nonatomic, strong) NSString *bottomRefreshControlPullToRefreshingText;
+@property (nonatomic, strong) NSString *bottomRefreshControlPullReleaseToRefreshingText;
+@property (nonatomic, strong) NSString *bottomRefreshControlpullRefreshingText;
+
+@property (nonatomic, strong) UIColor *statusTextColor;
+@property (nonatomic, strong) UIColor *loadingCircleColor;
+
 - (void)addTopRefreshControlUsingBlock:(void (^)())callback;
 - (void)addTopRefreshControlUsingBlock:(void (^)())callback refreshControlPullType:(RefreshControlPullType)refreshControlPullType;
 - (void)topRefreshControlStopRefreshing;

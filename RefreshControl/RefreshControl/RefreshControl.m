@@ -75,9 +75,8 @@
 // add refresh control to super scroll view, when init and dealloc call
 - (void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
-    if(self.superScrollView) {
-        [self.superScrollView removeObserver:self forKeyPath:@"contentOffset"];
-    }
+    
+    [self.superview removeObserver:self forKeyPath:@"contentOffset"];
     
     // add Observer for top refresh control
     if (!newSuperview) {
@@ -114,18 +113,9 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    if (!self.initInset) {
-        _scrollViewInsetRecord = [self superScrollView].contentInset;
+    if (!self.hasInitInset) {
+        _scrollViewInsetRecord = self.superScrollView.contentInset;
         _initInset = YES;
-
-        [self observeValueForKeyPath:@"contentSize"
-                            ofObject:nil
-                              change:nil
-                             context:nil];
-#pragma mark - TODO del ?
-        if (self.refreshControlState == RefreshControlStateRefreshing) {
-            self.refreshControlState = RefreshControlStateRefreshing;
-        }
     }
 }
 
@@ -196,16 +186,16 @@
     // Controls to scroll to the appropriate location to stay
     if (self.refreshControlType == RefreshControlTypeTop) {
         [UIView animateWithDuration:0.2 animations:^{
-            UIEdgeInsets inset = [self superScrollView].contentInset;
+            UIEdgeInsets inset = self.superScrollView.contentInset;
             inset.top = self.scrollViewInsetRecord.top + kPullControlHeight;
-            [self superScrollView].contentInset = inset;
+            self.superScrollView.contentInset = inset;
             // Set the scroll position to stay
-            [self superScrollView].contentOffset =
+            self.superScrollView.contentOffset =
             CGPointMake(0, -self.scrollViewInsetRecord.top - kPullControlHeight);
         }];
     } else {
         [UIView animateWithDuration:0.2 animations:^{
-            UIEdgeInsets inset = [self superScrollView].contentInset;
+            UIEdgeInsets inset = self.superScrollView.contentInset;
             CGFloat bottom = self.scrollViewInsetRecord.bottom + kPullControlHeight;
             CGFloat overHeight = [self scrollViewOverViewHeight];
             if (overHeight < 0) {
@@ -213,7 +203,7 @@
             }
             inset.bottom = bottom;
             // Set the scroll position to stay
-            [self superScrollView].contentInset = inset;
+            self.superScrollView.contentInset = inset;
         }];
     }
     
@@ -225,31 +215,31 @@
 - (void)stopRefreshing {
     if (self.refreshControlType == RefreshControlTypeTop) {
         // Drop-down control, rolled over just can not see the parent view of the head position (reduction inset)
-        UIEdgeInsets inset = [self superScrollView].contentInset;
+        UIEdgeInsets inset = self.superScrollView.contentInset;
         inset.top = self.scrollViewInsetRecord.top;
         [UIView animateWithDuration:0.2 animations:^{
-            [self superScrollView].contentInset = inset;
+            self.superScrollView.contentInset = inset;
         }];
     } else {
         // Loading is complete, the content does not fill the entire screen, contentOffset accompanying animation back to zero
         CGPoint tempOffset = CGPointZero;
         CGFloat animtionDuration = 0.2;
         CGFloat screenHeight = CGRectGetHeight([[UIScreen mainScreen] bounds]);
-        if ([self superScrollView].contentSize.height + kPullControlHeight > screenHeight) {
-            tempOffset = [self superScrollView].contentOffset;
+        if (self.superScrollView.contentSize.height + kPullControlHeight > screenHeight) {
+            tempOffset = self.superScrollView.contentOffset;
             animtionDuration = 0;
         }
         
         // AnimtionDuration bottom of the screen when the content does not exceed! = 0
         [UIView animateWithDuration:animtionDuration animations:^{
-            UIEdgeInsets inset = [self superScrollView].contentInset;
+            UIEdgeInsets inset = self.superScrollView.contentInset;
             inset.bottom = self.scrollViewInsetRecord.bottom;
-            [self superScrollView].contentInset = inset;
+            self.superScrollView.contentInset = inset;
         }];
         
         // Content exceeds the bottom of the screen, there are no rollback animation, direct load data, control `disappear`
         if (animtionDuration == 0) {
-            [self superScrollView].contentOffset = tempOffset;
+            self.superScrollView.contentOffset = tempOffset;
         }
     }
     self.refreshControlState = RefreshControlStateHidden;
@@ -284,6 +274,49 @@
             self.statusLabel.text = nil;
         }
             break;
+        default:
+            break;
+    }
+}
+
+#pragma mark - setting text
+
+- (void)setPullToRefreshing:(NSString *)pullToRefreshing {
+//    if ([pullToRefreshing isEqualToString:_pullToRefreshing]) {
+        _pullToRefreshing = [pullToRefreshing copy];
+//    }
+    
+    [self settingStatusText];
+}
+
+- (void)setPullReleaseToRefreshing:(NSString *)pullReleaseToRefreshing {
+//    if ([pullReleaseToRefreshing isEqualToString:_pullReleaseToRefreshing]) {
+        _pullReleaseToRefreshing = [pullReleaseToRefreshing copy];
+//    }
+    
+    [self settingStatusText];
+}
+
+- (void)setPullRefreshing:(NSString *)pullRefreshing {
+//    if (![pullRefreshing isEqualToString:_pullRefreshing]) {
+        _pullRefreshing = [pullRefreshing copy];
+//    }
+
+    [self settingStatusText];
+}
+
+
+- (void)settingStatusText {
+    switch (self.refreshControlState) {
+        case RefreshControlStatePulling:
+            self.statusLabel.text = self.pullReleaseToRefreshing;
+            break;
+        case RefreshControlStateOveredThreshold:
+            self.statusLabel.text = self.pullReleaseToRefreshing;
+            break;
+        case RefreshControlStateRefreshing:
+            self.statusLabel.text = self.pullRefreshing;
+            break;            
         default:
             break;
     }
@@ -360,11 +393,12 @@
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
+    [super willMoveToSuperview:newSuperview];
+    
+    [self.superview removeObserver:self forKeyPath:@"contentSize"];
+    
     if (!newSuperview) {
         return;
-    }
-    if(self.superScrollView) {
-        [self.superScrollView removeObserver:self forKeyPath:@"contentSize"];
     }
     if([newSuperview isKindOfClass:[UIScrollView class]]) {
         [newSuperview addObserver:self
@@ -372,9 +406,6 @@
                           options:NSKeyValueObservingOptionNew
                           context:NULL];
     }
-    
-    [super willMoveToSuperview:newSuperview];
-    NSLog(@"self.superScrollView: %@", self.superScrollView);
 }
 
 - (void)settingFrames {

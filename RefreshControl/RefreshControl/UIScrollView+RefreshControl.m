@@ -7,6 +7,7 @@
 //
 
 #import "UIScrollView+RefreshControl.h"
+#import "LoadingView.h"
 #import <objc/runtime.h>
 
 static const void *TopRefreshControlKey = &TopRefreshControlKey;
@@ -97,5 +98,74 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
     [self.bottomRefreshControl removeFromSuperview];
     self.bottomRefreshControl = nil;
 }
+
+#pragma mark - override accessors
+
+- (void)setTopRefreshControlPullToRefreshingText:(NSString *)topRefreshControlPullToRefreshingText {
+    self.topRefreshControl.pullReleaseToRefreshing = topRefreshControlPullToRefreshingText;
+}
+
+- (NSString *)topRefreshControlPullToRefreshingText {
+    return self.topRefreshControl.pullReleaseToRefreshing;
+}
+
+- (void)setTopRefreshControlPullReleaseToRefreshingText:(NSString *)topRefreshControlPullReleaseToRefreshingText {
+    self.topRefreshControl.pullReleaseToRefreshing = topRefreshControlPullReleaseToRefreshingText;
+}
+
+- (NSString *)topRefreshControlPullReleaseToRefreshingText {
+    return self.topRefreshControl.pullReleaseToRefreshing;
+}
+
+- (void)setTopRefreshControlpullRefreshingText:(NSString *)topRefreshControlpullRefreshingText {
+    self.topRefreshControl.pullRefreshing = topRefreshControlpullRefreshingText;
+}
+
+- (NSString *)topRefreshControlpullRefreshingText {
+    return self.topRefreshControl.pullRefreshing;
+}
+
+- (void)setBottomRefreshControlPullToRefreshingText:(NSString *)bottomRefreshControlPullToRefreshingText {
+    self.bottomRefreshControl.pullToRefreshing = bottomRefreshControlPullToRefreshingText;
+}
+
+- (NSString *)bottomRefreshControlPullToRefreshingText {
+    return self.bottomRefreshControl.pullToRefreshing;
+}
+
+- (void)setBottomRefreshControlPullReleaseToRefreshingText:(NSString *)bottomRefreshControlPullReleaseToRefreshingText {
+    self.bottomRefreshControl.pullReleaseToRefreshing = bottomRefreshControlPullReleaseToRefreshingText;
+}
+
+- (NSString *)bottomRefreshControlPullReleaseToRefreshingText {
+    return self.bottomRefreshControl.pullReleaseToRefreshing;
+}
+
+- (void)setBottomRefreshControlpullRefreshingText:(NSString *)bottomRefreshControlpullRefreshingText {
+    self.bottomRefreshControl.pullRefreshing = bottomRefreshControlpullRefreshingText;
+}
+
+- (NSString *)bottomRefreshControlpullRefreshingText {
+    return self.bottomRefreshControl.pullRefreshing;
+}
+
+- (void)setStatusTextColor:(UIColor *)statusTextColor {
+    self.topRefreshControl.statusLabel.textColor = statusTextColor;
+    self.bottomRefreshControl.statusLabel.textColor = statusTextColor;
+}
+
+- (UIColor *)statusTextColor {
+    return self.topRefreshControl.statusLabel.textColor;
+}
+
+- (void)setLoadingCircleColor:(UIColor *)loadingCircleColor {
+    self.topRefreshControl.loadingView.lineColor = loadingCircleColor;
+    self.bottomRefreshControl.loadingView.lineColor = loadingCircleColor;
+}
+
+- (UIColor *)loadingCircleColor {
+    return self.topRefreshControl.loadingView.lineColor;
+}
+
 
 @end

@@ -29,7 +29,7 @@
         [_dataSource addObject:data];
     }
 
-    typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     [self.tableView addTopRefreshControlUsingBlock:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             for (int i = 0; i < 5; i++) {
@@ -41,7 +41,7 @@
             [weakSelf.tableView topRefreshControlStopRefreshing];
             [weakSelf.tableView reloadData];
         });
-    }];
+    } refreshControlPullType:RefreshControlPullTypeOldFashion];
     
     [self.tableView addBottomRefreshControlUsingBlock:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -50,11 +50,15 @@
                 [weakSelf.dataSource addObject:data];
             }
         });
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [weakSelf.tableView bottomRefreshControlStopRefreshing];
             [weakSelf.tableView reloadData];
         });
-    }];
+    } refreshControlPullType:RefreshControlPullTypeOldFashion];
+    
+    self.tableView.topRefreshControlPullToRefreshingText = @"ddd";
+    self.tableView.statusTextColor = [UIColor redColor];
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

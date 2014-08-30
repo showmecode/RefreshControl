@@ -14,7 +14,7 @@
 TopRefreshControl
     
 ```objective-c
-    typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     [self.tableView addTopRefreshControlUsingBlock:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
           // request for datas
@@ -29,7 +29,7 @@ TopRefreshControl
 BottomRefreshControl
 
 ```objective-c
-    typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     [self.tableView addBottomRefreshControlUsingBlock:^{        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
           // request for datas
         });
