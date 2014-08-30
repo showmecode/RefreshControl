@@ -25,7 +25,6 @@
 @implementation RefreshControl
 @synthesize statusLabel = _statusLabel;
 @synthesize loadingView = _loadingView;
-//@synthesize superScrollView = _superScrollView;
 
 #pragma mark -
 #pragma mark - override super messages
@@ -169,13 +168,13 @@
     CGFloat properContentOffsetVerticalValue = properVerticalPullValue + kPullControlHeight;
 
     if (contentOffSetVerticalValue <= properContentOffsetVerticalValue) {
-        // 正在拖动，但是还没有到临界点
+        // Being dragged, but not to the critical point
         self.refreshControlState = RefreshControlStatePulling;
     } else if (contentOffSetVerticalValue > properContentOffsetVerticalValue) {
-        // 超过临界点(箭头反向、改变提示文字)，松手会执行Action(显示菊花，改变提示文字)
+        // Above the critical point (arrow reverse, change prompt text), let go will execute Action (display chrysanthemums, change prompt text)
         self.refreshControlState = RefreshControlStateOveredThreshold;
     } else {
-        // 反方向拖动、根本进不来
+        // Drag the opposite direction, did not come
         self.refreshControlState = RefreshControlStateHidden;
     }
 }
@@ -194,19 +193,17 @@
 }
 
 - (void)startRefreshing {
-    // 控件滚动到合适位置停留
+    // Controls to scroll to the appropriate location to stay
     if (self.refreshControlType == RefreshControlTypeTop) {
-        // 下拉控件
         [UIView animateWithDuration:0.2 animations:^{
             UIEdgeInsets inset = [self superScrollView].contentInset;
             inset.top = self.scrollViewInsetRecord.top + kPullControlHeight;
             [self superScrollView].contentInset = inset;
-            // 设置滚动停留的位置
+            // Set the scroll position to stay
             [self superScrollView].contentOffset =
             CGPointMake(0, -self.scrollViewInsetRecord.top - kPullControlHeight);
         }];
     } else {
-        // 上拉控件
         [UIView animateWithDuration:0.2 animations:^{
             UIEdgeInsets inset = [self superScrollView].contentInset;
             CGFloat bottom = self.scrollViewInsetRecord.bottom + kPullControlHeight;
@@ -215,7 +212,7 @@
                 bottom -= overHeight;
             }
             inset.bottom = bottom;
-            // 设置滚动停留的位置
+            // Set the scroll position to stay
             [self superScrollView].contentInset = inset;
         }];
     }
@@ -226,16 +223,15 @@
 }
 
 - (void)stopRefreshing {
-    // 事务执行完成
     if (self.refreshControlType == RefreshControlTypeTop) {
-        // 下拉控件，滚到父视图头部以上刚好看不见位置(还原inset)
+        // Drop-down control, rolled over just can not see the parent view of the head position (reduction inset)
         UIEdgeInsets inset = [self superScrollView].contentInset;
         inset.top = self.scrollViewInsetRecord.top;
         [UIView animateWithDuration:0.2 animations:^{
             [self superScrollView].contentInset = inset;
         }];
     } else {
-        // 加载完成，内容没有占满整屏，contentOffset伴随动画回到zero
+        // Loading is complete, the content does not fill the entire screen, contentOffset accompanying animation back to zero
         CGPoint tempOffset = CGPointZero;
         CGFloat animtionDuration = 0.2;
         CGFloat screenHeight = CGRectGetHeight([[UIScreen mainScreen] bounds]);
@@ -244,14 +240,14 @@
             animtionDuration = 0;
         }
         
-        // 内容未超过屏幕底端时animtionDuration != 0
+        // AnimtionDuration bottom of the screen when the content does not exceed! = 0
         [UIView animateWithDuration:animtionDuration animations:^{
             UIEdgeInsets inset = [self superScrollView].contentInset;
             inset.bottom = self.scrollViewInsetRecord.bottom;
             [self superScrollView].contentInset = inset;
         }];
         
-        // 内容超过屏幕底端，不出现回滚动画，直接加载数据，控件`消失`
+        // Content exceeds the bottom of the screen, there are no rollback animation, direct load data, control `disappear`
         if (animtionDuration == 0) {
             [self superScrollView].contentOffset = tempOffset;
         }
@@ -320,7 +316,7 @@
     return self;
 }
 
-// 合适的垂直方向拖动的值
+// Dragging the vertical direction of the right value
 - (CGFloat)properVerticalPullValue {
     return self.refreshControlPullType == RefreshControlPullTypeOldFashion ? self.superScrollView.contentInset.top : 0.0f;
 }
