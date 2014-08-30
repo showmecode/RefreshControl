@@ -4,10 +4,10 @@
 2. Add the refresh control to your UIScrollview objects
 3. Using the control just like below methods
 
-![](./images/TopRefreshControlFashionStyle.gif)
-![](./images/BottomRefreshControlFashionStyle.gif)
-![](./images/TopRefreshControlFashionStyle.gif)
-![](./images/BottomRefreshControlFashionStyle.gif)
+[![](./images/TopRefreshControlFashionStyle.gif)]()
+[![](./images/BottomRefreshControlFashionStyle.gif)]()
+[![](./images/TopRefreshControlFashionStyle.gif)]()
+[![](./images/BottomRefreshControlFashionStyle.gif)]()
 
 ##  Fashion Style
 
@@ -55,3 +55,4 @@ BottomRefreshControl
 ```objective-c
 addBottomRefreshControlUsingBlock:refreshControlPullType:
 ```
+
