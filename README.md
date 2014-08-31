@@ -1,13 +1,16 @@
-# How  to use ?
+
+## How does it look like ?
+
+![(RefreshControlPullTypeInsensitive)](https://github.com/showmecode/RefreshControl/blob/master/images/RefreshControlPullTypeInsensitive.gif)
+![(RefreshControlPullTypeSensitive)](https://github.com/showmecode/RefreshControl/blob/master/images/RefreshControlPullTypeSensitive.gif)
+
+## How  to use ?
 
 1. `#import "UIScrollView+RefreshControl.h"`
 2. Add the refresh control to your UIScrollview objects
 3. Using the control just like below methods
 
-![(RefreshControlPullTypeInsensitive)](https://github.com/showmecode/RefreshControl/blob/master/images/RefreshControlPullTypeInsensitive.gif)
-![(RefreshControlPullTypeSensitive)](https://github.com/showmecode/RefreshControl/blob/master/images/RefreshControlPullTypeSensitive.gif)
-
-##  Sensitive Style
+###  Sensitive Style
 
 TopRefreshControl
     
@@ -38,7 +41,7 @@ BottomRefreshControl
     }];
 ```
 
-## Insensitive Style
+### Insensitive Style
 
 Pass refreshControlPullType `RefreshControlPullTypeInsensitive`
 
