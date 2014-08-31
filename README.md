@@ -9,7 +9,7 @@
 ![(TopRefreshControlOldFashionStyle)](https://github.com/showmecode/RefreshControl/blob/master/images/TopRefreshControlOldFashionStyle.gif)
 ![(BottomRefreshControlOldFashionStyle)](https://github.com/showmecode/RefreshControl/blob/master/images/BottomRefreshControlOldFashionStyle.gif)
 
-##  Fashion Style
+##  Sensitive Style
 
 TopRefreshControl
     
@@ -40,9 +40,9 @@ BottomRefreshControl
     }];
 ```
 
-## Old Fashion Style
+## Insensitive Style
 
-Pass refreshControlPullType `RefreshControlPullTypeOldFashion`
+Pass refreshControlPullType `RefreshControlPullTypeInsensitive`
 
 TopRefreshControl
 
