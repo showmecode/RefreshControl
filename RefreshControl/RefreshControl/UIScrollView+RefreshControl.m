@@ -36,7 +36,7 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
 
 - (void)addTopRefreshControlUsingBlock:(void (^)())callback {
     [self addTopRefreshControlUsingBlock:callback
-                  refreshControlPullType:RefreshControlPullTypeFashion];
+                  refreshControlPullType:RefreshControlPullTypeSensitive];
 }
 
 - (void)addTopRefreshControlUsingBlock:(void (^)())callback
@@ -74,7 +74,7 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
 
 - (void)addBottomRefreshControlUsingBlock:(void (^)())callback {
     [self addBottomRefreshControlUsingBlock:callback
-                     refreshControlPullType:RefreshControlPullTypeFashion];
+                     refreshControlPullType:RefreshControlPullTypeSensitive];
 }
 
 - (void)addBottomRefreshControlUsingBlock:(void (^)())callback

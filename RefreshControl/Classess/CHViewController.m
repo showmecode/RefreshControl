@@ -41,7 +41,7 @@
             [weakSelf.tableView topRefreshControlStopRefreshing];
             [weakSelf.tableView reloadData];
         });
-    } refreshControlPullType:RefreshControlPullTypeOldFashion];
+    } refreshControlPullType:RefreshControlPullTypeInsensitive];
     
     [self.tableView addBottomRefreshControlUsingBlock:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -54,11 +54,11 @@
             [weakSelf.tableView bottomRefreshControlStopRefreshing];
             [weakSelf.tableView reloadData];
         });
-    } refreshControlPullType:RefreshControlPullTypeOldFashion];
+    } refreshControlPullType:RefreshControlPullTypeInsensitive];
     
-    self.tableView.topRefreshControlPullToRefreshingText = @"ddd";
+    self.tableView.topRefreshControlPullToRefreshingText = @"下拉刷新";
     self.tableView.statusTextColor = [UIColor redColor];
-
+    self.tableView.loadingCircleColor = [UIColor orangeColor];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

@@ -351,7 +351,7 @@
 
 // Dragging the vertical direction of the right value
 - (CGFloat)properVerticalPullValue {
-    return self.refreshControlPullType == RefreshControlPullTypeOldFashion ? self.superScrollView.contentInset.top : 0.0f;
+    return self.refreshControlPullType == RefreshControlPullTypeInsensitive ? self.superScrollView.contentInset.top : 0.0f;
 }
 
 - (void)settingFrames {
@@ -431,7 +431,7 @@
     CGFloat overHeight = [self scrollViewOverViewHeight];
     CGFloat result = self.scrollViewInsetRecord.top;
     if (overHeight > 0) {
-        CGFloat adjustHeight = self.refreshControlPullType == RefreshControlPullTypeOldFashion ? 0 : kPullControlHeight;
+        CGFloat adjustHeight = self.refreshControlPullType == RefreshControlPullTypeInsensitive ? 0 : kPullControlHeight;
         return overHeight - result - adjustHeight;
     } else {
         return -result;

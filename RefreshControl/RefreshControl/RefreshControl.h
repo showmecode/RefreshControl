@@ -15,8 +15,8 @@ typedef NS_ENUM(NSInteger, RefreshControlType) {
 };
 
 typedef NS_ENUM(NSInteger, RefreshControlPullType) {
-    RefreshControlPullTypeFashion,
-    RefreshControlPullTypeOldFashion
+    RefreshControlPullTypeSensitive,
+    RefreshControlPullTypeInsensitive
 };
 
 typedef NS_ENUM (NSInteger, RefreshControlState) {
