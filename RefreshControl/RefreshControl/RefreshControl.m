@@ -27,16 +27,7 @@
 @synthesize loadingView = _loadingView;
 
 #pragma mark -
-#pragma mark - override super messages
-
-- (void)dealloc {
-    NSLog(@"%s", __FUNCTION__);
-}
-
-- (BOOL)respondsToSelector:(SEL)aSelector {
-    printf("SELECTOR: %s\n", [NSStringFromSelector(aSelector) UTF8String]);
-    return [super respondsToSelector:aSelector];
-}
+#pragma mark - RefreshControl
 
 - (id)init {
     self = [super init];
@@ -279,64 +270,12 @@
     }
 }
 
-#pragma mark - setting text
-
-- (void)setPullToRefreshing:(NSString *)pullToRefreshing {
-//    if ([pullToRefreshing isEqualToString:_pullToRefreshing]) {
-        _pullToRefreshing = [pullToRefreshing copy];
-//    }
-    
-    [self settingStatusText];
-}
-
-- (void)setPullReleaseToRefreshing:(NSString *)pullReleaseToRefreshing {
-//    if ([pullReleaseToRefreshing isEqualToString:_pullReleaseToRefreshing]) {
-        _pullReleaseToRefreshing = [pullReleaseToRefreshing copy];
-//    }
-    
-    [self settingStatusText];
-}
-
-- (void)setPullRefreshing:(NSString *)pullRefreshing {
-//    if (![pullRefreshing isEqualToString:_pullRefreshing]) {
-        _pullRefreshing = [pullRefreshing copy];
-//    }
-
-    [self settingStatusText];
-}
-
-
-- (void)settingStatusText {
-    switch (self.refreshControlState) {
-        case RefreshControlStatePulling:
-            self.statusLabel.text = self.pullReleaseToRefreshing;
-            break;
-        case RefreshControlStateOveredThreshold:
-            self.statusLabel.text = self.pullReleaseToRefreshing;
-            break;
-        case RefreshControlStateRefreshing:
-            self.statusLabel.text = self.pullRefreshing;
-            break;            
-        default:
-            break;
-    }
-}
-
 @end
 
 #pragma mark -
 #pragma mark - TopRefreshControl
 
 @implementation TopRefreshControl
-
-- (void)dealloc {
-    NSLog(@"%s", __FUNCTION__);
-}
-
-- (BOOL)respondsToSelector:(SEL)aSelector {
-    printf("SELECTOR: %s\n", [NSStringFromSelector(aSelector) UTF8String]);
-    return [super respondsToSelector:aSelector];
-}
 
 - (instancetype)init {
     self = [super init];
@@ -367,19 +306,10 @@
 
 @end
 
+#pragma mark -
 #pragma mark - BottomRefreshControl
 
 @implementation BottomRefreshControl
-
-- (void)dealloc {
-    NSLog(@"%s", __FUNCTION__);
-    [self.superScrollView removeObserver:self forKeyPath:@"contentSize"];
-}
-
-- (BOOL)respondsToSelector:(SEL)aSelector {
-    printf("SELECTOR: %s\n", [NSStringFromSelector(aSelector) UTF8String]);
-    return [super respondsToSelector:aSelector];
-}
 
 - (instancetype)init {
     self = [super init];

@@ -25,7 +25,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     _dataSource = [[NSMutableArray alloc] init];
     for (int i = 0; i < 9; i++) {
-        NSString *data = [NSString stringWithFormat:@"%d", i];
+        NSString *data = [NSString stringWithFormat:@"initial data number: %d", i];
         [_dataSource addObject:data];
     }
 
@@ -33,11 +33,11 @@
     [self.tableView addTopRefreshControlUsingBlock:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             for (int i = 0; i < 5; i++) {
-                NSString *data = [NSString stringWithFormat:@"pull down data %d", arc4random() % 100];
+                NSString *data = [NSString stringWithFormat:@"pull down data random number: %d", arc4random() % 100];
                 [weakSelf.dataSource insertObject:data atIndex:0];
             }
         });
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [weakSelf.tableView topRefreshControlStopRefreshing];
             [weakSelf.tableView reloadData];
         });
@@ -46,11 +46,11 @@
     [self.tableView addBottomRefreshControlUsingBlock:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             for (int i = 0; i < 5; i++) {
-                NSString *data = [NSString stringWithFormat:@"pull up data %d", arc4random() % 100];
+                NSString *data = [NSString stringWithFormat:@"pull up data random number: %d", arc4random() % 100];
                 [weakSelf.dataSource addObject:data];
             }
         });
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [weakSelf.tableView bottomRefreshControlStopRefreshing];
             [weakSelf.tableView reloadData];
         });
@@ -71,7 +71,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"initial data: %@", _dataSource[indexPath.row]];
+    cell.textLabel.text = _dataSource[indexPath.row];
     
     return cell;
 }

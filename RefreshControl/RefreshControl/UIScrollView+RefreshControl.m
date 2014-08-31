@@ -102,11 +102,11 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
 #pragma mark - override accessors
 
 - (void)setTopRefreshControlPullToRefreshingText:(NSString *)topRefreshControlPullToRefreshingText {
-    self.topRefreshControl.pullReleaseToRefreshing = topRefreshControlPullToRefreshingText;
+    self.topRefreshControl.pullToRefreshing = topRefreshControlPullToRefreshingText;
 }
 
 - (NSString *)topRefreshControlPullToRefreshingText {
-    return self.topRefreshControl.pullReleaseToRefreshing;
+    return self.topRefreshControl.pullToRefreshing;
 }
 
 - (void)setTopRefreshControlPullReleaseToRefreshingText:(NSString *)topRefreshControlPullReleaseToRefreshingText {
