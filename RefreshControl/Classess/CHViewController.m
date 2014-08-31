@@ -23,8 +23,9 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _dataSource = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 19; i++) {
         NSString *data = [NSString stringWithFormat:@"initial data number: %d", i];
         [_dataSource addObject:data];
     }
@@ -37,11 +38,11 @@
                 [weakSelf.dataSource insertObject:data atIndex:0];
             }
         });
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [weakSelf.tableView topRefreshControlStopRefreshing];
             [weakSelf.tableView reloadData];
         });
-    } refreshControlPullType:RefreshControlPullTypeInsensitive];
+    }];
     
     [self.tableView addBottomRefreshControlUsingBlock:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -50,15 +51,15 @@
                 [weakSelf.dataSource addObject:data];
             }
         });
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [weakSelf.tableView bottomRefreshControlStopRefreshing];
             [weakSelf.tableView reloadData];
         });
-    } refreshControlPullType:RefreshControlPullTypeInsensitive];
+    }];
     
-    self.tableView.topRefreshControlPullToRefreshingText = @"下拉刷新";
-    self.tableView.statusTextColor = [UIColor redColor];
-    self.tableView.loadingCircleColor = [UIColor orangeColor];
+//    self.tableView.topRefreshControlPullToRefreshingText = @"下拉刷新";
+//    self.tableView.statusTextColor = [UIColor redColor];
+//    self.tableView.loadingCircleColor = [UIColor orangeColor];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

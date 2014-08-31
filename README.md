@@ -4,10 +4,8 @@
 2. Add the refresh control to your UIScrollview objects
 3. Using the control just like below methods
 
-![(TopRefreshControlFashionStyle)](https://github.com/showmecode/RefreshControl/blob/master/images/TopRefreshControlFashionStyle.gif)
-![(BottomRefreshControlFashionStyle)](https://github.com/showmecode/RefreshControl/blob/master/images/BottomRefreshControlFashionStyle.gif)
-![(TopRefreshControlOldFashionStyle)](https://github.com/showmecode/RefreshControl/blob/master/images/TopRefreshControlOldFashionStyle.gif)
-![(BottomRefreshControlOldFashionStyle)](https://github.com/showmecode/RefreshControl/blob/master/images/BottomRefreshControlOldFashionStyle.gif)
+![(RefreshControlPullTypeInsensitive)](https://github.com/showmecode/RefreshControl/blob/master/images/RefreshControlPullTypeInsensitive.gif)
+![(RefreshControlPullTypeSensitive)](https://github.com/showmecode/RefreshControl/blob/master/images/RefreshControlPullTypeSensitive.gif)
 
 ##  Sensitive Style
 
