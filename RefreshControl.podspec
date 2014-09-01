@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "RefreshControl"
-  s.version      = "0.0.1"
+  s.version      = "1.0.0"
   s.summary      = "RefreshControl is an useful pull to refresh control for ios developer"
 
   s.description  = <<-DESC
@@ -49,10 +49,10 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
   
-  s.author             = { "atcuan" => "atcuan@gmail.com" }
-  # Or just: s.author    = "atcuan"
-  # s.authors            = { "atcuan" => "atcuan@gmail.com" }
-  # s.social_media_url   = "http://twitter.com/atcuan"
+  s.author             = { "Moch" => "atcuan@gmail.com" }
+  # Or just: s.author    = "Moch"
+  # s.authors            = { "Moch" => "atcuan@gmail.com" }
+  s.social_media_url   = "http://twitter.com/MochXiao"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -74,7 +74,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/showmecode/RefreshControl.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/showmecode/RefreshControl.git", :tag => "1.0.0" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
