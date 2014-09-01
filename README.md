@@ -7,8 +7,13 @@
 
 ## How  to use ?
 
-1. `#import "UIScrollView+RefreshControl.h"`
-2. Using the control just like below methods
+### Podfile
+
+`pod 'RefreshControl'`
+
+### Project
+
+ `#import "UIScrollView+RefreshControl.h"`
 
 ###  Sensitive Style
 
