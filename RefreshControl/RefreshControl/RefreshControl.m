@@ -18,6 +18,7 @@
 
 @property (nonatomic, assign, getter = isDragging) BOOL dragging;
 @property (nonatomic, assign) UIEdgeInsets scrollViewInsetRecord;
+@property (nonatomic, assign) CGSize scrollViewContentSizeRecord;
 @property (nonatomic, assign, getter = hasInitInset) BOOL initInset;
 
 @end
@@ -176,6 +177,10 @@
 - (void)startRefreshing {
     // Controls to scroll to the appropriate location to stay
     if (self.refreshControlType == RefreshControlTypeTop) {
+        _scrollViewContentSizeRecord = self.superScrollView.contentSize;
+        NSLog(@"start refreshing contentOffset: %@", NSStringFromCGPoint(self.superScrollView.contentOffset));
+        NSLog(@"start refreshing contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
+        
         [UIView animateWithDuration:0.2 animations:^{
             UIEdgeInsets inset = self.superScrollView.contentInset;
             inset.top = self.scrollViewInsetRecord.top + kPullControlHeight;
@@ -197,7 +202,6 @@
             self.superScrollView.contentInset = inset;
         }];
     }
-    
     if (_begainRefreshing) {
         _begainRefreshing();
     }
@@ -206,30 +210,36 @@
 - (void)stopRefreshing {
     if (self.refreshControlType == RefreshControlTypeTop) {
         // Drop-down control, rolled over just can not see the parent view of the head position (reduction inset)
-        UIEdgeInsets inset = self.superScrollView.contentInset;
-        inset.top = self.scrollViewInsetRecord.top;
-        [UIView animateWithDuration:0.2 animations:^{
+        NSTimeInterval animationDuration = 0.2f;
+        if (_scrollViewContentSizeRecord.height != self.superScrollView.contentSize.height) {
+            animationDuration = 0.0f;
+            CGFloat contentHeightAdded = self.superScrollView.contentOffset.y + self.superScrollView.contentSize.height - self.scrollViewContentSizeRecord.height;
+            self.superScrollView.contentOffset = CGPointMake(self.superScrollView.contentOffset.x, contentHeightAdded);
+        }
+        [UIView animateWithDuration:animationDuration animations:^{
+            UIEdgeInsets inset = self.superScrollView.contentInset;
+            inset.top = self.scrollViewInsetRecord.top;
             self.superScrollView.contentInset = inset;
         }];
     } else {
         // Loading is complete, the content does not fill the entire screen, contentOffset accompanying animation back to zero
         CGPoint tempOffset = CGPointZero;
-        CGFloat animtionDuration = 0.2;
+        NSTimeInterval animtionDuration = 0.2f;
         CGFloat screenHeight = CGRectGetHeight([[UIScreen mainScreen] bounds]);
         if (self.superScrollView.contentSize.height + kPullControlHeight > screenHeight) {
             tempOffset = self.superScrollView.contentOffset;
-            animtionDuration = 0;
+            animtionDuration = 0.0f;
         }
         
         // AnimtionDuration bottom of the screen when the content does not exceed! = 0
+        UIEdgeInsets inset = self.superScrollView.contentInset;
+        inset.bottom = self.scrollViewInsetRecord.bottom;
         [UIView animateWithDuration:animtionDuration animations:^{
-            UIEdgeInsets inset = self.superScrollView.contentInset;
-            inset.bottom = self.scrollViewInsetRecord.bottom;
             self.superScrollView.contentInset = inset;
         }];
         
         // Content exceeds the bottom of the screen, there are no rollback animation, direct load data, control `disappear`
-        if (animtionDuration == 0) {
+        if (animtionDuration == 0.0f) {
             self.superScrollView.contentOffset = tempOffset;
         }
     }
