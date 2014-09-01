@@ -3,6 +3,7 @@
 
 ![(RefreshControlPullTypeInsensitive)](https://github.com/showmecode/RefreshControl/blob/master/images/RefreshControlPullTypeInsensitive.gif)
 ![(RefreshControlPullTypeSensitive)](https://github.com/showmecode/RefreshControl/blob/master/images/RefreshControlPullTypeSensitive.gif)
+![(RefreshControlPullTypeInsensitiveLikeTwitter)](https://github.com/showmecode/RefreshControl/blob/master/images/RefreshControlPullTypeInsensitiveLikeTwitter.gif)
 
 ## How  to use ?
 
@@ -20,11 +21,13 @@ TopRefreshControl
           // request for datas
     });
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf.tableView topRefreshControlStopRefreshing];
             [weakSelf.tableView reloadData];
+            [weakSelf.tableView topRefreshControlStopRefreshing];
         });
     }];
 ``` 
+
+**Attention**  In call back block, you should reload data first, then stop TopRefreshControl, otherwise, your scroll view will not stay the position before.
 
 BottomRefreshControl
 
