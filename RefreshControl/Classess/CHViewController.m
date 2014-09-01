@@ -40,9 +40,9 @@
         });
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [weakSelf.tableView reloadData];
-            [weakSelf.tableView topRefreshControlStopRefreshing];            
+            [weakSelf.tableView topRefreshControlStopRefreshing];
         });
-    } refreshControlPullType:RefreshControlPullTypeInsensitive];
+    }  refreshControlPullType:RefreshControlPullTypeInsensitive];
     
     [self.tableView addBottomRefreshControlUsingBlock:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

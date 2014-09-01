@@ -27,7 +27,7 @@ TopRefreshControl
     }];
 ``` 
 
-**Attention**  In call back block, you should reload data first, then stop TopRefreshControl, otherwise, your scroll view will not stay the position before.
+**Attention**:  In call back block, you should reload data first, then stop TopRefreshControl, otherwise, your scroll view will not stay the position before.
 
 BottomRefreshControl
 
