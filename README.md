@@ -59,3 +59,20 @@ BottomRefreshControl
 addBottomRefreshControlUsingBlock:refreshControlPullType:
 ```
 
+### By the way
+
+You can change the status text and color, loading animation circle color.
+
+```objective-c
+@property (nonatomic, strong) NSString *topRefreshControlPullToRefreshingText;
+@property (nonatomic, strong) NSString *topRefreshControlPullReleaseToRefreshingText;
+
+@property (nonatomic, strong) NSString *bottomRefreshControlPullToRefreshingText;
+@property (nonatomic, strong) NSString *bottomRefreshControlPullReleaseToRefreshingText;
+
+@property (nonatomic, strong) UIColor *statusTextColor;
+@property (nonatomic, strong) UIColor *loadingCircleColor;
+```
+
+
+
