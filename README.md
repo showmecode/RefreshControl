@@ -32,7 +32,7 @@ TopRefreshControl
     }];
 ``` 
 
-**Attention**:  In call back block, you should reload data first, then stop TopRefreshControl, otherwise, your scroll view will not stay the position before.
+**Attention**:  In call back block, you should reload data first, then stop `TopRefreshControl` animation, otherwise, your content focus will go to top. 
 
 BottomRefreshControl
 
@@ -42,11 +42,13 @@ BottomRefreshControl
           // request for datas
         });
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf.tableView bottomRefreshControlStopRefreshing];
             [weakSelf.tableView reloadData];
+            [weakSelf.tableView bottomRefreshControlStopRefreshing];
         });
     }];
 ```
+
+**Attention**:  In call back block, you should always reload data first, then stop `BottomRefreshControl `animation, otherwise, your content bottom will always go to screen bottom.
 
 ### Insensitive Style
 
