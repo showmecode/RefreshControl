@@ -25,7 +25,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _dataSource = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 19; i++) {
+    for (int i = 0; i < 13; i++) {
         NSString *data = [NSString stringWithFormat:@"initial data number: %d", i];
         [_dataSource addObject:data];
     }
@@ -39,8 +39,8 @@
             }
         });
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf.tableView reloadData];
             [weakSelf.tableView topRefreshControlStopRefreshing];
+            [weakSelf.tableView reloadData];
         });
     }  refreshControlPullType:RefreshControlPullTypeInsensitive];
     
@@ -54,7 +54,6 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [weakSelf.tableView reloadData];
             [weakSelf.tableView bottomRefreshControlStopRefreshing];
-
         });
     } refreshControlPullType:RefreshControlPullTypeInsensitive];
     
