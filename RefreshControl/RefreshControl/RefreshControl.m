@@ -10,7 +10,7 @@
 #import "LoadingView.h"
 
 #define CHImageWithName(NAME) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:NAME ofType:@"png"]]
-#define kPullControlHeight 64
+#define kPullControlHeight 44
 
 #pragma mark - RefreshControl
 
@@ -96,10 +96,10 @@
     }
     
     self.statusLabel.bounds = self.bounds;
-    self.statusLabel.center = CGPointMake(CGRectGetWidth(self.bounds) / 2, CGRectGetHeight(self.bounds) / 2);
+    self.statusLabel.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
     
-    self.loadingView.bounds = CGRectMake(0, 0, 30, 30);
-    self.loadingView.center = CGPointMake(CGRectGetWidth(self.bounds) / 2, CGRectGetHeight(self.bounds) / 2);
+    self.loadingView.bounds = CGRectMake(0, 0, 20, 20);
+    self.loadingView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
 }
 
 - (void)layoutSubviews {
@@ -178,16 +178,15 @@
     // Controls to scroll to the appropriate location to stay
     if (self.refreshControlType == RefreshControlTypeTop) {
         _scrollViewContentSizeRecord = self.superScrollView.contentSize;
-        NSLog(@"start refreshing contentOffset: %@", NSStringFromCGPoint(self.superScrollView.contentOffset));
-        NSLog(@"start refreshing contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
+//        NSLog(@"start refreshing contentOffset: %@", NSStringFromCGPoint(self.superScrollView.contentOffset));
+//        NSLog(@"start refreshing contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
         
         [UIView animateWithDuration:0.2 animations:^{
             UIEdgeInsets inset = self.superScrollView.contentInset;
             inset.top = self.scrollViewInsetRecord.top + kPullControlHeight;
             self.superScrollView.contentInset = inset;
             // Set the scroll position to stay
-            self.superScrollView.contentOffset =
-            CGPointMake(0, -self.scrollViewInsetRecord.top - kPullControlHeight);
+            self.superScrollView.contentOffset = CGPointMake(0, -self.scrollViewInsetRecord.top - kPullControlHeight);
         }];
     } else {
         [UIView animateWithDuration:0.2 animations:^{
