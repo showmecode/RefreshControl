@@ -4,6 +4,7 @@
 ![(RefreshControlPullTypeInsensitive)](https://github.com/showmecode/RefreshControl/blob/master/images/RefreshControlPullTypeInsensitive.gif)
 ![(RefreshControlPullTypeSensitive)](https://github.com/showmecode/RefreshControl/blob/master/images/RefreshControlPullTypeSensitive.gif)
 ![(RefreshControlPullTypeInsensitiveLikeTwitter)](https://github.com/showmecode/RefreshControl/blob/master/images/RefreshControlPullTypeInsensitiveLikeTwitter.gif)
+![(RefreshControlPullTypeInsensitiveLikeTwitter)](https://github.com/showmecode/RefreshControl/blob/master/images/RefreshFailureWithHintText.gif)
 
 ## How  to use ?
 

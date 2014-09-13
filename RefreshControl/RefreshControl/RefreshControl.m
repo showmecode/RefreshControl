@@ -149,10 +149,16 @@
 // super scroll view just begain pulling
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat contentOffSetVerticalValue = scrollView.contentOffset.y * self.refreshControlType;
-    //    NSLog(@"contentOffSetVerticalValue = %f", contentOffSetVerticalValue);
+
+    // when initial, this called 3 times, first = 0, others = 64
     CGFloat properVerticalPullValue = [self properVerticalPullValue];
+
+//    NSLog(@"contentOffSetVerticalValue = %f", contentOffSetVerticalValue);
     
-    if (contentOffSetVerticalValue <=  properVerticalPullValue) {
+    // "<" is import, can not use "<=", when initial, "<" will let control flow continue, at last
+    // refreshControlState = RefreshControlStateHidden, if use "<=", refreshControlState = RefreshControlStateOveredThreshold
+    // will casue bug which is in TopRefreshControl first time pull up will refreshing...
+    if (contentOffSetVerticalValue <  properVerticalPullValue) {
         return;
     }
     if(self.refreshControlState == RefreshControlStateRefreshing) {
@@ -160,6 +166,8 @@
     }
     
     CGFloat properContentOffsetVerticalValue = properVerticalPullValue + kPullControlHeight;
+
+//    NSLog(@"properContentOffsetVerticalValue = %f", properContentOffsetVerticalValue);
     
     if (contentOffSetVerticalValue <= properContentOffsetVerticalValue) {
         // Being dragged, but not to the critical point
@@ -168,7 +176,7 @@
         // Above the critical point (arrow reverse, change prompt text), let go will execute Action (display chrysanthemums, change prompt text)
         self.refreshControlState = RefreshControlStateOveredThreshold;
     } else {
-        // Drag the opposite direction, did not come
+        // Drag the opposite direction, initial time will come here
         self.refreshControlState = RefreshControlStateHidden;
     }
 }
@@ -190,8 +198,8 @@
     // Controls to scroll to the appropriate location to stay
     if (self.refreshControlType == RefreshControlTypeTop) {
         _scrollViewContentSizeRecord = self.superScrollView.contentSize;
-        //        NSLog(@"start refreshing contentOffset: %@", NSStringFromCGPoint(self.superScrollView.contentOffset));
-        //        NSLog(@"start refreshing contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
+//        NSLog(@"start refreshing contentOffset: %@", NSStringFromCGPoint(self.superScrollView.contentOffset));
+//        NSLog(@"start refreshing contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
         
         [UIView animateWithDuration:0.2 animations:^{
             UIEdgeInsets inset = self.superScrollView.contentInset;
