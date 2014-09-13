@@ -24,7 +24,7 @@
 @end
 
 @implementation RefreshControl
-@synthesize statusLabel = _statusLabel;
+@synthesize statusButton = _statusButton;
 @synthesize loadingView = _loadingView;
 
 #pragma mark -
@@ -39,18 +39,30 @@
     return self;
 }
 
-- (UILabel *)statusLabel {
-    if (!_statusLabel) {
-        UILabel *statusLabel = [UILabel new];
-        statusLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        statusLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
-        statusLabel.textColor = [UIColor lightGrayColor];
-        statusLabel.textAlignment = NSTextAlignmentCenter;
-        _statusLabel = statusLabel;
-        [self addSubview:_statusLabel];
+- (UIButton *)statusButton {
+    if (!_statusButton) {
+        UIButton *statusButton = [UIButton new];
+        statusButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        statusButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+        statusButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        [statusButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        [statusButton addTarget:self action:@selector(handleStatusButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        _statusButton = statusButton;
+        [self addSubview:_statusButton];
     }
     
-    return _statusLabel;
+    return _statusButton;
+}
+
+- (void)handleStatusButtonPressed:(UIButton *)sender {
+    // recover refreshing status
+    self.loadingView.hidden = NO;
+    [self.loadingView startAnimation];
+    [self.statusButton setTitle:nil forState:UIControlStateNormal];
+    
+    if (_begainRefreshing) {
+        _begainRefreshing();
+    }
 }
 
 - (LoadingView *)loadingView {
@@ -95,8 +107,8 @@
         return;
     }
     
-    self.statusLabel.bounds = self.bounds;
-    self.statusLabel.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+    self.statusButton.bounds = self.bounds;
+    self.statusButton.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
     
     self.loadingView.bounds = CGRectMake(0, 0, 20, 20);
     self.loadingView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
@@ -137,7 +149,7 @@
 // super scroll view just begain pulling
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat contentOffSetVerticalValue = scrollView.contentOffset.y * self.refreshControlType;
-//    NSLog(@"contentOffSetVerticalValue = %f", contentOffSetVerticalValue);
+    //    NSLog(@"contentOffSetVerticalValue = %f", contentOffSetVerticalValue);
     CGFloat properVerticalPullValue = [self properVerticalPullValue];
     
     if (contentOffSetVerticalValue <=  properVerticalPullValue) {
@@ -148,7 +160,7 @@
     }
     
     CGFloat properContentOffsetVerticalValue = properVerticalPullValue + kPullControlHeight;
-
+    
     if (contentOffSetVerticalValue <= properContentOffsetVerticalValue) {
         // Being dragged, but not to the critical point
         self.refreshControlState = RefreshControlStatePulling;
@@ -178,8 +190,8 @@
     // Controls to scroll to the appropriate location to stay
     if (self.refreshControlType == RefreshControlTypeTop) {
         _scrollViewContentSizeRecord = self.superScrollView.contentSize;
-//        NSLog(@"start refreshing contentOffset: %@", NSStringFromCGPoint(self.superScrollView.contentOffset));
-//        NSLog(@"start refreshing contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
+        //        NSLog(@"start refreshing contentOffset: %@", NSStringFromCGPoint(self.superScrollView.contentOffset));
+        //        NSLog(@"start refreshing contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
         
         [UIView animateWithDuration:0.2 animations:^{
             UIEdgeInsets inset = self.superScrollView.contentInset;
@@ -210,7 +222,7 @@
     if (self.refreshControlType == RefreshControlTypeTop) {
         // Drop-down control, rolled over just can not see the parent view of the head position (reduction inset)
         NSTimeInterval animationDuration = 0.2f;
-        CGFloat contentHeightAdded = self.superScrollView.contentOffset.y + self.superScrollView.contentSize.height - self.scrollViewContentSizeRecord.height;        
+        CGFloat contentHeightAdded = self.superScrollView.contentOffset.y + self.superScrollView.contentSize.height - self.scrollViewContentSizeRecord.height;
         if (_scrollViewContentSizeRecord.height != self.superScrollView.contentSize.height) {
             animationDuration = 0.0f;
             self.superScrollView.contentOffset = CGPointMake(self.superScrollView.contentOffset.x, contentHeightAdded);
@@ -250,27 +262,35 @@
     
     switch(refreshControlState) {
         case RefreshControlStateHidden: {
-            self.loadingView.hidden = YES;
             [self.loadingView stopAnimation];
+            self.loadingView.hidden = YES;
         }
             break;
         case RefreshControlStatePulling: {
-            self.statusLabel.text = self.pullToRefreshing;
+            [self.statusButton setTitle:self.pullToRefreshing forState:UIControlStateNormal];
         }
             break;
         case RefreshControlStateOveredThreshold: {
-            self.statusLabel.text = self.pullReleaseToRefreshing;
+            [self.statusButton setTitle:self.pullReleaseToRefreshing forState:UIControlStateNormal];
         }
             break;
         case RefreshControlStateRefreshing: {
             self.loadingView.hidden = NO;
             [self.loadingView startAnimation];
-            self.statusLabel.text = nil;
+            [self.statusButton setTitle:nil forState:UIControlStateNormal];
         }
             break;
         default:
             break;
     }
+}
+
+- (void)refreshFailureWithHintText:(NSString *)hintText {
+    [self.loadingView stopAnimation];
+    self.loadingView.hidden = YES;
+    
+    NSString *hint = hintText ? : self.refreshingFailureHintText;
+    [self.statusButton setTitle:hint forState:UIControlStateNormal];
 }
 
 @end
@@ -284,9 +304,10 @@
     self = [super init];
     if (self) {
         self.refreshControlType      = RefreshControlTypeTop;
-        self.pullToRefreshing        = @"Pull down refresh";
-        self.pullReleaseToRefreshing = @"Loosen refresh";
-        self.pullRefreshing          = @"Refreshing";
+        self.pullToRefreshing        = @"下拉刷新";
+        self.pullReleaseToRefreshing = @"松开刷新";
+        self.pullRefreshing          = @"刷新中...";
+        self.refreshingFailureHintText = @"刷新失败，请点击重新刷新！";
     }
     return self;
 }
@@ -303,7 +324,7 @@
     
     CGFloat width = CGRectGetWidth([[UIScreen mainScreen] bounds]);
     self.frame = CGRectMake(0, -kPullControlHeight, width, kPullControlHeight);
-
+    
     [super settingFrames];
 }
 
@@ -318,9 +339,10 @@
     self = [super init];
     if (self) {
         self.refreshControlType      = RefreshControlTypeBottom;
-        self.pullToRefreshing        = @"Pull up load more";
-        self.pullReleaseToRefreshing = @"Loosen refresh";
-        self.pullRefreshing          = @"Refreshing";
+        self.pullToRefreshing        = @"上拉加载更多";
+        self.pullReleaseToRefreshing = @"松开加载";
+        self.pullRefreshing          = @"加载中...";
+        self.refreshingFailureHintText = @"加载失败，请点击重新加载！";
     }
     return self;
 }

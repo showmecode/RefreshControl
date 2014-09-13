@@ -99,6 +99,18 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
     self.bottomRefreshControl = nil;
 }
 
+#pragma mark - process refresh failure
+
+- (void)refreshFailureWithHintText:(NSString *)hintText {
+    if (self.topRefreshControl.refreshControlState == RefreshControlStateRefreshing) {
+        [self.topRefreshControl refreshFailureWithHintText:hintText];
+        return;
+    }
+    if (self.bottomRefreshControl.refreshControlState == RefreshControlStateRefreshing) {
+        [self.bottomRefreshControl refreshFailureWithHintText:hintText];
+    }
+}
+
 #pragma mark - override accessors
 
 - (void)setTopRefreshControlPullToRefreshingText:(NSString *)topRefreshControlPullToRefreshingText {
@@ -150,12 +162,12 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
 }
 
 - (void)setStatusTextColor:(UIColor *)statusTextColor {
-    self.topRefreshControl.statusLabel.textColor = statusTextColor;
-    self.bottomRefreshControl.statusLabel.textColor = statusTextColor;
+    self.topRefreshControl.statusButton.titleLabel.textColor = statusTextColor;
+    self.bottomRefreshControl.statusButton.titleLabel.textColor = statusTextColor;
 }
 
 - (UIColor *)statusTextColor {
-    return self.topRefreshControl.statusLabel.textColor;
+    return self.topRefreshControl.statusButton.currentTitleColor;
 }
 
 - (void)setLoadingCircleColor:(UIColor *)loadingCircleColor {

@@ -39,7 +39,7 @@ typedef NS_ENUM (NSInteger, RefreshControlState) {
 // Scroll view content exceeds the height control view (Subclasses override the)
 @property (nonatomic, assign, readonly) CGFloat      scrollViewOverViewHeight;
 
-@property (nonatomic, weak, readonly) UILabel     *statusLabel;
+@property (nonatomic, weak, readonly) UIButton *statusButton;
 @property (nonatomic, weak, readonly) LoadingView *loadingView;
 
 // @"Pull down refresh"
@@ -48,10 +48,13 @@ typedef NS_ENUM (NSInteger, RefreshControlState) {
 @property (nonatomic, strong) NSString *pullReleaseToRefreshing;
 // @"Refreshing"
 @property (nonatomic, strong) NSString *pullRefreshing;
+// @"Networking error"
+@property (nonatomic, strong) NSString *refreshingFailureHintText;
 
 // external call
 - (void)startRefreshing;
 - (void)stopRefreshing;
+- (void)refreshFailureWithHintText:(NSString *)hintText;
 
 // call back
 @property (nonatomic, copy) void(^begainRefreshing)();

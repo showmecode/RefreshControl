@@ -32,4 +32,6 @@
 - (void)bottomRefreshControlStopRefreshing;
 - (void)removeBottomRefreshControl;
 
+- (void)refreshFailureWithHintText:(NSString *)hintText;
+
 @end

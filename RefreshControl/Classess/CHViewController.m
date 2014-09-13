@@ -29,7 +29,7 @@
         NSString *data = [NSString stringWithFormat:@"initial data number: %d", i];
         [_dataSource addObject:data];
     }
-
+    
     __weak typeof(self) weakSelf = self;
     [self.tableView addTopRefreshControlUsingBlock:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -39,8 +39,8 @@
             }
         });
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf.tableView topRefreshControlStopRefreshing];
             [weakSelf.tableView reloadData];
+            [weakSelf.tableView topRefreshControlStopRefreshing];
         });
     }  refreshControlPullType:RefreshControlPullTypeInsensitive];
     
@@ -52,14 +52,15 @@
             }
         });
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf.tableView reloadData];
-            [weakSelf.tableView bottomRefreshControlStopRefreshing];
+            //            [weakSelf.tableView reloadData];
+            //            [weakSelf.tableView bottomRefreshControlStopRefreshing];
+            [weakSelf.tableView refreshFailureWithHintText:@"网络错误！"];
         });
     } refreshControlPullType:RefreshControlPullTypeInsensitive];
     
-//    self.tableView.topRefreshControlPullToRefreshingText = @"下拉刷新";
-//    self.tableView.statusTextColor = [UIColor redColor];
-//    self.tableView.loadingCircleColor = [UIColor orangeColor];
+    //    self.tableView.topRefreshControlPullToRefreshingText = @"下拉刷新";
+    //    self.tableView.statusTextColor = [UIColor redColor];
+    //    self.tableView.loadingCircleColor = [UIColor orangeColor];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
