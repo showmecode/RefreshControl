@@ -19,6 +19,10 @@
 
 @implementation CHViewController
 
+- (void)dealloc {
+    NSLog(@"%s", __func__);
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -31,6 +35,8 @@
     }
     
     __weak typeof(self) weakSelf = self;
+
+
     [self.tableView addTopRefreshControlUsingBlock:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             for (int i = 0; i < 5; i++) {
@@ -38,11 +44,12 @@
                 [weakSelf.dataSource insertObject:data atIndex:0];
             }
         });
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf.tableView reloadData];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
             [weakSelf.tableView topRefreshControlStopRefreshing];
+            [weakSelf.tableView reloadData];
         });
-    }  refreshControlPullType:RefreshControlPullTypeInsensitive];
+    } refreshControlPullType:1 refreshControlStatusType:0];
     
     [self.tableView addBottomRefreshControlUsingBlock:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -51,16 +58,16 @@
                 [weakSelf.dataSource addObject:data];
             }
         });
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            //            [weakSelf.tableView reloadData];
-            //            [weakSelf.tableView bottomRefreshControlStopRefreshing];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [weakSelf.tableView reloadData];
+//            [weakSelf.tableView bottomRefreshControlStopRefreshing];
             [weakSelf.tableView refreshFailureWithHintText:@"网络错误！"];
         });
-    } refreshControlPullType:RefreshControlPullTypeInsensitive];
+    } refreshControlPullType:1 refreshControlStatusType:0];
     
-    //    self.tableView.topRefreshControlPullToRefreshingText = @"下拉刷新";
-    //    self.tableView.statusTextColor = [UIColor redColor];
-    //    self.tableView.loadingCircleColor = [UIColor orangeColor];
+    self.tableView.statusTextColor = [UIColor orangeColor];
+    self.tableView.loadingCircleColor = [UIColor orangeColor];
+    self.tableView.arrowColor = [UIColor orangeColor];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

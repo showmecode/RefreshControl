@@ -24,6 +24,7 @@
 		4617D68E19B1F65C00DC498C /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68919B1F65C00DC498C /* LoadingView.m */; };
 		4617D68F19B1F65C00DC498C /* RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68B19B1F65C00DC498C /* RefreshControl.m */; };
 		4617D69019B1F65C00DC498C /* UIScrollView+RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68D19B1F65C00DC498C /* UIScrollView+RefreshControl.m */; };
+		46CA05B819CBC2C5007F2A82 /* Arrow.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CA05B719CBC2C5007F2A82 /* Arrow.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		4617D68B19B1F65C00DC498C /* RefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshControl.m; sourceTree = "<group>"; };
 		4617D68C19B1F65C00DC498C /* UIScrollView+RefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+RefreshControl.h"; sourceTree = "<group>"; };
 		4617D68D19B1F65C00DC498C /* UIScrollView+RefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+RefreshControl.m"; sourceTree = "<group>"; };
+		46CA05B619CBC2C5007F2A82 /* Arrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arrow.h; sourceTree = "<group>"; };
+		46CA05B719CBC2C5007F2A82 /* Arrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Arrow.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +176,8 @@
 		4617D68719B1F65C00DC498C /* RefreshControl */ = {
 			isa = PBXGroup;
 			children = (
+				46CA05B619CBC2C5007F2A82 /* Arrow.h */,
+				46CA05B719CBC2C5007F2A82 /* Arrow.m */,
 				4617D68819B1F65C00DC498C /* LoadingView.h */,
 				4617D68919B1F65C00DC498C /* LoadingView.m */,
 				4617D68A19B1F65C00DC498C /* RefreshControl.h */,
@@ -287,6 +292,7 @@
 				4617D68519B1F65400DC498C /* CHAppDelegate.m in Sources */,
 				4617D68619B1F65400DC498C /* CHViewController.m in Sources */,
 				4617D68F19B1F65C00DC498C /* RefreshControl.m in Sources */,
+				46CA05B819CBC2C5007F2A82 /* Arrow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

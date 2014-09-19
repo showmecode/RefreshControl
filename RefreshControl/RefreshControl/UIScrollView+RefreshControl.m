@@ -8,6 +8,7 @@
 
 #import "UIScrollView+RefreshControl.h"
 #import "LoadingView.h"
+#import "Arrow.h"
 #import <objc/runtime.h>
 
 static const void *TopRefreshControlKey = &TopRefreshControlKey;
@@ -36,14 +37,17 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
 
 - (void)addTopRefreshControlUsingBlock:(void (^)())callback {
     [self addTopRefreshControlUsingBlock:callback
-                  refreshControlPullType:RefreshControlPullTypeSensitive];
+                  refreshControlPullType:RefreshControlPullTypeSensitive
+                refreshControlStatusType:RefreshControlStatusTypeText];
 }
 
 - (void)addTopRefreshControlUsingBlock:(void (^)())callback
-                refreshControlPullType:(RefreshControlPullType)refreshControlPullType {
+                refreshControlPullType:(RefreshControlPullType)refreshControlPullType
+              refreshControlStatusType:(RefreshControlStatusType)refreshControlStatusType {
     if (!self.topRefreshControl) {
         TopRefreshControl *topRefreshControl = [TopRefreshControl new];
         topRefreshControl.refreshControlPullType = refreshControlPullType;
+        topRefreshControl.refreshControlStatusType = refreshControlStatusType;
         self.topRefreshControl = topRefreshControl;
         [self addSubview:topRefreshControl];
     }
@@ -74,14 +78,17 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
 
 - (void)addBottomRefreshControlUsingBlock:(void (^)())callback {
     [self addBottomRefreshControlUsingBlock:callback
-                     refreshControlPullType:RefreshControlPullTypeSensitive];
+                     refreshControlPullType:RefreshControlPullTypeSensitive
+                   refreshControlStatusType:RefreshControlStatusTypeText];
 }
 
 - (void)addBottomRefreshControlUsingBlock:(void (^)())callback
-                   refreshControlPullType:(RefreshControlPullType)refreshControlPullType {
+                   refreshControlPullType:(RefreshControlPullType)refreshControlPullType
+                 refreshControlStatusType:(RefreshControlStatusType)refreshControlStatusType {
     if (!self.bottomRefreshControl) {
         BottomRefreshControl *bottomRefreshControl = [BottomRefreshControl new];
         bottomRefreshControl.refreshControlPullType = refreshControlPullType;
+        bottomRefreshControl.refreshControlStatusType = refreshControlStatusType;
         self.bottomRefreshControl = bottomRefreshControl;
         [self addSubview:bottomRefreshControl];
     }
@@ -97,18 +104,6 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
 - (void)removeBottomRefreshControl {
     [self.bottomRefreshControl removeFromSuperview];
     self.bottomRefreshControl = nil;
-}
-
-#pragma mark - process refresh failure
-
-- (void)refreshFailureWithHintText:(NSString *)hintText {
-    if (self.topRefreshControl.refreshControlState == RefreshControlStateRefreshing) {
-        [self.topRefreshControl refreshFailureWithHintText:hintText];
-        return;
-    }
-    if (self.bottomRefreshControl.refreshControlState == RefreshControlStateRefreshing) {
-        [self.bottomRefreshControl refreshFailureWithHintText:hintText];
-    }
 }
 
 #pragma mark - override accessors
@@ -162,8 +157,8 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
 }
 
 - (void)setStatusTextColor:(UIColor *)statusTextColor {
-    self.topRefreshControl.statusButton.titleLabel.textColor = statusTextColor;
-    self.bottomRefreshControl.statusButton.titleLabel.textColor = statusTextColor;
+    [self.topRefreshControl.statusButton setTitleColor:statusTextColor forState:UIControlStateNormal];
+    [self.bottomRefreshControl.statusButton setTitleColor:statusTextColor forState:UIControlStateNormal];
 }
 
 - (UIColor *)statusTextColor {
@@ -179,5 +174,25 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
     return self.topRefreshControl.loadingView.lineColor;
 }
 
+- (void)setArrowColor:(UIColor *)arrowColor {
+    self.topRefreshControl.arrow.color = arrowColor;
+    self.bottomRefreshControl.arrow.color = arrowColor;
+}
+
+- (UIColor *)arrowColor {
+    return self.topRefreshControl.arrow.color;
+}
+
+#pragma mark - common
+
+- (void)refreshFailureWithHintText:(NSString *)hintText {
+    if (self.topRefreshControl.refreshControlState == RefreshControlStateRefreshing) {
+        [self.topRefreshControl refreshFailureWithHintText:hintText];
+        return;
+    }
+    if (self.bottomRefreshControl.refreshControlState == RefreshControlStateRefreshing) {
+        [self.bottomRefreshControl refreshFailureWithHintText:hintText];
+    }
+}
 
 @end

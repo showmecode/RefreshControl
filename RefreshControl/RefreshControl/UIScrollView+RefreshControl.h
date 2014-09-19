@@ -21,14 +21,19 @@
 
 @property (nonatomic, strong) UIColor *statusTextColor;
 @property (nonatomic, strong) UIColor *loadingCircleColor;
+@property (nonatomic, strong) UIColor *arrowColor;
 
 - (void)addTopRefreshControlUsingBlock:(void (^)())callback;
-- (void)addTopRefreshControlUsingBlock:(void (^)())callback refreshControlPullType:(RefreshControlPullType)refreshControlPullType;
+- (void)addTopRefreshControlUsingBlock:(void (^)())callback
+                refreshControlPullType:(RefreshControlPullType)refreshControlPullType
+              refreshControlStatusType:(RefreshControlStatusType)refreshControlStatusType;
 - (void)topRefreshControlStopRefreshing;
 - (void)removeTopRefreshControl;
 
 - (void)addBottomRefreshControlUsingBlock:(void (^)())callback;
-- (void)addBottomRefreshControlUsingBlock:(void (^)())callback refreshControlPullType:(RefreshControlPullType)refreshControlPullType;
+- (void)addBottomRefreshControlUsingBlock:(void (^)())callback
+                   refreshControlPullType:(RefreshControlPullType)refreshControlPullType
+                 refreshControlStatusType:(RefreshControlStatusType)refreshControlStatusType;
 - (void)bottomRefreshControlStopRefreshing;
 - (void)removeBottomRefreshControl;
 

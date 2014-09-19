@@ -1,10 +1,12 @@
 
 ## How does it look like ?
 
-![(RefreshControlPullTypeInsensitive)](https://github.com/showmecode/RefreshControl/blob/master/images/RefreshControlPullTypeInsensitive.gif)
-![(RefreshControlPullTypeSensitive)](https://github.com/showmecode/RefreshControl/blob/master/images/RefreshControlPullTypeSensitive.gif)
-![(RefreshControlPullTypeInsensitiveLikeTwitter)](https://github.com/showmecode/RefreshControl/blob/master/images/RefreshControlPullTypeInsensitiveLikeTwitter.gif)
-![(RefreshControlPullTypeInsensitiveLikeTwitter)](https://github.com/showmecode/RefreshControl/blob/master/images/RefreshFailureWithHintText.gif)
+![(1)](https://github.com/showmecode/RefreshControl/blob/master/images/1.gif)
+![(2)](https://github.com/showmecode/RefreshControl/blob/master/images/2.gif)
+![(3)](https://github.com/showmecode/RefreshControl/blob/master/images/3.gif)
+![(4)](https://github.com/showmecode/RefreshControl/blob/master/images/4.gif)
+![(5)](https://github.com/showmecode/RefreshControl/blob/master/images/5.gif)
+![(6)](https://github.com/showmecode/RefreshControl/blob/master/images/6.gif)
 
 ## How  to use ?
 
@@ -51,25 +53,38 @@ BottomRefreshControl
 
 **Attention**:  In call back block, you should always reload data first, then stop `BottomRefreshControl `animation, otherwise, your content bottom will always go to screen bottom.
 
-### Insensitive Style
+### Insensitive Style & StatusType
+
+```Objective-c
+typedef NS_ENUM(NSInteger, RefreshControlPullType) {
+    RefreshControlPullTypeSensitive,
+    RefreshControlPullTypeInsensitive
+};
+
+typedef NS_ENUM(NSInteger, RefreshControlStatusType) {
+    RefreshControlStatusTypeTextAndArrow,
+    RefreshControlStatusTypeText,
+    RefreshControlStatusTypeArrow
+};
+```
 
 Pass refreshControlPullType `RefreshControlPullTypeInsensitive`
 
 TopRefreshControl
 
 ```objective-c
-addTopRefreshControlUsingBlock:refreshControlPullType:
+addTopRefreshControlUsingBlock:refreshControlPullType:refreshControlStatusType
 ```
 
 BottomRefreshControl
 
 ```objective-c
-addBottomRefreshControlUsingBlock:refreshControlPullType:
+addBottomRefreshControlUsingBlock:refreshControlPullType:refreshControlStatusType
 ```
 
 ### By the way
 
-You can change the status text and color, loading animation circle color.
+You can change the status text and color, loading animation circle color and arrow color.
 
 ```objective-c
 @property (nonatomic, strong) NSString *topRefreshControlPullToRefreshingText;
@@ -80,6 +95,7 @@ You can change the status text and color, loading animation circle color.
 
 @property (nonatomic, strong) UIColor *statusTextColor;
 @property (nonatomic, strong) UIColor *loadingCircleColor;
+@property (nonatomic, strong) UIColor *arrowColor;
 ```
 
 

@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "RefreshControl"
-  s.version      = "1.5.0"
+  s.version      = "1.5.1"
   s.summary      = "RefreshControl is an useful pull to refresh control for ios developer"
 
   s.description  = <<-DESC
@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
   #
 
   #s.license      = "MIT (example)"
-  s.license      = { :type => "GPL", :file => "LICENSE" }
+  s.license      = { :type => "MIT", :file => "LICENSE" }
 
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -74,7 +74,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/showmecode/RefreshControl.git", :tag => "1.5.0" }
+  s.source       = { :git => "https://github.com/showmecode/RefreshControl.git", :tag => "1.5.1" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

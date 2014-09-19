@@ -8,6 +8,7 @@
 
 #import "RefreshControl.h"
 #import "LoadingView.h"
+#import "Arrow.h"
 
 #define CHImageWithName(NAME) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:NAME ofType:@"png"]]
 #define kPullControlHeight 44
@@ -26,14 +27,20 @@
 @implementation RefreshControl
 @synthesize statusButton = _statusButton;
 @synthesize loadingView = _loadingView;
+@synthesize arrow = _arrow;
 
 #pragma mark -
 #pragma mark - RefreshControl
+
+- (void)dealloc {
+//    NSLog(@"%s", __func__);
+}
 
 - (id)init {
     self = [super init];
     if (self) {
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        self.refreshControlStatusType = RefreshControlStatusTypeTextAndArrow;
     }
     
     return self;
@@ -76,6 +83,16 @@
     return _loadingView;
 }
 
+- (Arrow *)arrow {
+    if (!_arrow) {
+        Arrow *arrow = [Arrow new];
+        arrow.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin| UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+        _arrow = arrow;
+        [self addSubview:arrow];
+    }
+    return _arrow;
+}
+
 // add refresh control to super scroll view, when init and dealloc call
 - (void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
@@ -99,6 +116,61 @@
 - (void)didMoveToSuperview {
     [super didMoveToSuperview];
     [self settingFrames];
+    
+    // only need seting once
+    [self settingStatusType];
+}
+
+- (void)settingStatusType {
+    if (self.refreshControlStatusType == RefreshControlStatusTypeText) {
+        return;
+    } else if (self.refreshControlStatusType == RefreshControlStatusTypeArrow) {
+        self.pullToRefreshing        = @"";
+        self.pullReleaseToRefreshing = @"";
+        self.pullRefreshing          = @"";
+        [self settingArrowFrames];
+    } else {
+        [self settingArrowFrames];
+    }
+}
+
+- (void)settingArrowFrames {
+    self.arrow.bounds = CGRectMake(0, 0, 20, 20);
+    self.arrow.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+    
+    CGFloat statusTextMaxBoundingLength = [self statusTextMaxBoundingLength];
+    if (statusTextMaxBoundingLength > 0) {
+        CGFloat centerX = self.arrow.center.x - statusTextMaxBoundingLength / 2 - 20;
+        self.arrow.center = CGPointMake(centerX, self.arrow.center.y);
+    }
+}
+
+- (CGFloat)statusTextMaxBoundingLength {
+    // static is import, this message will called twice when initial with both Top and Bottom RefreshControl
+    CGFloat maxBoundingLength = 0.0f;
+    NSArray *strings = @[self.pullRefreshing, self.pullReleaseToRefreshing, self.pullToRefreshing];
+    for (NSString *string in strings) {
+        CGFloat length = [self statusButtonTitleBoundingLengthForText:string];
+        if (length > maxBoundingLength) {
+            maxBoundingLength = length;
+        }
+    }
+    
+    return maxBoundingLength;
+}
+
+- (CGFloat)statusButtonTitleBoundingLengthForText:(NSString *)text {
+    CGSize boundingRectWithSize = CGSizeMake(CGRectGetWidth(self.statusButton.bounds),
+                                             CGRectGetHeight(self.statusButton.bounds));
+    NSStringDrawingOptions options = NSStringDrawingTruncatesLastVisibleLine |
+                                     NSStringDrawingUsesFontLeading |
+                                     NSStringDrawingUsesLineFragmentOrigin;
+    NSDictionary *attributes = @{NSFontAttributeName:self.statusButton.titleLabel.font};
+    CGFloat length = [text boundingRectWithSize:boundingRectWithSize
+                                        options:options
+                                     attributes:attributes
+                                        context:nil].size.width;
+    return length;
 }
 
 // setting self and sub controls frame
@@ -272,20 +344,32 @@
         case RefreshControlStateHidden: {
             [self.loadingView stopAnimation];
             self.loadingView.hidden = YES;
+            self.arrow.hidden = NO;
         }
             break;
         case RefreshControlStatePulling: {
             [self.statusButton setTitle:self.pullToRefreshing forState:UIControlStateNormal];
+            if (self.refreshControlType == RefreshControlTypeTop) {
+                [self.arrow rotation];
+            } else {
+                [self.arrow identity];
+            }
         }
             break;
         case RefreshControlStateOveredThreshold: {
             [self.statusButton setTitle:self.pullReleaseToRefreshing forState:UIControlStateNormal];
+            if (self.refreshControlType == RefreshControlTypeTop) {
+                [self.arrow identity];
+            } else {
+                [self.arrow rotation];
+            }
         }
             break;
         case RefreshControlStateRefreshing: {
             self.loadingView.hidden = NO;
             [self.loadingView startAnimation];
             [self.statusButton setTitle:nil forState:UIControlStateNormal];
+            self.arrow.hidden = YES;
         }
             break;
         default:

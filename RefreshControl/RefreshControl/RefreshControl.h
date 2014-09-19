@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class LoadingView;
+@class Arrow;
 
 typedef NS_ENUM(NSInteger, RefreshControlType) {
     RefreshControlTypeTop    = -1,
@@ -26,11 +27,18 @@ typedef NS_ENUM (NSInteger, RefreshControlState) {
     RefreshControlStateRefreshing        // Perform the action status
 };
 
+typedef NS_ENUM(NSInteger, RefreshControlStatusType) {
+    RefreshControlStatusTypeTextAndArrow,
+    RefreshControlStatusTypeText,
+    RefreshControlStatusTypeArrow
+};
+
 @interface RefreshControl : UIView
 
-@property (nonatomic, assign) RefreshControlType     refreshControlType;
-@property (nonatomic, assign) RefreshControlPullType refreshControlPullType;
-@property (nonatomic, assign) RefreshControlState    refreshControlState;
+@property (nonatomic, assign) RefreshControlType        refreshControlType;
+@property (nonatomic, assign) RefreshControlPullType    refreshControlPullType;
+@property (nonatomic, assign) RefreshControlState       refreshControlState;
+@property (nonatomic, assign) RefreshControlStatusType  refreshControlStatusType;
 
 // get super scroll view
 @property (nonatomic, weak, readonly  ) UIScrollView *superScrollView;
@@ -41,6 +49,7 @@ typedef NS_ENUM (NSInteger, RefreshControlState) {
 
 @property (nonatomic, weak, readonly) UIButton *statusButton;
 @property (nonatomic, weak, readonly) LoadingView *loadingView;
+@property (nonatomic, weak, readonly) Arrow *arrow;
 
 // @"Pull down refresh"
 @property (nonatomic, strong) NSString *pullToRefreshing;
