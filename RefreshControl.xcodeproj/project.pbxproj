@@ -21,7 +21,7 @@
 		4609D19319ACD0A9003D6E36 /* RefreshControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4609D19219ACD0A9003D6E36 /* RefreshControlTests.m */; };
 		4617D68519B1F65400DC498C /* CHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68219B1F65400DC498C /* CHAppDelegate.m */; };
 		4617D68619B1F65400DC498C /* CHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68419B1F65400DC498C /* CHViewController.m */; };
-		4617D68E19B1F65C00DC498C /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68919B1F65C00DC498C /* LoadingView.m */; };
+		4617D68E19B1F65C00DC498C /* Indicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68919B1F65C00DC498C /* Indicator.m */; };
 		4617D68F19B1F65C00DC498C /* RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68B19B1F65C00DC498C /* RefreshControl.m */; };
 		4617D69019B1F65C00DC498C /* UIScrollView+RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68D19B1F65C00DC498C /* UIScrollView+RefreshControl.m */; };
 		46CA05B819CBC2C5007F2A82 /* Arrow.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CA05B719CBC2C5007F2A82 /* Arrow.m */; };
@@ -57,8 +57,8 @@
 		4617D68219B1F65400DC498C /* CHAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHAppDelegate.m; sourceTree = "<group>"; };
 		4617D68319B1F65400DC498C /* CHViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHViewController.h; sourceTree = "<group>"; };
 		4617D68419B1F65400DC498C /* CHViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHViewController.m; sourceTree = "<group>"; };
-		4617D68819B1F65C00DC498C /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
-		4617D68919B1F65C00DC498C /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
+		4617D68819B1F65C00DC498C /* Indicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Indicator.h; sourceTree = "<group>"; };
+		4617D68919B1F65C00DC498C /* Indicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Indicator.m; sourceTree = "<group>"; };
 		4617D68A19B1F65C00DC498C /* RefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshControl.h; sourceTree = "<group>"; };
 		4617D68B19B1F65C00DC498C /* RefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshControl.m; sourceTree = "<group>"; };
 		4617D68C19B1F65C00DC498C /* UIScrollView+RefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+RefreshControl.h"; sourceTree = "<group>"; };
@@ -178,8 +178,8 @@
 			children = (
 				46CA05B619CBC2C5007F2A82 /* Arrow.h */,
 				46CA05B719CBC2C5007F2A82 /* Arrow.m */,
-				4617D68819B1F65C00DC498C /* LoadingView.h */,
-				4617D68919B1F65C00DC498C /* LoadingView.m */,
+				4617D68819B1F65C00DC498C /* Indicator.h */,
+				4617D68919B1F65C00DC498C /* Indicator.m */,
 				4617D68A19B1F65C00DC498C /* RefreshControl.h */,
 				4617D68B19B1F65C00DC498C /* RefreshControl.m */,
 				4617D68C19B1F65C00DC498C /* UIScrollView+RefreshControl.h */,
@@ -288,7 +288,7 @@
 			files = (
 				4609D17419ACD0A8003D6E36 /* main.m in Sources */,
 				4617D69019B1F65C00DC498C /* UIScrollView+RefreshControl.m in Sources */,
-				4617D68E19B1F65C00DC498C /* LoadingView.m in Sources */,
+				4617D68E19B1F65C00DC498C /* Indicator.m in Sources */,
 				4617D68519B1F65400DC498C /* CHAppDelegate.m in Sources */,
 				4617D68619B1F65400DC498C /* CHViewController.m in Sources */,
 				4617D68F19B1F65C00DC498C /* RefreshControl.m in Sources */,

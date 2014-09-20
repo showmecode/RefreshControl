@@ -6,18 +6,18 @@
 //  Copyright (c) 2014 Moch. All rights reserved.
 //
 
-#import "LoadingView.h"
+#import "Indicator.h"
 
 #define CHRadian(x) (2 * M_PI / 360 * x)
 
-@interface LoadingView ()
+@interface Indicator ()
 
 @property (nonatomic, assign) CGFloat radian;
 @property (nonatomic, strong) NSTimer *timer;
 
 @end
 
-@implementation LoadingView
+@implementation Indicator
 
 - (instancetype)initWithFrame:(CGRect)frame {
     CGFloat width = CGRectGetWidth(frame);

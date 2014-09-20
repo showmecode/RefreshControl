@@ -61,13 +61,18 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //            [weakSelf.tableView reloadData];
 //            [weakSelf.tableView bottomRefreshControlStopRefreshing];
-            [weakSelf.tableView refreshFailureWithHintText:@"网络错误！"];
+            [weakSelf.tableView refreshFailureWithHintText:@"加载失败，请点击重试！"];
         });
     } refreshControlPullType:1 refreshControlStatusType:0];
     
     self.tableView.statusTextColor = [UIColor orangeColor];
     self.tableView.loadingCircleColor = [UIColor orangeColor];
     self.tableView.arrowColor = [UIColor orangeColor];
+    
+    [self.tableView addTouchUpInsideEventUsingBlock:^(RefreshControl *refreshControl) {
+        NSLog(@"%@", refreshControl);
+        [weakSelf.tableView refreshingAgain:refreshControl];
+    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

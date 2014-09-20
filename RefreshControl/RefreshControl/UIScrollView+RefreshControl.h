@@ -38,5 +38,7 @@
 - (void)removeBottomRefreshControl;
 
 - (void)refreshFailureWithHintText:(NSString *)hintText;
+- (void)addTouchUpInsideEventUsingBlock:(void (^)(RefreshControl *refreshControl))callback;
+- (void)refreshingAgain:(RefreshControl *)refreshControl;
 
 @end

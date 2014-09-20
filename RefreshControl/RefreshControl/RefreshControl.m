@@ -7,7 +7,7 @@
 //
 
 #import "RefreshControl.h"
-#import "LoadingView.h"
+#import "Indicator.h"
 #import "Arrow.h"
 
 #define CHImageWithName(NAME) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:NAME ofType:@"png"]]
@@ -21,12 +21,13 @@
 @property (nonatomic, assign) UIEdgeInsets scrollViewInsetRecord;
 @property (nonatomic, assign) CGSize scrollViewContentSizeRecord;
 @property (nonatomic, assign, getter = hasInitInset) BOOL initInset;
+@property (nonatomic, assign, getter = isRefreshFailure) BOOL refreshFailure;
 
 @end
 
 @implementation RefreshControl
-@synthesize statusButton = _statusButton;
-@synthesize loadingView = _loadingView;
+@synthesize statusLabel = _statusLabel;
+@synthesize indicator = _indicator;
 @synthesize arrow = _arrow;
 
 #pragma mark -
@@ -41,46 +42,56 @@
     if (self) {
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         self.refreshControlStatusType = RefreshControlStatusTypeTextAndArrow;
+        self.userInteractionEnabled = NO;
+        [self addTarget:self action:@selector(handleTouchEvent:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return self;
 }
 
-- (UIButton *)statusButton {
-    if (!_statusButton) {
-        UIButton *statusButton = [UIButton new];
-        statusButton.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        statusButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
-        statusButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-        [statusButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        [statusButton addTarget:self action:@selector(handleStatusButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        _statusButton = statusButton;
-        [self addSubview:_statusButton];
+- (void)handleTouchEvent:(RefreshControl *)refreshControl {
+    if (_touchUpInsideEvent) {
+        _touchUpInsideEvent(self);
+    } else {
+        [self refreshingAgain];
     }
-    
-    return _statusButton;
 }
 
-- (void)handleStatusButtonPressed:(UIButton *)sender {
+- (void)refreshingAgain {
     // recover refreshing status
-    self.loadingView.hidden = NO;
-    [self.loadingView startAnimation];
-    [self.statusButton setTitle:nil forState:UIControlStateNormal];
+    self.indicator.hidden = NO;
+    [self.indicator startAnimation];
+    self.statusLabel.text = nil;
     
     if (_begainRefreshing) {
         _begainRefreshing();
     }
+    self.userInteractionEnabled = NO;
 }
 
-- (LoadingView *)loadingView {
-    if (!_loadingView) {
-        LoadingView *loadingView = [LoadingView new];
+- (UILabel *)statusLabel {
+    if (!_statusLabel) {
+        UILabel *statusLabel = [UILabel new];
+        statusLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        statusLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+        statusLabel.textColor = [UIColor lightGrayColor];
+        statusLabel.textAlignment = NSTextAlignmentCenter;
+        _statusLabel = statusLabel;
+        [self addSubview:_statusLabel];
+    }
+    
+    return _statusLabel;
+}
+
+- (Indicator *)indicator {
+    if (!_indicator) {
+        Indicator *loadingView = [Indicator new];
         loadingView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin| UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-        _loadingView = loadingView;
+        _indicator = loadingView;
         [self addSubview:loadingView];
     }
     
-    return _loadingView;
+    return _indicator;
 }
 
 - (Arrow *)arrow {
@@ -160,12 +171,12 @@
 }
 
 - (CGFloat)statusButtonTitleBoundingLengthForText:(NSString *)text {
-    CGSize boundingRectWithSize = CGSizeMake(CGRectGetWidth(self.statusButton.bounds),
-                                             CGRectGetHeight(self.statusButton.bounds));
+    CGSize boundingRectWithSize = CGSizeMake(CGRectGetWidth(self.statusLabel.bounds),
+                                             CGRectGetHeight(self.statusLabel.bounds));
     NSStringDrawingOptions options = NSStringDrawingTruncatesLastVisibleLine |
                                      NSStringDrawingUsesFontLeading |
                                      NSStringDrawingUsesLineFragmentOrigin;
-    NSDictionary *attributes = @{NSFontAttributeName:self.statusButton.titleLabel.font};
+    NSDictionary *attributes = @{NSFontAttributeName:self.statusLabel.font};
     CGFloat length = [text boundingRectWithSize:boundingRectWithSize
                                         options:options
                                      attributes:attributes
@@ -179,11 +190,11 @@
         return;
     }
     
-    self.statusButton.bounds = self.bounds;
-    self.statusButton.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+    self.statusLabel.bounds = self.bounds;
+    self.statusLabel.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
     
-    self.loadingView.bounds = CGRectMake(0, 0, 20, 20);
-    self.loadingView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+    self.indicator.bounds = CGRectMake(0, 0, 20, 20);
+    self.indicator.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
 }
 
 - (void)layoutSubviews {
@@ -256,6 +267,10 @@
 // super scroll view already stop pulling, will decelerate
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if(self.refreshControlState == RefreshControlStateRefreshing) {
+        if (self.isRefreshFailure) {
+            [self refreshingAgain];
+            _refreshFailure = NO;
+        }
         return;
     }
     
@@ -342,13 +357,13 @@
     
     switch(refreshControlState) {
         case RefreshControlStateHidden: {
-            [self.loadingView stopAnimation];
-            self.loadingView.hidden = YES;
+            [self.indicator stopAnimation];
+            self.indicator.hidden = YES;
             self.arrow.hidden = NO;
         }
             break;
         case RefreshControlStatePulling: {
-            [self.statusButton setTitle:self.pullToRefreshing forState:UIControlStateNormal];
+            self.statusLabel.text = self.pullToRefreshing;
             if (self.refreshControlType == RefreshControlTypeTop) {
                 [self.arrow rotation];
             } else {
@@ -357,7 +372,7 @@
         }
             break;
         case RefreshControlStateOveredThreshold: {
-            [self.statusButton setTitle:self.pullReleaseToRefreshing forState:UIControlStateNormal];
+            self.statusLabel.text = self.pullReleaseToRefreshing;
             if (self.refreshControlType == RefreshControlTypeTop) {
                 [self.arrow identity];
             } else {
@@ -366,9 +381,9 @@
         }
             break;
         case RefreshControlStateRefreshing: {
-            self.loadingView.hidden = NO;
-            [self.loadingView startAnimation];
-            [self.statusButton setTitle:nil forState:UIControlStateNormal];
+            self.indicator.hidden = NO;
+            [self.indicator startAnimation];
+            self.statusLabel.text = nil;
             self.arrow.hidden = YES;
         }
             break;
@@ -378,11 +393,13 @@
 }
 
 - (void)refreshFailureWithHintText:(NSString *)hintText {
-    [self.loadingView stopAnimation];
-    self.loadingView.hidden = YES;
+    _refreshFailure = YES;
+    self.userInteractionEnabled = YES;
+    [self.indicator stopAnimation];
+    self.indicator.hidden = YES;
     
     NSString *hint = hintText ? : self.refreshingFailureHintText;
-    [self.statusButton setTitle:hint forState:UIControlStateNormal];
+    self.statusLabel.text = hint;
 }
 
 @end

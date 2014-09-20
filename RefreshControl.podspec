@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "RefreshControl"
-  s.version      = "1.5.1"
+  s.version      = "1.5.2"
   s.summary      = "RefreshControl is an useful pull to refresh control for ios developer"
 
   s.description  = <<-DESC
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.author             = { "Moch" => "atcuan@gmail.com" }
   s.social_media_url   = "http://twitter.com/MochXiao"
   s.platform     = :ios, "7.0"
-  s.source       = { :git => "https://github.com/showmecode/RefreshControl.git", :tag => "1.5.1" }
+  s.source       = { :git => "https://github.com/showmecode/RefreshControl.git", :tag => "1.5.2" }
   s.requires_arc = true
   s.source_files  = "RefreshControl/RefreshControl/*"
   s.frameworks = 'Foundation', 'UIKit'

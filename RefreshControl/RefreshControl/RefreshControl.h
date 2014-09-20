@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class LoadingView;
+@class Indicator;
 @class Arrow;
 
 typedef NS_ENUM(NSInteger, RefreshControlType) {
@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger, RefreshControlStatusType) {
     RefreshControlStatusTypeArrow
 };
 
-@interface RefreshControl : UIView
+@interface RefreshControl : UIControl
 
 @property (nonatomic, assign) RefreshControlType        refreshControlType;
 @property (nonatomic, assign) RefreshControlPullType    refreshControlPullType;
@@ -47,8 +47,8 @@ typedef NS_ENUM(NSInteger, RefreshControlStatusType) {
 // Scroll view content exceeds the height control view (Subclasses override the)
 @property (nonatomic, assign, readonly) CGFloat      scrollViewOverViewHeight;
 
-@property (nonatomic, weak, readonly) UIButton *statusButton;
-@property (nonatomic, weak, readonly) LoadingView *loadingView;
+@property (nonatomic, weak, readonly) UILabel *statusLabel;
+@property (nonatomic, weak, readonly) Indicator *indicator;
 @property (nonatomic, weak, readonly) Arrow *arrow;
 
 // @"Pull down refresh"
@@ -66,8 +66,11 @@ typedef NS_ENUM(NSInteger, RefreshControlStatusType) {
 - (void)refreshFailureWithHintText:(NSString *)hintText;
 
 // call back
-@property (nonatomic, copy) void(^begainRefreshing)();
-@property (nonatomic, copy) void(^endRefreshing)();
+@property (nonatomic, copy) void (^begainRefreshing)();
+@property (nonatomic, copy) void (^endRefreshing)();
+@property (nonatomic, copy) void (^touchUpInsideEvent)(RefreshControl *refreshControl);
+// refresh agign
+- (void)refreshingAgain;
 
 @end
 

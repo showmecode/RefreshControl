@@ -7,7 +7,7 @@
 //
 
 #import "UIScrollView+RefreshControl.h"
-#import "LoadingView.h"
+#import "Indicator.h"
 #import "Arrow.h"
 #import <objc/runtime.h>
 
@@ -70,6 +70,7 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
 - (void)setBottomRefreshControl:(BottomRefreshControl *)bottomRefreshControl {
     [self willChangeValueForKey:@"BottomRefreshControlKey"];
     objc_setAssociatedObject(self, BottomRefreshControlKey, bottomRefreshControl, OBJC_ASSOCIATION_ASSIGN);
+    [self didChangeValueForKey:@"BottomRefreshControlKey"];
 }
 
 - (BottomRefreshControl *)bottomRefreshControl {
@@ -157,21 +158,21 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
 }
 
 - (void)setStatusTextColor:(UIColor *)statusTextColor {
-    [self.topRefreshControl.statusButton setTitleColor:statusTextColor forState:UIControlStateNormal];
-    [self.bottomRefreshControl.statusButton setTitleColor:statusTextColor forState:UIControlStateNormal];
+    self.topRefreshControl.statusLabel.textColor = statusTextColor;
+    self.bottomRefreshControl.statusLabel.textColor = statusTextColor;
 }
 
 - (UIColor *)statusTextColor {
-    return self.topRefreshControl.statusButton.currentTitleColor;
+    return self.topRefreshControl.statusLabel.textColor;
 }
 
 - (void)setLoadingCircleColor:(UIColor *)loadingCircleColor {
-    self.topRefreshControl.loadingView.lineColor = loadingCircleColor;
-    self.bottomRefreshControl.loadingView.lineColor = loadingCircleColor;
+    self.topRefreshControl.indicator.lineColor = loadingCircleColor;
+    self.bottomRefreshControl.indicator.lineColor = loadingCircleColor;
 }
 
 - (UIColor *)loadingCircleColor {
-    return self.topRefreshControl.loadingView.lineColor;
+    return self.topRefreshControl.indicator.lineColor;
 }
 
 - (void)setArrowColor:(UIColor *)arrowColor {
@@ -193,6 +194,21 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
     if (self.bottomRefreshControl.refreshControlState == RefreshControlStateRefreshing) {
         [self.bottomRefreshControl refreshFailureWithHintText:hintText];
     }
+}
+
+- (void)refreshingAgain:(RefreshControl *)refreshControl {
+    if ([refreshControl isMemberOfClass:[TopRefreshControl class]]) {
+        [self.topRefreshControl refreshingAgain];
+        return;
+    }
+    if ([refreshControl isMemberOfClass:[BottomRefreshControl class]]) {
+        [self.bottomRefreshControl refreshingAgain];
+    }
+}
+
+- (void)addTouchUpInsideEventUsingBlock:(void (^)(RefreshControl *refreshControl))callback {
+    self.topRefreshControl.touchUpInsideEvent = callback;
+    self.bottomRefreshControl.touchUpInsideEvent = callback;
 }
 
 @end

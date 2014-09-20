@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoadingView : UIView
+@interface Indicator : UIView
 
 @property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, strong) UIColor *lineColor;
