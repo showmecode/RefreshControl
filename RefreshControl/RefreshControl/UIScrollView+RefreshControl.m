@@ -65,6 +65,18 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
     self.topRefreshControl = nil;
 }
 
+- (void)topRefreshControlRefreshFailureWithHintText:(NSString *)hintText {
+    [self.topRefreshControl refreshFailureWithHintText:hintText];
+}
+
+- (void)addTouchUpInsideEventForTopRefreshControlUsingBlock:(void (^)(RefreshControl *refreshControl))callback {
+    self.topRefreshControl.touchUpInsideEvent = callback;
+}
+
+- (void)topRefreshControlResumeRefreshing {
+    [self.topRefreshControl resumeRefreshing];
+}
+
 #pragma mark - BootomRefreshControl
 
 - (void)setBottomRefreshControl:(BottomRefreshControl *)bottomRefreshControl {
@@ -105,6 +117,18 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
 - (void)removeBottomRefreshControl {
     [self.bottomRefreshControl removeFromSuperview];
     self.bottomRefreshControl = nil;
+}
+
+- (void)bottomRefreshControlRefreshFailureWithHintText:(NSString *)hintText {
+    [self.bottomRefreshControl refreshFailureWithHintText:hintText];
+}
+
+- (void)addTouchUpInsideEventForBottomRefreshControlUsingBlock:(void (^)(RefreshControl *refreshControl))callback {
+    self.bottomRefreshControl.touchUpInsideEvent = callback;
+}
+
+- (void)bottomRefreshControlResumeRefreshing {
+    [self.bottomRefreshControl resumeRefreshing];
 }
 
 #pragma mark - override accessors
@@ -182,33 +206,6 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
 
 - (UIColor *)arrowColor {
     return self.topRefreshControl.arrow.color;
-}
-
-#pragma mark - common
-
-- (void)refreshFailureWithHintText:(NSString *)hintText {
-    if (self.topRefreshControl.refreshControlState == RefreshControlStateRefreshing) {
-        [self.topRefreshControl refreshFailureWithHintText:hintText];
-        return;
-    }
-    if (self.bottomRefreshControl.refreshControlState == RefreshControlStateRefreshing) {
-        [self.bottomRefreshControl refreshFailureWithHintText:hintText];
-    }
-}
-
-- (void)refreshingAgain:(RefreshControl *)refreshControl {
-    if ([refreshControl isMemberOfClass:[TopRefreshControl class]]) {
-        [self.topRefreshControl refreshingAgain];
-        return;
-    }
-    if ([refreshControl isMemberOfClass:[BottomRefreshControl class]]) {
-        [self.bottomRefreshControl refreshingAgain];
-    }
-}
-
-- (void)addTouchUpInsideEventUsingBlock:(void (^)(RefreshControl *refreshControl))callback {
-    self.topRefreshControl.touchUpInsideEvent = callback;
-    self.bottomRefreshControl.touchUpInsideEvent = callback;
 }
 
 @end

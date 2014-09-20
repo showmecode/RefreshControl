@@ -69,8 +69,8 @@ typedef NS_ENUM(NSInteger, RefreshControlStatusType) {
 @property (nonatomic, copy) void (^begainRefreshing)();
 @property (nonatomic, copy) void (^endRefreshing)();
 @property (nonatomic, copy) void (^touchUpInsideEvent)(RefreshControl *refreshControl);
-// refresh agign
-- (void)refreshingAgain;
+// resume refreshing state
+- (void)resumeRefreshing;
 
 @end
 

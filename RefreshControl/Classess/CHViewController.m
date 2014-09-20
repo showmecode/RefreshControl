@@ -52,16 +52,16 @@
     } refreshControlPullType:1 refreshControlStatusType:0];
     
     [self.tableView addBottomRefreshControlUsingBlock:^{
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            for (int i = 0; i < 5; i++) {
-                NSString *data = [NSString stringWithFormat:@"pull up data random number: %d", arc4random() % 100];
-                [weakSelf.dataSource addObject:data];
-            }
-        });
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            for (int i = 0; i < 5; i++) {
+//                NSString *data = [NSString stringWithFormat:@"pull up data random number: %d", arc4random() % 100];
+//                [weakSelf.dataSource addObject:data];
+//            }
+//        });
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //            [weakSelf.tableView reloadData];
 //            [weakSelf.tableView bottomRefreshControlStopRefreshing];
-            [weakSelf.tableView refreshFailureWithHintText:@"加载失败，请点击重试！"];
+            [weakSelf.tableView bottomRefreshControlRefreshFailureWithHintText:@"加载失败，请点击重试！"];
         });
     } refreshControlPullType:1 refreshControlStatusType:0];
     
@@ -69,9 +69,8 @@
     self.tableView.loadingCircleColor = [UIColor orangeColor];
     self.tableView.arrowColor = [UIColor orangeColor];
     
-    [self.tableView addTouchUpInsideEventUsingBlock:^(RefreshControl *refreshControl) {
-        NSLog(@"%@", refreshControl);
-        [weakSelf.tableView refreshingAgain:refreshControl];
+    [self.tableView addTouchUpInsideEventForBottomRefreshControlUsingBlock:^(RefreshControl *refreshControl) {
+        [weakSelf.tableView bottomRefreshControlResumeRefreshing];
     }];
 }
 

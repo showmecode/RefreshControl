@@ -29,6 +29,9 @@
               refreshControlStatusType:(RefreshControlStatusType)refreshControlStatusType;
 - (void)topRefreshControlStopRefreshing;
 - (void)removeTopRefreshControl;
+- (void)topRefreshControlRefreshFailureWithHintText:(NSString *)hintText;
+- (void)addTouchUpInsideEventForTopRefreshControlUsingBlock:(void (^)(RefreshControl *refreshControl))callback;
+- (void)topRefreshControlResumeRefreshing;
 
 - (void)addBottomRefreshControlUsingBlock:(void (^)())callback;
 - (void)addBottomRefreshControlUsingBlock:(void (^)())callback
@@ -36,9 +39,8 @@
                  refreshControlStatusType:(RefreshControlStatusType)refreshControlStatusType;
 - (void)bottomRefreshControlStopRefreshing;
 - (void)removeBottomRefreshControl;
-
-- (void)refreshFailureWithHintText:(NSString *)hintText;
-- (void)addTouchUpInsideEventUsingBlock:(void (^)(RefreshControl *refreshControl))callback;
-- (void)refreshingAgain:(RefreshControl *)refreshControl;
+- (void)bottomRefreshControlRefreshFailureWithHintText:(NSString *)hintText;
+- (void)addTouchUpInsideEventForBottomRefreshControlUsingBlock:(void (^)(RefreshControl *refreshControl))callback;
+- (void)bottomRefreshControlResumeRefreshing;
 
 @end

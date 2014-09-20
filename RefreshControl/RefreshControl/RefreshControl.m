@@ -53,11 +53,11 @@
     if (_touchUpInsideEvent) {
         _touchUpInsideEvent(self);
     } else {
-        [self refreshingAgain];
+        [self resumeRefreshing];
     }
 }
 
-- (void)refreshingAgain {
+- (void)resumeRefreshing {
     // recover refreshing status
     self.indicator.hidden = NO;
     [self.indicator startAnimation];
@@ -268,7 +268,7 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if(self.refreshControlState == RefreshControlStateRefreshing) {
         if (self.isRefreshFailure) {
-            [self refreshingAgain];
+            [self resumeRefreshing];
             _refreshFailure = NO;
         }
         return;

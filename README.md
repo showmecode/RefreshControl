@@ -98,15 +98,24 @@ You can change the status text and color, loading animation circle color and arr
 @property (nonatomic, strong) UIColor *arrowColor;
 ```
 
+You can set refresh failure status text
+
+```Objective-c
+topRefreshControlRefreshFailureWithHintText:
+bottomRefreshControlRefreshFailureWithHintText:
+```
+
 You can handle touch event by you self
 
 ```Objective-c
-addTouchUpInsideEventUsingBlock:
+addTouchUpInsideEventForTopRefreshControlUsingBlock:
+addTouchUpInsideEventForBottomRefreshControlUsingBlock:
 ```
 
 If you don't handle this event, we will refresh again when you touch RefreshControl or pull again. Of course, after you handle this event, you wanna refresh again, call flow message or pull
 
 ```Objective-c
-refreshingAgain：
+topRefreshControlResumeRefreshing
+bottomRefreshControlResumeRefreshing
 ```
 
