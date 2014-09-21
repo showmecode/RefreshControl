@@ -85,10 +85,11 @@
 
 - (Indicator *)indicator {
     if (!_indicator) {
-        Indicator *loadingView = [Indicator new];
-        loadingView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin| UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-        _indicator = loadingView;
-        [self addSubview:loadingView];
+        Indicator *indicator = [Indicator new];
+        indicator.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin| UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+        indicator.hidden = YES;
+        _indicator = indicator;
+        [self addSubview:indicator];
     }
     
     return _indicator;

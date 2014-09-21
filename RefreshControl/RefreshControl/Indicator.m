@@ -50,7 +50,7 @@
 
 - (void)drawRect:(CGRect)rect {
     if (self.radian <= 0) {
-        _radian = 0;
+        _radian = 2;
     }
     
     CGFloat lineWidth = 1.0f;
