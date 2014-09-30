@@ -50,7 +50,7 @@
 
 - (void)drawRect:(CGRect)rect {
     if (self.radian <= 0) {
-        _radian = 2;
+        _radian = M_PI;
     }
     
     CGFloat lineWidth = 1.0f;
@@ -70,8 +70,8 @@
                     CGRectGetMidX(self.bounds),
                     CGRectGetMidY(self.bounds),
                     CGRectGetWidth(self.bounds) / 2 - lineWidth,
-                    CHRadian(120),
-                    CHRadian(120) + CHRadian(330) * self.radian,
+                    CHRadian(80),
+                    CHRadian(80) + CHRadian(340) * self.radian,
                     0);
     CGContextStrokePath(context);
     CGContextRelease(context);
@@ -90,19 +90,22 @@
     _animating = YES;
     
     self.radian = 0;
+    
+    [self startRotateAnimation];
+    
     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.02f
                                                   target:self
                                                 selector:@selector(drawPathAnimation:)
                                                 userInfo:nil
                                                  repeats:YES];
-    [[NSRunLoop currentRunLoop]addTimer:self.timer forMode:NSRunLoopCommonModes];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
 
 - (void)drawPathAnimation:(NSTimer *)timer {
-    self.radian += 0.03f;
+    self.radian += CHRadian(10);
     
-    if (self.radian >= 1) {
-        self.radian = 1;
+    if (self.radian >= CHRadian(80)) {
+        self.radian = CHRadian(55);
         [timer invalidate];
         self.timer = nil;
         [self startRotateAnimation];

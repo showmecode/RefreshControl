@@ -23,11 +23,17 @@
     NSLog(@"%s", __func__);
 }
 
+- (BOOL)respondsToSelector:(SEL)aSelector {
+    printf("SELECTOR: %s\n", [NSStringFromSelector(aSelector) UTF8String]);
+    return [super respondsToSelector:aSelector];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.dataSource = self;
     _dataSource = [[NSMutableArray alloc] init];
     for (int i = 0; i < 13; i++) {
         NSString *data = [NSString stringWithFormat:@"initial data number: %d", i];
