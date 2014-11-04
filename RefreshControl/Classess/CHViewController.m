@@ -10,7 +10,7 @@
 #import "UIScrollView+RefreshControl.h"
 #import "RefreshControl.h"
 
-@interface CHViewController () <UITableViewDataSource>
+@interface CHViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;;
@@ -32,10 +32,12 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    
     _dataSource = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 13; i++) {
+    for (int i = 0; i < 8; i++) {
         NSString *data = [NSString stringWithFormat:@"initial data number: %d", i];
         [_dataSource addObject:data];
     }
@@ -43,33 +45,33 @@
     __weak typeof(self) weakSelf = self;
 
 
-    [self.tableView addTopRefreshControlUsingBlock:^{
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            for (int i = 0; i < 5; i++) {
-                NSString *data = [NSString stringWithFormat:@"pull down data random number: %d", arc4random() % 100];
-                [weakSelf.dataSource insertObject:data atIndex:0];
-            }
-        });
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-
-            [weakSelf.tableView topRefreshControlStopRefreshing];
-            [weakSelf.tableView reloadData];
-        });
-    } refreshControlPullType:1 refreshControlStatusType:0];
-    
-    [self.tableView addBottomRefreshControlUsingBlock:^{
+//    [self.tableView addTopRefreshControlUsingBlock:^{
 //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 //            for (int i = 0; i < 5; i++) {
-//                NSString *data = [NSString stringWithFormat:@"pull up data random number: %d", arc4random() % 100];
-//                [weakSelf.dataSource addObject:data];
+//                NSString *data = [NSString stringWithFormat:@"pull down data random number: %d", arc4random() % 100];
+//                [weakSelf.dataSource insertObject:data atIndex:0];
 //            }
 //        });
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//
+//            [weakSelf.tableView topRefreshControlStopRefreshing];
 //            [weakSelf.tableView reloadData];
-//            [weakSelf.tableView bottomRefreshControlStopRefreshing];
-            [weakSelf.tableView bottomRefreshControlRefreshFailureWithHintText:@"加载失败，请点击重试！"];
+//        });
+//    } refreshControlPullType:1 refreshControlStatusType:0];
+    
+    [self.tableView addBottomRefreshControlUsingBlock:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            for (int i = 0; i < 5; i++) {
+                NSString *data = [NSString stringWithFormat:@"pull up data random number: %d", arc4random() % 100];
+                [weakSelf.dataSource addObject:data];
+            }
         });
-    } refreshControlPullType:1 refreshControlStatusType:0];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf.tableView reloadData];
+            [weakSelf.tableView bottomRefreshControlStopRefreshing];
+//            [weakSelf.tableView bottomRefreshControlRefreshFailureWithHintText:@"加载失败，请点击重试！"];
+        });
+    } refreshControlPullType:RefreshControlPullTypeInsensitive refreshControlStatusType:RefreshControlStatusTypeTextAndArrow];
     
     self.tableView.statusTextColor = [UIColor orangeColor];
     self.tableView.loadingCircleColor = [UIColor orangeColor];
@@ -93,6 +95,10 @@
     cell.textLabel.text = _dataSource[indexPath.row];
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44 + indexPath.row;
 }
 
 

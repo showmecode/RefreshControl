@@ -8,16 +8,46 @@
 
 #import "Indicator.h"
 
-#define CHRadian(x) (2 * M_PI / 360 * x)
+#define CHRadian(x) (M_PI * (x) / 180.0f)
 
 @interface Indicator ()
 
-@property (nonatomic, assign) CGFloat radian;
-@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, assign) BOOL resetAnimation;
+@property (nonatomic, readwrite, getter = isAnimating) BOOL animating;
+@property (nonatomic, assign, getter = isInitializeTime) BOOL initializeTime;
 
 @end
 
 @implementation Indicator
+
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    [super willMoveToSuperview:newSuperview];
+    
+    if (!newSuperview) {
+        self.resetAnimation = NO;
+        [self stopRotateAnimation];
+    }
+}
+
+- (void)willMoveToWindow:(UIWindow *)newWindow {
+    [super willMoveToWindow:newWindow];
+    
+    if (self.isInitializeTime) {
+        self.initializeTime = NO;
+        return;
+    }
+    
+    if (newWindow) {
+        [self startAnimation];
+    } else {
+        self.resetAnimation = NO;
+        [self stopAnimation];
+    }
+}
+
+- (instancetype)init {
+    return [self initWithFrame:CGRectZero];
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     CGFloat width = CGRectGetWidth(frame);
@@ -26,15 +56,14 @@
     CGRect newFrame = CGRectMake(frame.origin.x, frame.origin.y, lengthOfSide, lengthOfSide);
     self = [super initWithFrame:newFrame];
     if (self) {
-        self.backgroundColor = [UIColor clearColor];
         self.layer.cornerRadius = lengthOfSide / 2;
+        self.backgroundColor = [UIColor clearColor];
         self.layer.masksToBounds = YES;
+        
+        self.resetAnimation = YES;
+        self.initializeTime = YES;
     }
     return self;
-}
-
-- (instancetype)init {
-    return [self initWithFrame:CGRectZero];
 }
 
 - (void)setBounds:(CGRect)bounds {
@@ -49,10 +78,6 @@
 }
 
 - (void)drawRect:(CGRect)rect {
-    if (self.radian <= 0) {
-        _radian = M_PI;
-    }
-    
     CGFloat lineWidth = 1.0f;
     UIColor *lineColor = [UIColor lightGrayColor];
     if (self.lineWidth) {
@@ -70,46 +95,21 @@
                     CGRectGetMidX(self.bounds),
                     CGRectGetMidY(self.bounds),
                     CGRectGetWidth(self.bounds) / 2 - lineWidth,
-                    CHRadian(80),
-                    CHRadian(80) + CHRadian(340) * self.radian,
-                    0);
+                    CHRadian(260),
+                    CHRadian(-80),
+                    YES);
     CGContextStrokePath(context);
     CGContextRelease(context);
 }
 
-- (void)setRadian:(CGFloat)radian {
-    _radian = radian;
-    [self setNeedsDisplay];
-}
-
 - (void)startAnimation {
     if (self.isAnimating) {
-        [self stopAnimation];
-        [self.layer removeAllAnimations];
+        return;
     }
-    _animating = YES;
-    
-    self.radian = 0;
     
     [self startRotateAnimation];
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.02f
-                                                  target:self
-                                                selector:@selector(drawPathAnimation:)
-                                                userInfo:nil
-                                                 repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
-}
-
-- (void)drawPathAnimation:(NSTimer *)timer {
-    self.radian += CHRadian(10);
-    
-    if (self.radian >= CHRadian(80)) {
-        self.radian = CHRadian(55);
-        [timer invalidate];
-        self.timer = nil;
-        [self startRotateAnimation];
-    }
+    self.animating = YES;
 }
 
 - (void)startRotateAnimation {
@@ -119,27 +119,39 @@
     animation.duration = 1.0f;
     animation.repeatCount = HUGE_VAL;
     animation.removedOnCompletion = YES;
-    [self.layer addAnimation:animation forKey:@"keyFrameAnimation"];
+    animation.delegate = self;
+    [self.layer addAnimation:animation forKey:@"RotateAnimation"];
 }
 
 - (void)stopAnimation {
-    _animating = NO;
-    
-    if ([self.timer isValid]) {
-        [self.timer invalidate];
-        self.timer = nil;
+    if (!self.animating) {
+        return;
     }
+    
     [self stopRotateAnimation];
+    
+    self.animating = NO;
 }
 
 - (void)stopRotateAnimation {
     [UIView animateWithDuration:0.3f animations:^{
         self.alpha = 0;
     } completion:^(BOOL finished) {
-        self.radian = 0;
         [self.layer removeAllAnimations];
         self.alpha = 1;
     }];
 }
+
+// animation delegate
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+    if (!self.animating) {
+        return;
+    }
+    
+    if (!flag && self.resetAnimation) {
+        [self startRotateAnimation];
+    }
+}
+
 
 @end
