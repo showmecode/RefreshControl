@@ -432,8 +432,7 @@
         return;
     }
     
-    CGFloat width = CGRectGetWidth([[UIScreen mainScreen] bounds]);
-    self.frame = CGRectMake(0, -kPullControlHeight, width, kPullControlHeight);
+    self.frame = CGRectMake(0, -kPullControlHeight, CGRectGetWidth(self.superScrollView.bounds), kPullControlHeight);
     
     [super settingFrames];
 }
