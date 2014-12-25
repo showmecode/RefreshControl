@@ -431,7 +431,7 @@
     if (!self.superScrollView) {
         return;
     }
-    
+	
     self.frame = CGRectMake(0, -kPullControlHeight, CGRectGetWidth(self.superScrollView.bounds), kPullControlHeight);
     
     [super settingFrames];
