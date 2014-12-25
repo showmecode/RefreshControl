@@ -14,11 +14,6 @@
 		4609D17419ACD0A8003D6E36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4609D17319ACD0A8003D6E36 /* main.m */; };
 		4609D17B19ACD0A8003D6E36 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4609D17919ACD0A8003D6E36 /* Main.storyboard */; };
 		4609D18019ACD0A8003D6E36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4609D17F19ACD0A8003D6E36 /* Images.xcassets */; };
-		4609D18719ACD0A8003D6E36 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4609D18619ACD0A8003D6E36 /* XCTest.framework */; };
-		4609D18819ACD0A8003D6E36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4609D16719ACD0A8003D6E36 /* Foundation.framework */; };
-		4609D18919ACD0A8003D6E36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4609D16B19ACD0A8003D6E36 /* UIKit.framework */; };
-		4609D19119ACD0A9003D6E36 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4609D18F19ACD0A9003D6E36 /* InfoPlist.strings */; };
-		4609D19319ACD0A9003D6E36 /* RefreshControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4609D19219ACD0A9003D6E36 /* RefreshControlTests.m */; };
 		4617D68519B1F65400DC498C /* CHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68219B1F65400DC498C /* CHAppDelegate.m */; };
 		4617D68619B1F65400DC498C /* CHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68419B1F65400DC498C /* CHViewController.m */; };
 		4617D68E19B1F65C00DC498C /* Indicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68919B1F65C00DC498C /* Indicator.m */; };
@@ -26,16 +21,6 @@
 		4617D69019B1F65C00DC498C /* UIScrollView+RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68D19B1F65C00DC498C /* UIScrollView+RefreshControl.m */; };
 		46CA05B819CBC2C5007F2A82 /* Arrow.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CA05B719CBC2C5007F2A82 /* Arrow.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		4609D18A19ACD0A9003D6E36 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4609D15C19ACD0A8003D6E36 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4609D16319ACD0A8003D6E36;
-			remoteInfo = RefreshControl;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		4609D16419ACD0A8003D6E36 /* RefreshControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RefreshControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,7 +33,6 @@
 		4609D17519ACD0A8003D6E36 /* RefreshControl-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RefreshControl-Prefix.pch"; sourceTree = "<group>"; };
 		4609D17A19ACD0A8003D6E36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4609D17F19ACD0A8003D6E36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		4609D18519ACD0A8003D6E36 /* RefreshControlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RefreshControlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4609D18619ACD0A8003D6E36 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		4609D18E19ACD0A9003D6E36 /* RefreshControlTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RefreshControlTests-Info.plist"; sourceTree = "<group>"; };
 		4609D19019ACD0A9003D6E36 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -78,16 +62,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4609D18219ACD0A8003D6E36 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4609D18719ACD0A8003D6E36 /* XCTest.framework in Frameworks */,
-				4609D18919ACD0A8003D6E36 /* UIKit.framework in Frameworks */,
-				4609D18819ACD0A8003D6E36 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -105,7 +79,6 @@
 			isa = PBXGroup;
 			children = (
 				4609D16419ACD0A8003D6E36 /* RefreshControl.app */,
-				4609D18519ACD0A8003D6E36 /* RefreshControlTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -208,24 +181,6 @@
 			productReference = 4609D16419ACD0A8003D6E36 /* RefreshControl.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4609D18419ACD0A8003D6E36 /* RefreshControlTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4609D19919ACD0A9003D6E36 /* Build configuration list for PBXNativeTarget "RefreshControlTests" */;
-			buildPhases = (
-				4609D18119ACD0A8003D6E36 /* Sources */,
-				4609D18219ACD0A8003D6E36 /* Frameworks */,
-				4609D18319ACD0A8003D6E36 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				4609D18B19ACD0A9003D6E36 /* PBXTargetDependency */,
-			);
-			name = RefreshControlTests;
-			productName = RefreshControlTests;
-			productReference = 4609D18519ACD0A8003D6E36 /* RefreshControlTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -235,11 +190,6 @@
 				CLASSPREFIX = CH;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Moch;
-				TargetAttributes = {
-					4609D18419ACD0A8003D6E36 = {
-						TestTargetID = 4609D16319ACD0A8003D6E36;
-					};
-				};
 			};
 			buildConfigurationList = 4609D15F19ACD0A8003D6E36 /* Build configuration list for PBXProject "RefreshControl" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -255,7 +205,6 @@
 			projectRoot = "";
 			targets = (
 				4609D16319ACD0A8003D6E36 /* RefreshControl */,
-				4609D18419ACD0A8003D6E36 /* RefreshControlTests */,
 			);
 		};
 /* End PBXProject section */
@@ -268,14 +217,6 @@
 				4609D18019ACD0A8003D6E36 /* Images.xcassets in Resources */,
 				4609D17219ACD0A8003D6E36 /* InfoPlist.strings in Resources */,
 				4609D17B19ACD0A8003D6E36 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4609D18319ACD0A8003D6E36 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4609D19119ACD0A9003D6E36 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,23 +237,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4609D18119ACD0A8003D6E36 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4609D19319ACD0A9003D6E36 /* RefreshControlTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		4609D18B19ACD0A9003D6E36 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4609D16319ACD0A8003D6E36 /* RefreshControl */;
-			targetProxy = 4609D18A19ACD0A9003D6E36 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		4609D17019ACD0A8003D6E36 /* InfoPlist.strings */ = {
@@ -438,46 +363,6 @@
 			};
 			name = Release;
 		};
-		4609D19A19ACD0A9003D6E36 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/RefreshControl.app/RefreshControl";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "RefreshControl/RefreshControl-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "RefreshControlTests/RefreshControlTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		4609D19B19ACD0A9003D6E36 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/RefreshControl.app/RefreshControl";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "RefreshControl/RefreshControl-Prefix.pch";
-				INFOPLIST_FILE = "RefreshControlTests/RefreshControlTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -495,15 +380,6 @@
 			buildConfigurations = (
 				4609D19719ACD0A9003D6E36 /* Debug */,
 				4609D19819ACD0A9003D6E36 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		4609D19919ACD0A9003D6E36 /* Build configuration list for PBXNativeTarget "RefreshControlTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4609D19A19ACD0A9003D6E36 /* Debug */,
-				4609D19B19ACD0A9003D6E36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

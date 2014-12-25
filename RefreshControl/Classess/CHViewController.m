@@ -45,34 +45,34 @@
     __weak typeof(self) weakSelf = self;
 
 
-//    [self.tableView addTopRefreshControlUsingBlock:^{
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//            for (int i = 0; i < 5; i++) {
-//                NSString *data = [NSString stringWithFormat:@"pull down data random number: %d", arc4random() % 100];
-//                [weakSelf.dataSource insertObject:data atIndex:0];
-//            }
-//        });
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//
-//            [weakSelf.tableView topRefreshControlStopRefreshing];
-//            [weakSelf.tableView reloadData];
-//        });
-//    } refreshControlPullType:1 refreshControlStatusType:0];
-    
-    [self.tableView addBottomRefreshControlUsingBlock:^{
+    [self.tableView addTopRefreshControlUsingBlock:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             for (int i = 0; i < 5; i++) {
-                NSString *data = [NSString stringWithFormat:@"pull up data random number: %d", arc4random() % 100];
-                [weakSelf.dataSource addObject:data];
+                NSString *data = [NSString stringWithFormat:@"pull down data random number: %d", arc4random() % 100];
+                [weakSelf.dataSource insertObject:data atIndex:0];
             }
         });
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf.tableView reloadData];
-            [weakSelf.tableView bottomRefreshControlStopRefreshing];
-//            [weakSelf.tableView bottomRefreshControlRefreshFailureWithHintText:@"加载失败，请点击重试！"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+			[weakSelf.tableView reloadData];
+
+            [weakSelf.tableView topRefreshControlStopRefreshing];
         });
-    } refreshControlPullType:RefreshControlPullTypeInsensitive refreshControlStatusType:RefreshControlStatusTypeTextAndArrow];
-    
+    } refreshControlPullType:1 refreshControlStatusType:0];
+	
+//    [self.tableView addBottomRefreshControlUsingBlock:^{
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            for (int i = 0; i < 5; i++) {
+//                NSString *data = [NSString stringWithFormat:@"pull up data random number: %d", arc4random() % 100];
+//                [weakSelf.dataSource addObject:data];
+//            }
+//        });
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [weakSelf.tableView reloadData];
+//            [weakSelf.tableView bottomRefreshControlStopRefreshing];
+////            [weakSelf.tableView bottomRefreshControlRefreshFailureWithHintText:@"加载失败，请点击重试！"];
+//        });
+//    } refreshControlPullType:RefreshControlPullTypeInsensitive refreshControlStatusType:RefreshControlStatusTypeTextAndArrow];
+	
     self.tableView.statusTextColor = [UIColor orangeColor];
     self.tableView.loadingCircleColor = [UIColor orangeColor];
     self.tableView.arrowColor = [UIColor orangeColor];
