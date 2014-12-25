@@ -10,7 +10,7 @@
 #import "UIScrollView+RefreshControl.h"
 #import "RefreshControl.h"
 
-@interface CHViewController () <UITableViewDataSource>
+@interface CHViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;;
@@ -32,44 +32,49 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+	
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.dataSource = self;
+	self.tableView.delegate = self;
+	
     _dataSource = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 13; i++) {
-        NSString *data = [NSString stringWithFormat:@"initial data number: %d", i];
-        [_dataSource addObject:data];
-    }
-    
+	for (int i = 0; i < 6; i++) {
+		NSString *data = [NSString stringWithFormat:@"initial data number: %d", i];
+		CGFloat height = arc4random() % 66 + 44;
+		
+		[_dataSource addObject:@{@"content":data, @"height":@(height)}];
+	}
+	
     __weak typeof(self) weakSelf = self;
-
 
     [self.tableView addTopRefreshControlUsingBlock:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            for (int i = 0; i < 5; i++) {
-                NSString *data = [NSString stringWithFormat:@"pull down data random number: %d", arc4random() % 100];
-                [weakSelf.dataSource insertObject:data atIndex:0];
-            }
+			for (int i = 0; i < 5; i++) {
+				NSString *data = [NSString stringWithFormat:@"pull down data random number: %d", arc4random() % 100];
+				CGFloat height = arc4random() % 66 + 44;
+				[weakSelf.dataSource insertObject:@{@"content":data, @"height":@(height)} atIndex:0];
+			}
         });
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 			[weakSelf.tableView reloadData];
-
-            [weakSelf.tableView topRefreshControlStopRefreshing];
+			[weakSelf.tableView topRefreshControlStopRefreshing];
         });
-    } refreshControlPullType:1 refreshControlStatusType:0];
+    } refreshControlPullType:RefreshControlPullTypeSensitive refreshControlStatusType:RefreshControlStatusTypeText];
     
     [self.tableView addBottomRefreshControlUsingBlock:^{
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//            for (int i = 0; i < 5; i++) {
-//                NSString *data = [NSString stringWithFormat:@"pull up data random number: %d", arc4random() % 100];
-//                [weakSelf.dataSource addObject:data];
-//            }
-//        });
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            [weakSelf.tableView reloadData];
-//            [weakSelf.tableView bottomRefreshControlStopRefreshing];
-            [weakSelf.tableView bottomRefreshControlRefreshFailureWithHintText:@"加载失败，请点击重试！"];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            for (int i = 0; i < 5; i++) {
+                NSString *data = [NSString stringWithFormat:@"pull up data random number: %d", arc4random() % 100];
+				CGFloat height = arc4random() % 66 + 44;
+                [weakSelf.dataSource addObject:@{@"content":data, @"height":@(height)}];
+            }
         });
-    } refreshControlPullType:1 refreshControlStatusType:0];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf.tableView reloadData];
+            [weakSelf.tableView bottomRefreshControlStopRefreshing];
+//            [weakSelf.tableView bottomRefreshControlRefreshFailureWithHintText:@"加载失败，请点击重试！"];
+        });
+    } refreshControlPullType:RefreshControlPullTypeInsensitive refreshControlStatusType:RefreshControlStatusTypeText];
     
     self.tableView.statusTextColor = [UIColor orangeColor];
     self.tableView.loadingCircleColor = [UIColor orangeColor];
@@ -80,21 +85,27 @@
     }];
 }
 
+#pragma mark - 
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return [self.dataSource[indexPath.row][@"height"] floatValue];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _dataSource.count;
+	return _dataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"CellIdentifier";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
-    cell.textLabel.text = _dataSource[indexPath.row];
-    
-    return cell;
+	static NSString *cellIdentifier = @"CellIdentifier";
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+	if (!cell) {
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+	}
+	
+	NSString *text = _dataSource[indexPath.row][@"content"];
+	cell.textLabel.text = text;
+	
+	return cell;
 }
-
-
 
 @end
