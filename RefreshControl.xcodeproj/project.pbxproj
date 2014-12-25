@@ -19,6 +19,7 @@
 		4617D68E19B1F65C00DC498C /* Indicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68919B1F65C00DC498C /* Indicator.m */; };
 		4617D68F19B1F65C00DC498C /* RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68B19B1F65C00DC498C /* RefreshControl.m */; };
 		4617D69019B1F65C00DC498C /* UIScrollView+RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68D19B1F65C00DC498C /* UIScrollView+RefreshControl.m */; };
+		4658DDDE1A4C01FF00FBD73B /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4658DDDD1A4C01FF00FBD73B /* Launch Screen.xib */; };
 		46CA05B819CBC2C5007F2A82 /* Arrow.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CA05B719CBC2C5007F2A82 /* Arrow.m */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		4617D68B19B1F65C00DC498C /* RefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshControl.m; sourceTree = "<group>"; };
 		4617D68C19B1F65C00DC498C /* UIScrollView+RefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+RefreshControl.h"; sourceTree = "<group>"; };
 		4617D68D19B1F65C00DC498C /* UIScrollView+RefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+RefreshControl.m"; sourceTree = "<group>"; };
+		4658DDDD1A4C01FF00FBD73B /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		46CA05B619CBC2C5007F2A82 /* Arrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arrow.h; sourceTree = "<group>"; };
 		46CA05B719CBC2C5007F2A82 /* Arrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Arrow.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,6 +104,7 @@
 				4609D17919ACD0A8003D6E36 /* Main.storyboard */,
 				4609D17F19ACD0A8003D6E36 /* Images.xcassets */,
 				4609D16E19ACD0A8003D6E36 /* Supporting Files */,
+				4658DDDD1A4C01FF00FBD73B /* Launch Screen.xib */,
 			);
 			path = RefreshControl;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4609D18019ACD0A8003D6E36 /* Images.xcassets in Resources */,
+				4658DDDE1A4C01FF00FBD73B /* Launch Screen.xib in Resources */,
 				4609D17219ACD0A8003D6E36 /* InfoPlist.strings in Resources */,
 				4609D17B19ACD0A8003D6E36 /* Main.storyboard in Resources */,
 			);

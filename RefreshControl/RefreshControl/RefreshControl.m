@@ -72,7 +72,7 @@
 - (UILabel *)statusLabel {
     if (!_statusLabel) {
         UILabel *statusLabel = [UILabel new];
-        statusLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        statusLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin| UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
         statusLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
         statusLabel.textColor = [UIColor lightGrayColor];
         statusLabel.textAlignment = NSTextAlignmentCenter;

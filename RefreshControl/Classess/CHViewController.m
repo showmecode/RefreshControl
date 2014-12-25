@@ -10,7 +10,7 @@
 #import "UIScrollView+RefreshControl.h"
 #import "RefreshControl.h"
 
-@interface CHViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface CHViewController () <UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;;
@@ -32,12 +32,10 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    
     _dataSource = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 13; i++) {
         NSString *data = [NSString stringWithFormat:@"initial data number: %d", i];
         [_dataSource addObject:data];
     }
@@ -58,21 +56,21 @@
             [weakSelf.tableView topRefreshControlStopRefreshing];
         });
     } refreshControlPullType:1 refreshControlStatusType:0];
-	
-//    [self.tableView addBottomRefreshControlUsingBlock:^{
+    
+    [self.tableView addBottomRefreshControlUsingBlock:^{
 //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 //            for (int i = 0; i < 5; i++) {
 //                NSString *data = [NSString stringWithFormat:@"pull up data random number: %d", arc4random() % 100];
 //                [weakSelf.dataSource addObject:data];
 //            }
 //        });
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //            [weakSelf.tableView reloadData];
 //            [weakSelf.tableView bottomRefreshControlStopRefreshing];
-////            [weakSelf.tableView bottomRefreshControlRefreshFailureWithHintText:@"加载失败，请点击重试！"];
-//        });
-//    } refreshControlPullType:RefreshControlPullTypeInsensitive refreshControlStatusType:RefreshControlStatusTypeTextAndArrow];
-	
+            [weakSelf.tableView bottomRefreshControlRefreshFailureWithHintText:@"加载失败，请点击重试！"];
+        });
+    } refreshControlPullType:1 refreshControlStatusType:0];
+    
     self.tableView.statusTextColor = [UIColor orangeColor];
     self.tableView.loadingCircleColor = [UIColor orangeColor];
     self.tableView.arrowColor = [UIColor orangeColor];
@@ -95,10 +93,6 @@
     cell.textLabel.text = _dataSource[indexPath.row];
     
     return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44 + indexPath.row;
 }
 
 
