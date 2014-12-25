@@ -33,20 +33,13 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
 	
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.dataSource = self;
 	self.tableView.delegate = self;
 	
     _dataSource = [[NSMutableArray alloc] init];
-	for (int i = 0; i < 6; i++) {
-		NSString *data = [NSString stringWithFormat:@"initial data number: %d", i];
-		CGFloat height = arc4random() % 66 + 44;
-		
-		[_dataSource addObject:@{@"content":data, @"height":@(height)}];
-	}
 	
     __weak typeof(self) weakSelf = self;
-
     [self.tableView addTopRefreshControlUsingBlock:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 			for (int i = 0; i < 5; i++) {
@@ -56,10 +49,11 @@
 			}
         });
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-			[weakSelf.tableView reloadData];
 			[weakSelf.tableView topRefreshControlStopRefreshing];
+			[weakSelf.tableView reloadData];
+			
         });
-    } refreshControlPullType:RefreshControlPullTypeSensitive refreshControlStatusType:RefreshControlStatusTypeText];
+    } refreshControlPullType:RefreshControlPullTypeInsensitive refreshControlStatusType:RefreshControlStatusTypeText];
     
     [self.tableView addBottomRefreshControlUsingBlock:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -83,9 +77,13 @@
     [self.tableView addTouchUpInsideEventForBottomRefreshControlUsingBlock:^(RefreshControl *refreshControl) {
         [weakSelf.tableView bottomRefreshControlResumeRefreshing];
     }];
+	
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		[self.tableView topRefreshControlStartInitializeRefreshing];
+	});
 }
 
-#pragma mark - 
+#pragma mark -
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	return [self.dataSource[indexPath.row][@"height"] floatValue];
@@ -106,6 +104,12 @@
 	cell.textLabel.text = text;
 	
 	return cell;
+}
+
+#pragma mark - 
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+	NSLog(@"contentOffset = %@", NSStringFromCGPoint(scrollView.contentOffset));
 }
 
 @end

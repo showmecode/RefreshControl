@@ -23,6 +23,8 @@
 @property (nonatomic, strong) UIColor *loadingCircleColor;
 @property (nonatomic, strong) UIColor *arrowColor;
 
+#pragma mark - TopRefreshControl
+
 - (void)addTopRefreshControlUsingBlock:(void (^)())callback;
 - (void)addTopRefreshControlUsingBlock:(void (^)())callback
                 refreshControlPullType:(RefreshControlPullType)refreshControlPullType
@@ -33,6 +35,8 @@
 - (void)addTouchUpInsideEventForTopRefreshControlUsingBlock:(void (^)(RefreshControl *refreshControl))callback;
 - (void)topRefreshControlResumeRefreshing;
 
+#pragma mark - BootomRefreshControl
+
 - (void)addBottomRefreshControlUsingBlock:(void (^)())callback;
 - (void)addBottomRefreshControlUsingBlock:(void (^)())callback
                    refreshControlPullType:(RefreshControlPullType)refreshControlPullType
@@ -42,5 +46,9 @@
 - (void)bottomRefreshControlRefreshFailureWithHintText:(NSString *)hintText;
 - (void)addTouchUpInsideEventForBottomRefreshControlUsingBlock:(void (^)(RefreshControl *refreshControl))callback;
 - (void)bottomRefreshControlResumeRefreshing;
+
+#pragma mark - Initialize refreshing
+
+- (void)topRefreshControlStartInitializeRefreshing;
 
 @end

@@ -8,7 +8,7 @@
 
 #import "Indicator.h"
 
-#define CHRadian(x) (M_PI * (x) / 180.0f)
+#define CHXRadian(x) (M_PI * (x) / 180.0f)
 
 @interface Indicator ()
 
@@ -19,6 +19,12 @@
 @end
 
 @implementation Indicator
+
+#ifdef DEBUG
+- (void)dealloc {
+	NSLog(@"%s", __FUNCTION__);
+}
+#endif
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
 	[super willMoveToSuperview:newSuperview];
@@ -95,8 +101,8 @@
 					CGRectGetMidX(self.bounds),
 					CGRectGetMidY(self.bounds),
 					CGRectGetWidth(self.bounds) / 2 - lineWidth,
-					CHRadian(260),
-					CHRadian(-80),
+					CHXRadian(260),
+					CHXRadian(-80),
 					YES);
 	CGContextStrokePath(context);
 	CGContextRelease(context);
