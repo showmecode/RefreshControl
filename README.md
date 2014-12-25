@@ -32,7 +32,7 @@ TopRefreshControl
             [weakSelf.tableView reloadData];
             [weakSelf.tableView topRefreshControlStopRefreshing];
         });
-    }];
+    } refreshControlPullType:RefreshControlPullTypeInsensitive refreshControlStatusType:RefreshControlStatusTypeText];
 ``` 
 
 **Attention**:  In call back block, you should reload data first, then stop `TopRefreshControl` animation, otherwise, your content focus will go to top. 
@@ -48,10 +48,18 @@ BottomRefreshControl
             [weakSelf.tableView reloadData];
             [weakSelf.tableView bottomRefreshControlStopRefreshing];
         });
-    }];
+    } refreshControlPullType:RefreshControlPullTypeSensitive refreshControlStatusType:RefreshControlStatusTypeText];
 ```
 
 **Attention**:  In call back block, you should always reload data first, then stop `BottomRefreshControl `animation, otherwise, your content bottom will always go to screen bottom.
+
+### Initialize refreshing
+
+```objective-c
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.tableView topRefreshControlStartInitializeRefreshing];
+    });
+```
 
 ### Insensitive Style & StatusType
 
