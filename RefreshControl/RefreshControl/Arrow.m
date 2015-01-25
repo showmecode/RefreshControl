@@ -101,10 +101,10 @@
     CGFloat headWidth = CGRectGetWidth(self.bounds) * 0.7;
     CGFloat headLength = CGRectGetHeight(self.bounds) / 2;
     UIBezierPath *bezierPath = [UIBezierPath bezierPathWithArrowFromPoint:startPoint
-                                                            toPoint:endPoint
-                                                          tailWidth:tailWidth
-                                                          headWidth:headWidth
-                                                         headLength:headLength];
+                                                                  toPoint:endPoint
+                                                                tailWidth:tailWidth
+                                                                headWidth:headWidth
+                                                               headLength:headLength];
     [self.color setFill];
     [bezierPath fill];
 }

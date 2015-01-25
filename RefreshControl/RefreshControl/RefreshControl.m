@@ -52,7 +52,7 @@
 #pragma mark - RefreshControl
 
 - (void)dealloc {
-//    NSLog(@"%s", __func__);
+    //    NSLog(@"%s", __func__);
 }
 
 - (id)init {
@@ -193,8 +193,8 @@
     CGSize boundingRectWithSize = CGSizeMake(CGRectGetWidth(self.statusLabel.bounds),
                                              CGRectGetHeight(self.statusLabel.bounds));
     NSStringDrawingOptions options = NSStringDrawingTruncatesLastVisibleLine |
-                                     NSStringDrawingUsesFontLeading |
-                                     NSStringDrawingUsesLineFragmentOrigin;
+    NSStringDrawingUsesFontLeading |
+    NSStringDrawingUsesLineFragmentOrigin;
     NSDictionary *attributes = @{NSFontAttributeName:self.statusLabel.font};
     CGFloat length = [text boundingRectWithSize:boundingRectWithSize
                                         options:options
@@ -251,11 +251,11 @@
 // super scroll view just begain pulling
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat contentOffSetVerticalValue = scrollView.contentOffset.y * self.refreshControlType;
-
+    
     // when initial, this called 3 times, first = 0, others = 64
     CGFloat properVerticalPullValue = [self properVerticalPullValue];
-
-//    NSLog(@"contentOffSetVerticalValue = %f", contentOffSetVerticalValue);
+    
+    //    NSLog(@"contentOffSetVerticalValue = %f", contentOffSetVerticalValue);
     
     // "<" is import, can not use "<=", when initial, "<" will let control flow continue, at last
     // refreshControlState = RefreshControlStateHidden, if use "<=", refreshControlState = RefreshControlStateOveredThreshold
@@ -268,8 +268,8 @@
     }
     
     CGFloat properContentOffsetVerticalValue = properVerticalPullValue + kPullControlHeight;
-
-//    NSLog(@"properContentOffsetVerticalValue = %f", properContentOffsetVerticalValue);
+    
+    //    NSLog(@"properContentOffsetVerticalValue = %f", properContentOffsetVerticalValue);
     
     if (contentOffSetVerticalValue <= properContentOffsetVerticalValue) {
         // Being dragged, but not to the critical point
@@ -304,8 +304,8 @@
     // Controls to scroll to the appropriate location to stay
     if (self.refreshControlType == RefreshControlTypeTop) {
         _scrollViewContentSizeRecord = self.superScrollView.contentSize;
-//        NSLog(@"start refreshing contentOffset: %@", NSStringFromCGPoint(self.superScrollView.contentOffset));
-//        NSLog(@"start refreshing contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
+        //        NSLog(@"start refreshing contentOffset: %@", NSStringFromCGPoint(self.superScrollView.contentOffset));
+        //        NSLog(@"start refreshing contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
         
         [UIView animateWithDuration:0.2 animations:^{
             UIEdgeInsets inset = self.superScrollView.contentInset;
@@ -449,7 +449,7 @@
     if (!self.superScrollView) {
         return;
     }
-	
+    
     self.frame = CGRectMake(0, -kPullControlHeight, CGRectGetWidth(self.superScrollView.bounds), kPullControlHeight);
     
     [super settingFrames];

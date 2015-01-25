@@ -226,11 +226,11 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
     return self.topRefreshControl.arrow.color;
 }
 
-#pragma mark - 
+#pragma mark -
 
 - (void)topRefreshControlStartInitializeRefreshing {
-	[self.topRefreshControl setRefreshControlState:RefreshControlStateRefreshing];
-	[self.topRefreshControl startRefreshing];
+    [self.topRefreshControl setRefreshControlState:RefreshControlStateRefreshing];
+    [self.topRefreshControl startRefreshing];
 }
 
 @end
