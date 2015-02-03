@@ -234,6 +234,14 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
     return self.bottomRefreshControl.refreshControlState;
 }
 
+- (void)setTopRefreshControlState:(RefreshControlState)topRefreshControlState {
+    self.topRefreshControlState = topRefreshControlState;
+}
+
+- (void)setBottomRefreshControlState:(RefreshControlState)bottomRefreshControlState {
+    self.bottomRefreshControlState = bottomRefreshControlState;
+}
+
 #pragma mark -
 
 - (void)topRefreshControlStartInitializeRefreshing {
