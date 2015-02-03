@@ -69,4 +69,9 @@
 
 - (void)topRefreshControlStartInitializeRefreshing;
 
+#pragma mark - GetRefreshControl's state
+
+- (RefreshControlState)topRefreshControlState;
+- (RefreshControlState)bottomRefreshControlState;
+
 @end
