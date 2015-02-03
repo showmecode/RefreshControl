@@ -71,7 +71,7 @@
 
 #pragma mark - GetRefreshControl's state
 
-- (RefreshControlState)getTopRefreshControlState;
-- (RefreshControlState)GetBottomRegreshControlState;
+- (RefreshControlState)topRefreshControlState;
+- (RefreshControlState)bottomRefreshControlState;
 
 @end
