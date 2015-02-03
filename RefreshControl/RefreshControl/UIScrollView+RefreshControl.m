@@ -226,27 +226,21 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
     return self.topRefreshControl.arrow.color;
 }
 
-- (RefreshControlState)topRefreshControlState {
-    return self.topRefreshControl.refreshControlState;
-}
-
-- (RefreshControlState)bottomRefreshControlState {
-    return self.bottomRefreshControl.refreshControlState;
-}
-
-- (void)setTopRefreshControlState:(RefreshControlState)topRefreshControlState {
-    self.topRefreshControlState = topRefreshControlState;
-}
-
-- (void)setBottomRefreshControlState:(RefreshControlState)bottomRefreshControlState {
-    self.bottomRefreshControlState = bottomRefreshControlState;
-}
-
 #pragma mark -
 
 - (void)topRefreshControlStartInitializeRefreshing {
     [self.topRefreshControl setRefreshControlState:RefreshControlStateRefreshing];
     [self.topRefreshControl startRefreshing];
+}
+
+#pragma mark - GetRefreshControl's state
+
+- (RefreshControlState)getTopRefreshControlState {
+    return self.topRefreshControl.refreshControlState;
+}
+
+- (RefreshControlState)GetBottomRegreshControlState {
+    return self.bottomRefreshControl.refreshControlState;
 }
 
 @end

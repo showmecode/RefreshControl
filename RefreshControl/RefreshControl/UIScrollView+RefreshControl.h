@@ -41,9 +41,6 @@
 @property (nonatomic, strong) UIColor *loadingCircleColor;
 @property (nonatomic, strong) UIColor *arrowColor;
 
-@property (nonatomic, assign) RefreshControlState topRefreshControlState;
-@property (nonatomic, assign) RefreshControlState bottomRefreshControlState;
-
 #pragma mark - TopRefreshControl
 
 - (void)addTopRefreshControlUsingBlock:(void (^)())callback;
@@ -71,5 +68,10 @@
 #pragma mark - Initialize refreshing
 
 - (void)topRefreshControlStartInitializeRefreshing;
+
+#pragma mark - GetRefreshControl's state
+
+- (RefreshControlState)getTopRefreshControlState;
+- (RefreshControlState)GetBottomRegreshControlState;
 
 @end
