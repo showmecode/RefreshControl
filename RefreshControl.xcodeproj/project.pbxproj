@@ -12,14 +12,13 @@
 		4609D16C19ACD0A8003D6E36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4609D16B19ACD0A8003D6E36 /* UIKit.framework */; };
 		4609D17219ACD0A8003D6E36 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4609D17019ACD0A8003D6E36 /* InfoPlist.strings */; };
 		4609D17419ACD0A8003D6E36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4609D17319ACD0A8003D6E36 /* main.m */; };
-		4609D17B19ACD0A8003D6E36 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4609D17919ACD0A8003D6E36 /* Main.storyboard */; };
 		4609D18019ACD0A8003D6E36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4609D17F19ACD0A8003D6E36 /* Images.xcassets */; };
 		4617D68519B1F65400DC498C /* CHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68219B1F65400DC498C /* CHAppDelegate.m */; };
 		4617D68619B1F65400DC498C /* CHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68419B1F65400DC498C /* CHViewController.m */; };
 		4617D68E19B1F65C00DC498C /* Indicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68919B1F65C00DC498C /* Indicator.m */; };
 		4617D68F19B1F65C00DC498C /* RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68B19B1F65C00DC498C /* RefreshControl.m */; };
 		4617D69019B1F65C00DC498C /* UIScrollView+RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68D19B1F65C00DC498C /* UIScrollView+RefreshControl.m */; };
-		4658DDDE1A4C01FF00FBD73B /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4658DDDD1A4C01FF00FBD73B /* Launch Screen.xib */; };
+		464288471AE2222C00E30B6E /* CHIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 464288461AE2222C00E30B6E /* CHIndexViewController.m */; };
 		46CA05B819CBC2C5007F2A82 /* Arrow.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CA05B719CBC2C5007F2A82 /* Arrow.m */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +31,6 @@
 		4609D17119ACD0A8003D6E36 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4609D17319ACD0A8003D6E36 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4609D17519ACD0A8003D6E36 /* RefreshControl-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RefreshControl-Prefix.pch"; sourceTree = "<group>"; };
-		4609D17A19ACD0A8003D6E36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4609D17F19ACD0A8003D6E36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4609D18619ACD0A8003D6E36 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		4617D68119B1F65400DC498C /* CHAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHAppDelegate.h; sourceTree = "<group>"; };
@@ -45,7 +43,8 @@
 		4617D68B19B1F65C00DC498C /* RefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshControl.m; sourceTree = "<group>"; };
 		4617D68C19B1F65C00DC498C /* UIScrollView+RefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+RefreshControl.h"; sourceTree = "<group>"; };
 		4617D68D19B1F65C00DC498C /* UIScrollView+RefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+RefreshControl.m"; sourceTree = "<group>"; };
-		4658DDDD1A4C01FF00FBD73B /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		464288451AE2222C00E30B6E /* CHIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHIndexViewController.h; sourceTree = "<group>"; };
+		464288461AE2222C00E30B6E /* CHIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHIndexViewController.m; sourceTree = "<group>"; };
 		46CA05B619CBC2C5007F2A82 /* Arrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arrow.h; sourceTree = "<group>"; };
 		46CA05B719CBC2C5007F2A82 /* Arrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Arrow.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,10 +96,8 @@
 			children = (
 				4617D68719B1F65C00DC498C /* RefreshControl */,
 				4617D68019B1F65400DC498C /* Classess */,
-				4609D17919ACD0A8003D6E36 /* Main.storyboard */,
 				4609D17F19ACD0A8003D6E36 /* Images.xcassets */,
 				4609D16E19ACD0A8003D6E36 /* Supporting Files */,
-				4658DDDD1A4C01FF00FBD73B /* Launch Screen.xib */,
 			);
 			path = RefreshControl;
 			sourceTree = "<group>";
@@ -121,6 +118,8 @@
 			children = (
 				4617D68119B1F65400DC498C /* CHAppDelegate.h */,
 				4617D68219B1F65400DC498C /* CHAppDelegate.m */,
+				464288451AE2222C00E30B6E /* CHIndexViewController.h */,
+				464288461AE2222C00E30B6E /* CHIndexViewController.m */,
 				4617D68319B1F65400DC498C /* CHViewController.h */,
 				4617D68419B1F65400DC498C /* CHViewController.m */,
 			);
@@ -196,9 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4609D18019ACD0A8003D6E36 /* Images.xcassets in Resources */,
-				4658DDDE1A4C01FF00FBD73B /* Launch Screen.xib in Resources */,
 				4609D17219ACD0A8003D6E36 /* InfoPlist.strings in Resources */,
-				4609D17B19ACD0A8003D6E36 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +210,7 @@
 				4617D69019B1F65C00DC498C /* UIScrollView+RefreshControl.m in Sources */,
 				4617D68E19B1F65C00DC498C /* Indicator.m in Sources */,
 				4617D68519B1F65400DC498C /* CHAppDelegate.m in Sources */,
+				464288471AE2222C00E30B6E /* CHIndexViewController.m in Sources */,
 				4617D68619B1F65400DC498C /* CHViewController.m in Sources */,
 				4617D68F19B1F65C00DC498C /* RefreshControl.m in Sources */,
 				46CA05B819CBC2C5007F2A82 /* Arrow.m in Sources */,
@@ -228,14 +226,6 @@
 				4609D17119ACD0A8003D6E36 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		4609D17919ACD0A8003D6E36 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4609D17A19ACD0A8003D6E36 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -273,7 +263,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -305,7 +295,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -319,6 +309,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RefreshControl/RefreshControl-Prefix.pch";
 				INFOPLIST_FILE = "RefreshControl/RefreshControl-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -332,6 +323,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RefreshControl/RefreshControl-Prefix.pch";
 				INFOPLIST_FILE = "RefreshControl/RefreshControl-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
