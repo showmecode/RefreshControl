@@ -243,4 +243,10 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
     return self.bottomRefreshControl.refreshControlState;
 }
 
+#pragma mark - Top pull background view
+
+- (void)addTopRefreshControlBackgroundView:(UIView *)backgroundView {
+    self.topRefreshControl.backgroundView = backgroundView;
+}
+
 @end

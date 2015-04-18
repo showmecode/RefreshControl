@@ -71,7 +71,12 @@
             [weakSelf.tableView reloadData];
         });
     } refreshControlPullType:RefreshControlPullTypeInsensitive refreshControlStatusType:RefreshControlStatusTypeText];
-    
+
+
+    UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 160)];
+    backgroundView.backgroundColor = [UIColor lightGrayColor];
+    [self.tableView addTopRefreshControlBackgroundView:backgroundView];
+
     [self.tableView addBottomRefreshControlUsingBlock: ^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             for (int i = 0; i < 5; i++) {

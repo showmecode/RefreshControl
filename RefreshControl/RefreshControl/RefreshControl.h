@@ -94,6 +94,8 @@ typedef NS_ENUM(NSInteger, RefreshControlStatusType) {
 
 @interface TopRefreshControl : RefreshControl
 
+@property (nonatomic, strong) UIView *backgroundView;
+
 @end
 
 @interface BottomRefreshControl : RefreshControl

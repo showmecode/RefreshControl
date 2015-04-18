@@ -74,4 +74,8 @@
 - (RefreshControlState)topRefreshControlState;
 - (RefreshControlState)bottomRefreshControlState;
 
+#pragma mark - Top pull background view
+
+- (void)addTopRefreshControlBackgroundView:(UIView *)backgroundView;
+
 @end

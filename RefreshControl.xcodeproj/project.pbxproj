@@ -35,9 +35,6 @@
 		4609D17A19ACD0A8003D6E36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4609D17F19ACD0A8003D6E36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4609D18619ACD0A8003D6E36 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		4609D18E19ACD0A9003D6E36 /* RefreshControlTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RefreshControlTests-Info.plist"; sourceTree = "<group>"; };
-		4609D19019ACD0A9003D6E36 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4609D19219ACD0A9003D6E36 /* RefreshControlTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RefreshControlTests.m; sourceTree = "<group>"; };
 		4617D68119B1F65400DC498C /* CHAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHAppDelegate.h; sourceTree = "<group>"; };
 		4617D68219B1F65400DC498C /* CHAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHAppDelegate.m; sourceTree = "<group>"; };
 		4617D68319B1F65400DC498C /* CHViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHViewController.h; sourceTree = "<group>"; };
@@ -71,7 +68,6 @@
 			isa = PBXGroup;
 			children = (
 				4609D16D19ACD0A8003D6E36 /* RefreshControl */,
-				4609D18C19ACD0A9003D6E36 /* RefreshControlTests */,
 				4609D16619ACD0A8003D6E36 /* Frameworks */,
 				4609D16519ACD0A8003D6E36 /* Products */,
 			);
@@ -116,24 +112,6 @@
 				4609D17019ACD0A8003D6E36 /* InfoPlist.strings */,
 				4609D17319ACD0A8003D6E36 /* main.m */,
 				4609D17519ACD0A8003D6E36 /* RefreshControl-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		4609D18C19ACD0A9003D6E36 /* RefreshControlTests */ = {
-			isa = PBXGroup;
-			children = (
-				4609D19219ACD0A9003D6E36 /* RefreshControlTests.m */,
-				4609D18D19ACD0A9003D6E36 /* Supporting Files */,
-			);
-			path = RefreshControlTests;
-			sourceTree = "<group>";
-		};
-		4609D18D19ACD0A9003D6E36 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				4609D18E19ACD0A9003D6E36 /* RefreshControlTests-Info.plist */,
-				4609D18F19ACD0A9003D6E36 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -258,14 +236,6 @@
 				4609D17A19ACD0A8003D6E36 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		4609D18F19ACD0A9003D6E36 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4609D19019ACD0A9003D6E36 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
