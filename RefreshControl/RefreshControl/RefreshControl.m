@@ -301,11 +301,12 @@
 }
 
 - (void)startRefreshing {
+    _scrollViewContentSizeRecord = self.superScrollView.contentSize;
+
     // Controls to scroll to the appropriate location to stay
     if (self.refreshControlType == RefreshControlTypeTop) {
-        _scrollViewContentSizeRecord = self.superScrollView.contentSize;
-        //        NSLog(@"start refreshing contentOffset: %@", NSStringFromCGPoint(self.superScrollView.contentOffset));
-        //        NSLog(@"start refreshing contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
+//        NSLog(@"start refreshing contentOffset: %@", NSStringFromCGPoint(self.superScrollView.contentOffset));
+//        NSLog(@"start refreshing contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
         
         [UIView animateWithDuration:0.2 animations:^{
             UIEdgeInsets inset = self.superScrollView.contentInset;
@@ -335,7 +336,7 @@
 - (void)stopRefreshing {
     if (self.refreshControlType == RefreshControlTypeTop) {
         // Drop-down control, rolled over just can not see the parent view of the head position (reduction inset)
-        NSTimeInterval animationDuration = 0.2f;
+        NSTimeInterval animationDuration = 0.5f;
         CGFloat contentHeightAdded = self.superScrollView.contentOffset.y + self.superScrollView.contentSize.height - self.scrollViewContentSizeRecord.height;
         if (_scrollViewContentSizeRecord.height != self.superScrollView.contentSize.height) {
             animationDuration = 0.0f;
@@ -349,12 +350,15 @@
         }];
     } else {
         // Loading is complete, the content does not fill the entire screen, contentOffset accompanying animation back to zero
-        NSTimeInterval animtionDuration = 0.2f;
+        // Either there is no more new datas, need animation too
+        NSTimeInterval animtionDuration = 0.5f;
         CGFloat screenHeight = CGRectGetHeight([[UIScreen mainScreen] bounds]);
-        if (self.superScrollView.contentSize.height + kPullControlHeight > screenHeight) {
+        CGFloat contentHeight = self.superScrollView.contentSize.height + kPullControlHeight;
+        CGFloat contentAdded = self.superScrollView.contentSize.height - self.scrollViewContentSizeRecord.height;
+        if ((contentHeight > screenHeight) && contentAdded) {
             animtionDuration = 0.0f;
         }
-        
+
         // AnimtionDuration bottom of the screen when the content does not exceed! = 0
         UIEdgeInsets inset = self.superScrollView.contentInset;
         inset.bottom = self.scrollViewInsetRecord.bottom;

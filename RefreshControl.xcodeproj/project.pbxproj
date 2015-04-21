@@ -12,7 +12,6 @@
 		4609D16C19ACD0A8003D6E36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4609D16B19ACD0A8003D6E36 /* UIKit.framework */; };
 		4609D17219ACD0A8003D6E36 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4609D17019ACD0A8003D6E36 /* InfoPlist.strings */; };
 		4609D17419ACD0A8003D6E36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4609D17319ACD0A8003D6E36 /* main.m */; };
-		4609D18019ACD0A8003D6E36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4609D17F19ACD0A8003D6E36 /* Images.xcassets */; };
 		4617D68519B1F65400DC498C /* CHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68219B1F65400DC498C /* CHAppDelegate.m */; };
 		4617D68619B1F65400DC498C /* CHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68419B1F65400DC498C /* CHViewController.m */; };
 		4617D68E19B1F65C00DC498C /* Indicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68919B1F65C00DC498C /* Indicator.m */; };
@@ -31,7 +30,6 @@
 		4609D17119ACD0A8003D6E36 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4609D17319ACD0A8003D6E36 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4609D17519ACD0A8003D6E36 /* RefreshControl-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RefreshControl-Prefix.pch"; sourceTree = "<group>"; };
-		4609D17F19ACD0A8003D6E36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4609D18619ACD0A8003D6E36 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		4617D68119B1F65400DC498C /* CHAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHAppDelegate.h; sourceTree = "<group>"; };
 		4617D68219B1F65400DC498C /* CHAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHAppDelegate.m; sourceTree = "<group>"; };
@@ -96,7 +94,6 @@
 			children = (
 				4617D68719B1F65C00DC498C /* RefreshControl */,
 				4617D68019B1F65400DC498C /* Classess */,
-				4609D17F19ACD0A8003D6E36 /* Images.xcassets */,
 				4609D16E19ACD0A8003D6E36 /* Supporting Files */,
 			);
 			path = RefreshControl;
@@ -194,7 +191,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4609D18019ACD0A8003D6E36 /* Images.xcassets in Resources */,
 				4609D17219ACD0A8003D6E36 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

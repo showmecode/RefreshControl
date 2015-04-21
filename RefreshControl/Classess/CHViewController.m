@@ -46,6 +46,8 @@
     return [super respondsToSelector:aSelector];
 }
 
+static NSInteger count = 0;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -80,18 +82,23 @@
     [self.tableView addTopRefreshControlBackgroundView:backgroundView];
 
     [self.tableView addBottomRefreshControlUsingBlock: ^{
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            for (int i = 0; i < 5; i++) {
-                NSString *data = [NSString stringWithFormat:@"pull up data random number: %d", arc4random() % 100];
-                CGFloat height = arc4random() % 66 + 44;
-                [weakSelf.dataSource addObject:@{ @"content":data, @"height":@(height) }];
-            }
-        });
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf.tableView reloadData];
-            [weakSelf.tableView bottomRefreshControlStopRefreshing];
-            //            [weakSelf.tableView bottomRefreshControlRefreshFailureWithHintText:@"加载失败，请点击重试！"];
-        });
+        if (count < 1) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                for (int i = 0; i < 5; i++) {
+                    NSString *data = [NSString stringWithFormat:@"pull up data random number: %d", arc4random() % 100];
+                    CGFloat height = arc4random() % 66 + 44;
+                    [weakSelf.dataSource addObject:@{ @"content":data, @"height":@(height) }];
+                }
+                count++;
+            });
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakSelf.tableView reloadData];
+                [weakSelf.tableView bottomRefreshControlStopRefreshing];
+            });
+        } else {
+//            [weakSelf.tableView bottomRefreshControlStopRefreshing];
+            [weakSelf.tableView bottomRefreshControlRefreshFailureWithHintText:@"加载失败，请点击重试！"];
+        }
     } refreshControlPullType:RefreshControlPullTypeInsensitive refreshControlStatusType:RefreshControlStatusTypeText];
     
     self.tableView.statusTextColor = [UIColor orangeColor];
@@ -130,10 +137,5 @@
     return cell;
 }
 
-#pragma mark -
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"contentOffset = %@", NSStringFromCGPoint(scrollView.contentOffset));
-}
 
 @end
