@@ -16,6 +16,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/showmecode/RefreshControl.git",
 :tag => s.version.to_s }
   s.requires_arc = true
-  s.source_files  = "RefreshControl/RefreshControl/*"
+  s.source_files  = "RefreshControl/*。{h,m}"
   s.frameworks = 'Foundation', 'UIKit'
 end

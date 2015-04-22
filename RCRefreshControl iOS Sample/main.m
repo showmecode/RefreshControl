@@ -1,8 +1,8 @@
 //
-//  Arrow.h
+//  main.m
 //  RefreshControl
 //
-//  Created by Moch Xiao on 2014-12-25.
+//  Created by Moch Xiao on (null).
 //  Copyright (c) 2014 Moch Xiao (https://github.com/atcuan).
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,12 +25,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
-@interface Arrow : UIView
-
-@property (nonatomic, strong) UIColor *color;
-
-- (void)rotation;
-- (void)identity;
-
-@end
+int main(int argc, char * argv[]) {
+    @autoreleasepool {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+    }
+}

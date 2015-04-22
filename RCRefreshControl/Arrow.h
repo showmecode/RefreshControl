@@ -1,8 +1,8 @@
 //
-//  CHAppDelegate.h
+//  Arrow.h
 //  RefreshControl
 //
-//  Created by Moch Xiao on 2014-12-25.
+//  Created by Moch Xiao on 2015-04-23.
 //  Copyright (c) 2014 Moch Xiao (https://github.com/atcuan).
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,8 +26,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CHAppDelegate : UIResponder <UIApplicationDelegate>
+@interface Arrow : UIView
 
-@property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, strong) UIColor *color;
+
+- (void)rotation;
+- (void)identity;
 
 @end

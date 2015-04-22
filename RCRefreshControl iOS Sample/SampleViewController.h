@@ -1,8 +1,8 @@
 //
-//  Indicator.h
+//  SampleViewController.h
 //  RefreshControl
 //
-//  Created by Moch Xiao on 2014-12-25.
+//  Created by Moch Xiao on (null).
 //  Copyright (c) 2014 Moch Xiao (https://github.com/atcuan).
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,13 +26,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Indicator : UIView
-
-@property (nonatomic, assign) CGFloat lineWidth;
-@property (nonatomic, strong) UIColor *lineColor;
-@property (nonatomic, readonly, getter = isAnimating) BOOL animating;
-
-- (void)startAnimation;
-- (void)stopAnimation;
+@interface SampleViewController : UIViewController
 
 @end

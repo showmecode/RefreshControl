@@ -2,7 +2,7 @@
 //  UIScrollView+RefreshControl.m
 //  RefreshControl
 //
-//  Created by Moch Xiao on 2015-02-03.
+//  Created by Moch Xiao on 2015-04-23.
 //  Copyright (c) 2014 Moch Xiao (https://github.com/atcuan).
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy

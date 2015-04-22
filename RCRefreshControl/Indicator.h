@@ -1,8 +1,8 @@
 //
-//  CHIndexViewController.m
+//  Indicator.h
 //  RefreshControl
 //
-//  Created by Moch Xiao on 4/18/15.
+//  Created by Moch Xiao on 2015-04-23.
 //  Copyright (c) 2014 Moch Xiao (https://github.com/atcuan).
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,23 +24,15 @@
 //  THE SOFTWARE.
 //
 
-#import "CHIndexViewController.h"
-#import "CHViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface CHIndexViewController ()
+@interface Indicator : UIView
 
-@end
+@property (nonatomic, assign) CGFloat lineWidth;
+@property (nonatomic, strong) UIColor *lineColor;
+@property (nonatomic, readonly, getter = isAnimating) BOOL animating;
 
-@implementation CHIndexViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"下一页" style:UIBarButtonItemStylePlain target:self action:@selector(push:)];
-}
-
-- (void)push:(UIBarButtonItem *)sender {
-    [self.navigationController pushViewController:[CHViewController new] animated:YES];
-}
+- (void)startAnimation;
+- (void)stopAnimation;
 
 @end
