@@ -14,7 +14,7 @@
 		46EEDC9C1AE8137500788238 /* Indicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EEDC941AE8137500788238 /* Indicator.m */; };
 		46EEDC9D1AE8137500788238 /* RefreshControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EEDC951AE8137500788238 /* RefreshControl.h */; };
 		46EEDC9E1AE8137500788238 /* RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EEDC961AE8137500788238 /* RefreshControl.m */; };
-		46EEDC9F1AE8137500788238 /* UIScrollView+RefreshControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EEDC971AE8137500788238 /* UIScrollView+RefreshControl.h */; };
+		46EEDC9F1AE8137500788238 /* UIScrollView+RefreshControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EEDC971AE8137500788238 /* UIScrollView+RefreshControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		46EEDCA01AE8137500788238 /* UIScrollView+RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EEDC981AE8137500788238 /* UIScrollView+RefreshControl.m */; };
 		46EEDCAA1AE8139600788238 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EEDCA91AE8139600788238 /* main.m */; };
 		46EEDCAD1AE8139600788238 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EEDCAC1AE8139600788238 /* AppDelegate.m */; };

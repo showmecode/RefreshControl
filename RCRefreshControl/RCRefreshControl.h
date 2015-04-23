@@ -33,5 +33,3 @@ FOUNDATION_EXPORT double RCRefreshControlVersionNumber;
 FOUNDATION_EXPORT const unsigned char RCRefreshControlVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <RCRefreshControl/PublicHeader.h>
-
-#import "UIScrollView+RefreshControl.h"
