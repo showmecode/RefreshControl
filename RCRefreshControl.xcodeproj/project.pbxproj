@@ -170,8 +170,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				46EEDC991AE8137500788238 /* Arrow.h in Headers */,
-				46EEDC7B1AE8136100788238 /* RCRefreshControl.h in Headers */,
 				46EEDC9F1AE8137500788238 /* UIScrollView+RefreshControl.h in Headers */,
+				46EEDC7B1AE8136100788238 /* RCRefreshControl.h in Headers */,
 				46EEDC9D1AE8137500788238 /* RefreshControl.h in Headers */,
 				46EEDC9B1AE8137500788238 /* Indicator.h in Headers */,
 			);
@@ -478,6 +478,7 @@
 				46EEDC8D1AE8136100788238 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		46EEDCC51AE8139600788238 /* Build configuration list for PBXNativeTarget "RCRefreshControl iOS Sample" */ = {
 			isa = XCConfigurationList;
@@ -486,6 +487,7 @@
 				46EEDCC71AE8139600788238 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
