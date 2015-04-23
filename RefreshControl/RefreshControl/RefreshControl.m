@@ -29,7 +29,7 @@
 #import "Arrow.h"
 
 #define CHImageWithName(NAME) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:NAME ofType:@"png"]]
-#define kPullControlHeight 44
+#define kPullControlHeight 50
 
 #pragma mark - RefreshControl
 
@@ -302,19 +302,24 @@
 
 - (void)startRefreshing {
     _scrollViewContentSizeRecord = self.superScrollView.contentSize;
-
+//    NSLog(@"start refreshing record contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
+    
+    void (^animationCompletion)(BOOL finished) = ^(BOOL finished) {
+        if (_begainRefreshing) {
+            _begainRefreshing();
+        }
+    };
+    
     // Controls to scroll to the appropriate location to stay
     if (self.refreshControlType == RefreshControlTypeTop) {
-//        NSLog(@"start refreshing contentOffset: %@", NSStringFromCGPoint(self.superScrollView.contentOffset));
-//        NSLog(@"start refreshing contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
-        
+        UIEdgeInsets inset = self.superScrollView.contentInset;
+        inset.top = self.scrollViewInsetRecord.top + kPullControlHeight;
+
         [UIView animateWithDuration:0.2 animations:^{
-            UIEdgeInsets inset = self.superScrollView.contentInset;
-            inset.top = self.scrollViewInsetRecord.top + kPullControlHeight;
             self.superScrollView.contentInset = inset;
             // Set the scroll position to stay
             self.superScrollView.contentOffset = CGPointMake(0, -self.scrollViewInsetRecord.top - kPullControlHeight);
-        }];
+        } completion:animationCompletion];
     } else {
         [UIView animateWithDuration:0.2 animations:^{
             UIEdgeInsets inset = self.superScrollView.contentInset;
@@ -326,49 +331,77 @@
             inset.bottom = bottom;
             // Set the scroll position to stay
             self.superScrollView.contentInset = inset;
-        }];
-    }
-    if (_begainRefreshing) {
-        _begainRefreshing();
+        } completion:animationCompletion];
     }
 }
 
-- (void)stopRefreshing {
+- (void)stopRefreshingWithHintText:(NSString *)hintText {
+    void (^animationCompletion)(BOOL finished) = ^(BOOL finished) {
+        self.refreshControlState = RefreshControlStateHidden;
+        if (_endRefreshing) {
+            _endRefreshing();
+        }
+        [self removeBackgroundView];
+    };
+
+    NSTimeInterval animationDuration = 0.5f;
+    NSTimeInterval delay = 1.0f;
+    CGFloat contentHeightAdded = self.superScrollView.contentSize.height - self.scrollViewContentSizeRecord.height;
+
     if (self.refreshControlType == RefreshControlTypeTop) {
         // Drop-down control, rolled over just can not see the parent view of the head position (reduction inset)
-        NSTimeInterval animationDuration = 0.5f;
-        CGFloat contentHeightAdded = self.superScrollView.contentOffset.y + self.superScrollView.contentSize.height - self.scrollViewContentSizeRecord.height;
-        if (_scrollViewContentSizeRecord.height != self.superScrollView.contentSize.height) {
-            animationDuration = 0.0f;
-            self.superScrollView.contentOffset = CGPointMake(self.superScrollView.contentOffset.x, contentHeightAdded);
-        }
+
+//        NSLog(@"now refreshing contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
         
+        // If do not refresh the data, the increment should be zero,
+        // contentInset should be accompanied by animation, back to the initial position
+        // If do refresh the data already, the increment should not be zero,
+        // contentOffset should be back to proper position directly
+        BOOL contentBeyondScreenEdge = self.scrollViewContentSizeRecord.height > CGRectGetHeight(self.superScrollView.bounds);
+        if (contentHeightAdded && contentBeyondScreenEdge) {
+            animationDuration = 0.0f;
+            delay = 0.0f;
+            self.superScrollView.contentOffset = CGPointMake(self.superScrollView.contentOffset.x,
+                                                             self.superScrollView.contentOffset.y + contentHeightAdded);
+        }
+        if (hintText) {
+            self.statusLabel.text = hintText;
+            self.indicator.hidden = YES;
+            self.arrow.hidden = YES;
+        } else {
+            delay = 0.0f;
+        }
+
         UIEdgeInsets inset = self.superScrollView.contentInset;
         inset.top = self.scrollViewInsetRecord.top;
-        [UIView animateWithDuration:animationDuration animations:^{
+        [UIView animateWithDuration:animationDuration delay:delay options:UIViewAnimationOptionCurveLinear animations:^{
             self.superScrollView.contentInset = inset;
-        }];
+        } completion:animationCompletion];
     } else {
         // Loading is complete, the content does not fill the entire screen, contentOffset accompanying animation back to zero
         // Either there is no more new datas, need animation too
-        NSTimeInterval animtionDuration = 0.5f;
         CGFloat screenHeight = CGRectGetHeight([[UIScreen mainScreen] bounds]);
         CGFloat contentHeight = self.superScrollView.contentSize.height + kPullControlHeight;
-        CGFloat contentAdded = self.superScrollView.contentSize.height - self.scrollViewContentSizeRecord.height;
-        if ((contentHeight > screenHeight) && contentAdded) {
-            animtionDuration = 0.0f;
+        if ((contentHeight > screenHeight) && contentHeightAdded) {
+            animationDuration = 0.0f;
+            delay = 0.0f;
         }
 
+        if (hintText) {
+            self.statusLabel.text = hintText;
+            self.indicator.hidden = YES;
+            self.arrow.hidden = YES;
+        } else {
+            delay = 0.0f;
+        }
+        
         // AnimtionDuration bottom of the screen when the content does not exceed! = 0
         UIEdgeInsets inset = self.superScrollView.contentInset;
         inset.bottom = self.scrollViewInsetRecord.bottom;
-        [UIView animateWithDuration:animtionDuration animations:^{
+        
+        [UIView animateWithDuration:animationDuration delay:delay options:UIViewAnimationOptionCurveLinear animations:^{
             self.superScrollView.contentInset = inset;
-        }];
-    }
-    self.refreshControlState = RefreshControlStateHidden;
-    if (_endRefreshing) {
-        _endRefreshing();
+        } completion:animationCompletion];
     }
 }
 
@@ -423,6 +456,9 @@
     
     NSString *hint = hintText ? : self.refreshingFailureHintText;
     self.statusLabel.text = hint;
+}
+
+- (void)removeBackgroundView {
 }
 
 @end
@@ -480,8 +516,9 @@
     }
 }
 
-- (void)stopRefreshing {
-    [super stopRefreshing];
+- (void)removeBackgroundView {
+    [super removeBackgroundView];
+    
     if (self.alreadyAddedBackgroundView) {
         [self.backgroundView setHidden:YES];
     }

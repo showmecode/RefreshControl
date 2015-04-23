@@ -1,12 +1,25 @@
 
 ## How does it look like ?
 
-![(1)](https://github.com/showmecode/RefreshControl/blob/master/images/1.gif)
-![(2)](https://github.com/showmecode/RefreshControl/blob/master/images/2.gif)
-![(3)](https://github.com/showmecode/RefreshControl/blob/master/images/3.gif)
-![(4)](https://github.com/showmecode/RefreshControl/blob/master/images/4.gif)
-![(5)](https://github.com/showmecode/RefreshControl/blob/master/images/5.gif)
-![(6)](https://github.com/showmecode/RefreshControl/blob/master/images/6.gif)
+<p align="left">
+	<img src="./images/1.gif" width=24%">&nbsp;
+	<img src="./images/2.gif" width=24%">&nbsp;
+	<img src="./images/3.gif" width=24%">&nbsp;
+</p>
+<p align="left">
+	<img src="./images/4.gif" width=24%">&nbsp;
+	<img src="./images/5.gif" width=24%">&nbsp;
+	<img src="./images/6.gif" width=24%">&nbsp;
+</p>
+<p align="left">
+	<img src="./images/7.gif" width=24%">&nbsp;
+	<img src="./images/8.gif" width=24%">&nbsp;
+	<img src="./images/9.gif" width=24%">&nbsp;
+</p>
+<p align="left">
+	<img src="./images/10.gif" width=24%">&nbsp;
+	<img src="./images/11.gif" width=24%">&nbsp;
+</p>
 
 ## How  to use ?
 
@@ -127,7 +140,6 @@ topRefreshControlResumeRefreshing
 bottomRefreshControlResumeRefreshing
 ```
 
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 
 

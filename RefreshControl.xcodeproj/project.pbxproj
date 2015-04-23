@@ -18,6 +18,7 @@
 		4617D68F19B1F65C00DC498C /* RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68B19B1F65C00DC498C /* RefreshControl.m */; };
 		4617D69019B1F65C00DC498C /* UIScrollView+RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68D19B1F65C00DC498C /* UIScrollView+RefreshControl.m */; };
 		464288471AE2222C00E30B6E /* CHIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 464288461AE2222C00E30B6E /* CHIndexViewController.m */; };
+		464EB8731AE8BBBB00EE7958 /* dinosaur.png in Resources */ = {isa = PBXBuildFile; fileRef = 464EB8721AE8BBBB00EE7958 /* dinosaur.png */; };
 		46CA05B819CBC2C5007F2A82 /* Arrow.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CA05B719CBC2C5007F2A82 /* Arrow.m */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		4617D68D19B1F65C00DC498C /* UIScrollView+RefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+RefreshControl.m"; sourceTree = "<group>"; };
 		464288451AE2222C00E30B6E /* CHIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHIndexViewController.h; sourceTree = "<group>"; };
 		464288461AE2222C00E30B6E /* CHIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHIndexViewController.m; sourceTree = "<group>"; };
+		464EB8721AE8BBBB00EE7958 /* dinosaur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dinosaur.png; sourceTree = "<group>"; };
 		46CA05B619CBC2C5007F2A82 /* Arrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arrow.h; sourceTree = "<group>"; };
 		46CA05B719CBC2C5007F2A82 /* Arrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Arrow.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,6 +115,7 @@
 		4617D68019B1F65400DC498C /* Classess */ = {
 			isa = PBXGroup;
 			children = (
+				464EB8721AE8BBBB00EE7958 /* dinosaur.png */,
 				4617D68119B1F65400DC498C /* CHAppDelegate.h */,
 				4617D68219B1F65400DC498C /* CHAppDelegate.m */,
 				464288451AE2222C00E30B6E /* CHIndexViewController.h */,
@@ -191,6 +194,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				464EB8731AE8BBBB00EE7958 /* dinosaur.png in Resources */,
 				4609D17219ACD0A8003D6E36 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

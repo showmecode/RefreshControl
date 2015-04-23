@@ -74,7 +74,12 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
 
 - (void)topRefreshControlStopRefreshing {
     if (self.topRefreshControl) {
-        [self.topRefreshControl stopRefreshing];
+        [self.topRefreshControl stopRefreshingWithHintText:nil];
+    }
+}
+- (void)topRefreshControlStopRefreshingWithHintText:(NSString *)hintText {
+    if (self.topRefreshControl) {
+        [self.topRefreshControl stopRefreshingWithHintText:hintText];
     }
 }
 
@@ -128,7 +133,13 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
 
 - (void)bottomRefreshControlStopRefreshing {
     if (self.bottomRefreshControl) {
-        [self.bottomRefreshControl stopRefreshing];
+        [self.bottomRefreshControl stopRefreshingWithHintText:nil];
+    }
+}
+
+- (void)bottomRefreshControlStopRefreshingWithHintText:(NSString *)hintText; {
+    if (self.bottomRefreshControl) {
+        [self.bottomRefreshControl stopRefreshingWithHintText:hintText];
     }
 }
 

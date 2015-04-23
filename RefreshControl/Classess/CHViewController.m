@@ -40,11 +40,11 @@
 - (void)dealloc {
     NSLog(@"%s", __func__);
 }
-
-- (BOOL)respondsToSelector:(SEL)aSelector {
-    printf("SELECTOR: %s\n", [NSStringFromSelector(aSelector) UTF8String]);
-    return [super respondsToSelector:aSelector];
-}
+//
+//- (BOOL)respondsToSelector:(SEL)aSelector {
+//    printf("SELECTOR: %s\n", [NSStringFromSelector(aSelector) UTF8String]);
+//    return [super respondsToSelector:aSelector];
+//}
 
 static NSInteger count = 0;
 
@@ -70,16 +70,18 @@ static NSInteger count = 0;
                 [weakSelf.dataSource insertObject:@{ @"content":data, @"height":@(height) } atIndex:0];
             }
         });
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf.tableView topRefreshControlStopRefreshing];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [weakSelf.tableView reloadData];
+//            [weakSelf.tableView topRefreshControlStopRefreshing];
+            [weakSelf.tableView topRefreshControlStopRefreshingWithHintText:@"刷新成功"];
         });
     } refreshControlPullType:RefreshControlPullTypeInsensitive refreshControlStatusType:RefreshControlStatusTypeText];
 
 
-    UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 160)];
-    backgroundView.backgroundColor = [UIColor lightGrayColor];
-    [self.tableView addTopRefreshControlBackgroundView:backgroundView];
+//    UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 160)];
+//    backgroundView.backgroundColor = [UIColor lightGrayColor];
+//    [self.tableView addTopRefreshControlBackgroundView:backgroundView];
+    [self.tableView addTopRefreshControlBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dinosaur"]]];
 
     [self.tableView addBottomRefreshControlUsingBlock: ^{
         if (count < 1) {
@@ -91,12 +93,16 @@ static NSInteger count = 0;
                 }
                 count++;
             });
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [weakSelf.tableView reloadData];
-                [weakSelf.tableView bottomRefreshControlStopRefreshing];
+//                [weakSelf.tableView bottomRefreshControlStopRefreshing];
+                [weakSelf.tableView bottomRefreshControlStopRefreshingWithHintText:@"已经加载完所有数据"];
+
             });
         } else {
 //            [weakSelf.tableView bottomRefreshControlStopRefreshing];
+//            [weakSelf.tableView bottomRefreshControlStopRefreshingWithHintText:@"已经加载完所有数据"];
+            
             [weakSelf.tableView bottomRefreshControlRefreshFailureWithHintText:@"加载失败，请点击重试！"];
         }
     } refreshControlPullType:RefreshControlPullTypeInsensitive refreshControlStatusType:RefreshControlStatusTypeText];
@@ -109,9 +115,9 @@ static NSInteger count = 0;
         [weakSelf.tableView bottomRefreshControlResumeRefreshing];
     }];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.tableView topRefreshControlStartInitializeRefreshing];
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self.tableView topRefreshControlStartInitializeRefreshing];
+//    });
 }
 
 #pragma mark -

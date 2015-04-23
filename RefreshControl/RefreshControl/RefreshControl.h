@@ -80,7 +80,7 @@ typedef NS_ENUM(NSInteger, RefreshControlStatusType) {
 
 // external call
 - (void)startRefreshing;
-- (void)stopRefreshing;
+- (void)stopRefreshingWithHintText:(NSString *)hintText;
 - (void)refreshFailureWithHintText:(NSString *)hintText;
 
 // call back
@@ -89,6 +89,10 @@ typedef NS_ENUM(NSInteger, RefreshControlStatusType) {
 @property (nonatomic, copy) void (^touchUpInsideEvent)(RefreshControl *refreshControl);
 // resume refreshing state
 - (void)resumeRefreshing;
+
+// TopRefreshControl override
+- (void)removeBackgroundView;
+
 
 @end
 
