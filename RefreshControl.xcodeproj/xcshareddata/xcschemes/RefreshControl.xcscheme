@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0630"
+   LastUpgradeVersion = "0610"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "46EEDC741AE8136100788238"
-               BuildableName = "RCRefreshControl.framework"
-               BlueprintName = "RCRefreshControl"
-               ReferencedContainer = "container:RCRefreshControl.xcodeproj">
+               BlueprintIdentifier = "4609D16319ACD0A8003D6E36"
+               BuildableName = "RefreshControl.app"
+               BlueprintName = "RefreshControl"
+               ReferencedContainer = "container:RefreshControl.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -28,10 +28,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "46EEDC7F1AE8136100788238"
-               BuildableName = "RCRefreshControlTests.xctest"
-               BlueprintName = "RCRefreshControlTests"
-               ReferencedContainer = "container:RCRefreshControl.xcodeproj">
+               BlueprintIdentifier = "4609D18419ACD0A8003D6E36"
+               BuildableName = "RefreshControlTests.xctest"
+               BlueprintName = "RefreshControlTests"
+               ReferencedContainer = "container:RefreshControl.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,20 +46,20 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "46EEDC7F1AE8136100788238"
-               BuildableName = "RCRefreshControlTests.xctest"
-               BlueprintName = "RCRefreshControlTests"
-               ReferencedContainer = "container:RCRefreshControl.xcodeproj">
+               BlueprintIdentifier = "4609D18419ACD0A8003D6E36"
+               BuildableName = "RefreshControlTests.xctest"
+               BlueprintName = "RefreshControlTests"
+               ReferencedContainer = "container:RefreshControl.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "46EEDC741AE8136100788238"
-            BuildableName = "RCRefreshControl.framework"
-            BlueprintName = "RCRefreshControl"
-            ReferencedContainer = "container:RCRefreshControl.xcodeproj">
+            BlueprintIdentifier = "4609D16319ACD0A8003D6E36"
+            BuildableName = "RefreshControl.app"
+            BlueprintName = "RefreshControl"
+            ReferencedContainer = "container:RefreshControl.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -72,16 +72,32 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "46EEDC741AE8136100788238"
-            BuildableName = "RCRefreshControl.framework"
-            BlueprintName = "RCRefreshControl"
-            ReferencedContainer = "container:RCRefreshControl.xcodeproj">
+            BlueprintIdentifier = "4609D16319ACD0A8003D6E36"
+            BuildableName = "RefreshControl.app"
+            BlueprintName = "RefreshControl"
+            ReferencedContainer = "container:RefreshControl.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
+         <AdditionalOption
+            key = "MallocStackLogging"
+            value = ""
+            isEnabled = "YES">
+         </AdditionalOption>
+         <AdditionalOption
+            key = "NSZombieEnabled"
+            value = "YES"
+            isEnabled = "YES">
+         </AdditionalOption>
+         <AdditionalOption
+            key = "NSDOLoggingEnabled"
+            value = "YES"
+            isEnabled = "YES">
+         </AdditionalOption>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
@@ -90,15 +106,16 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "46EEDC741AE8136100788238"
-            BuildableName = "RCRefreshControl.framework"
-            BlueprintName = "RCRefreshControl"
-            ReferencedContainer = "container:RCRefreshControl.xcodeproj">
+            BlueprintIdentifier = "4609D16319ACD0A8003D6E36"
+            BuildableName = "RefreshControl.app"
+            BlueprintName = "RefreshControl"
+            ReferencedContainer = "container:RefreshControl.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

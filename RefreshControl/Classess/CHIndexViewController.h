@@ -1,8 +1,8 @@
 //
-//  ViewController.m
+//  CHIndexViewController.h
 //  RefreshControl
 //
-//  Created by Moch Xiao on (null).
+//  Created by Moch Xiao on 4/18/15.
 //  Copyright (c) 2014 Moch Xiao (https://github.com/atcuan).
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,24 +23,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
+#import <UIKit/UIKit.h>
 
-#import "ViewController.h"
-#import "SampleViewController.h"
-
-@interface ViewController ()
-
-@end
-
-@implementation ViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"下一页" style:UIBarButtonItemStylePlain target:self action:@selector(push:)];
-}
-
-- (void)push:(UIBarButtonItem *)sender {
-    [self.navigationController pushViewController:[SampleViewController new] animated:YES];
-}
+@interface CHIndexViewController : UIViewController
 
 @end

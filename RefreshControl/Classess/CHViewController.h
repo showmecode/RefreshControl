@@ -1,8 +1,8 @@
 //
-//  RCRefreshControl.h
+//  CHViewController.h
 //  RefreshControl
 //
-//  Created by Moch Xiao on 2015-04-23.
+//  Created by Moch Xiao on 2014-12-25.
 //  Copyright (c) 2014 Moch Xiao (https://github.com/atcuan).
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,10 +26,6 @@
 
 #import <UIKit/UIKit.h>
 
-//! Project version number for RCRefreshControl.
-FOUNDATION_EXPORT double RCRefreshControlVersionNumber;
+@interface CHViewController : UIViewController
 
-//! Project version string for RCRefreshControl.
-FOUNDATION_EXPORT const unsigned char RCRefreshControlVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <RCRefreshControl/PublicHeader.h>
+@end

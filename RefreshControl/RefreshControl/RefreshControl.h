@@ -2,7 +2,7 @@
 //  RefreshControl.h
 //  RefreshControl
 //
-//  Created by Moch Xiao on 2015-04-23.
+//  Created by Moch Xiao on 2014-12-25.
 //  Copyright (c) 2014 Moch Xiao (https://github.com/atcuan).
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy

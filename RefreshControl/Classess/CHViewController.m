@@ -1,8 +1,8 @@
 //
-//  SampleViewController.m
+//  CHViewController.m
 //  RefreshControl
 //
-//  Created by Moch Xiao on (null).
+//  Created by Moch Xiao on 2014-12-25.
 //  Copyright (c) 2014 Moch Xiao (https://github.com/atcuan).
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,17 +24,18 @@
 //  THE SOFTWARE.
 //
 
-#import "SampleViewController.h"
+#import "CHViewController.h"
 #import "UIScrollView+RefreshControl.h"
+#import "RefreshControl.h"
 
-@interface SampleViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface CHViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 
 @end
 
-@implementation SampleViewController
+@implementation CHViewController
 
 - (void)dealloc {
     NSLog(@"%s", __func__);
@@ -50,7 +51,7 @@ static NSInteger count = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    
+
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.dataSource = self;
@@ -74,12 +75,12 @@ static NSInteger count = 0;
             [weakSelf.tableView reloadData];
         });
     } refreshControlPullType:RefreshControlPullTypeInsensitive refreshControlStatusType:RefreshControlStatusTypeText];
-    
-    
+
+
     UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 160)];
     backgroundView.backgroundColor = [UIColor lightGrayColor];
     [self.tableView addTopRefreshControlBackgroundView:backgroundView];
-    
+
     [self.tableView addBottomRefreshControlUsingBlock: ^{
         if (count < 1) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -95,7 +96,7 @@ static NSInteger count = 0;
                 [weakSelf.tableView bottomRefreshControlStopRefreshing];
             });
         } else {
-            //            [weakSelf.tableView bottomRefreshControlStopRefreshing];
+//            [weakSelf.tableView bottomRefreshControlStopRefreshing];
             [weakSelf.tableView bottomRefreshControlRefreshFailureWithHintText:@"加载失败，请点击重试！"];
         }
     } refreshControlPullType:RefreshControlPullTypeInsensitive refreshControlStatusType:RefreshControlStatusTypeText];
