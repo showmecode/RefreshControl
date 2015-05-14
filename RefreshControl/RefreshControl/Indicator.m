@@ -140,7 +140,7 @@
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     animation.fromValue = @(0);
     animation.toValue = @(2 * M_PI);
-    animation.duration = 0.6f;
+    animation.duration = 0.4f;
     animation.repeatCount = HUGE_VAL;
     animation.removedOnCompletion = YES;
     animation.delegate = self;

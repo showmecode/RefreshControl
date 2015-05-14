@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "RefreshControl"
-  s.version      = "1.9"
+  s.version      = "1.9.2"
   s.summary      = "RefreshControl is an useful pull to refresh control for ios developer"
 
   s.description  = <<-DESC
