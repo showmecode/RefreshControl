@@ -51,17 +51,23 @@
 #pragma mark -
 #pragma mark - RefreshControl
 
+#ifdef LOG_DEALLOC
 - (void)dealloc {
-    //    NSLog(@"%s", __func__);
+    NSLog(@"%s: %@", __FUNCTION__, self);
 }
+#endif
 
 - (id)init {
     self = [super init];
     if (self) {
-        self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.refreshControlStatusType = RefreshControlStatusTypeTextAndArrow;
+        self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        self.refreshControlStatusType = RefreshControlStatusTypeText;
         self.userInteractionEnabled = NO;
         [self addTarget:self action:@selector(handleTouchEvent:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self addSubview:self.statusLabel];
+        [self addSubview:self.indicator];
+        [self addSubview:self.arrow];
     }
     
     return self;
@@ -89,13 +95,11 @@
 
 - (UILabel *)statusLabel {
     if (!_statusLabel) {
-        UILabel *statusLabel = [UILabel new];
-        statusLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        statusLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
-        statusLabel.textColor = [UIColor lightGrayColor];
-        statusLabel.textAlignment = NSTextAlignmentCenter;
-        _statusLabel = statusLabel;
-        [self addSubview:_statusLabel];
+        _statusLabel = [UILabel new];
+        _statusLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        _statusLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+        _statusLabel.textColor = [UIColor lightGrayColor];
+        _statusLabel.textAlignment = NSTextAlignmentCenter;
     }
     
     return _statusLabel;
@@ -103,11 +107,9 @@
 
 - (Indicator *)indicator {
     if (!_indicator) {
-        Indicator *indicator = [Indicator new];
-        indicator.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        indicator.hidden = YES;
-        _indicator = indicator;
-        [self addSubview:indicator];
+        _indicator = [Indicator new];
+        _indicator.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+        _indicator.hidden = YES;
     }
     
     return _indicator;
@@ -115,10 +117,8 @@
 
 - (Arrow *)arrow {
     if (!_arrow) {
-        Arrow *arrow = [Arrow new];
-        arrow.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin| UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-        _arrow = arrow;
-        [self addSubview:arrow];
+        _arrow = [Arrow new];
+        _arrow.autoresizingMask = UIViewAutoresizingNone;
     }
     return _arrow;
 }
@@ -153,6 +153,7 @@
 
 - (void)settingStatusType {
     if (self.refreshControlStatusType == RefreshControlStatusTypeText) {
+        [self.arrow removeFromSuperview];
         return;
     } else if (self.refreshControlStatusType == RefreshControlStatusTypeArrow) {
         self.pullToRefreshing        = @"";
@@ -223,6 +224,8 @@
         _scrollViewInsetRecord = self.superScrollView.contentInset;
         _initInset = YES;
     }
+    
+    [self settingArrowFrames];
 }
 
 #pragma mark - observeing
@@ -302,7 +305,7 @@
 
 - (void)startRefreshing {
     _scrollViewContentSizeRecord = self.superScrollView.contentSize;
-    // NSLog(@"start refreshing record contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
+//    NSLog(@"start refreshing record contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
     
     void (^animationCompletion)(BOOL finished) = ^(BOOL finished) {
         if (_begainRefreshing) {
@@ -314,7 +317,7 @@
     if (self.refreshControlType == RefreshControlTypeTop) {
         UIEdgeInsets inset = self.superScrollView.contentInset;
         inset.top = self.scrollViewInsetRecord.top + kPullControlHeight;
-        
+
         [UIView animateWithDuration:0.2 animations:^{
             self.superScrollView.contentInset = inset;
             // Set the scroll position to stay
@@ -343,15 +346,15 @@
         }
         [self removeBackgroundView];
     };
-    
+
     NSTimeInterval animationDuration = 0.5f;
     NSTimeInterval delay = 1.0f;
     CGFloat contentHeightAdded = self.superScrollView.contentSize.height - self.scrollViewContentSizeRecord.height;
-    
+
     if (self.refreshControlType == RefreshControlTypeTop) {
         // Drop-down control, rolled over just can not see the parent view of the head position (reduction inset)
-        
-        // NSLog(@"now refreshing contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
+
+//        NSLog(@"now refreshing contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
         
         // If do not refresh the data, the increment should be zero,
         // contentInset should be accompanied by animation, back to the initial position
@@ -371,7 +374,7 @@
         } else {
             delay = 0.0f;
         }
-        
+
         UIEdgeInsets inset = self.superScrollView.contentInset;
         inset.top = self.scrollViewInsetRecord.top;
         [UIView animateWithDuration:animationDuration delay:delay options:UIViewAnimationOptionCurveLinear animations:^{
@@ -386,7 +389,7 @@
             animationDuration = 0.0f;
             delay = 0.0f;
         }
-        
+
         if (hintText) {
             self.statusLabel.text = hintText;
             self.indicator.hidden = YES;
@@ -503,7 +506,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [super scrollViewDidScroll:scrollView];
-    
+
     [self.backgroundView setHidden:NO];
     if (!self.alreadyAddedBackgroundView && self.backgroundView) {
         self.backgroundView.frame = CGRectMake(0,

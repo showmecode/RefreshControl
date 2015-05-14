@@ -65,9 +65,9 @@ typedef NS_ENUM(NSInteger, RefreshControlStatusType) {
 // Scroll view content exceeds the height control view (Subclasses override the)
 @property (nonatomic, assign, readonly) CGFloat      scrollViewOverViewHeight;
 
-@property (nonatomic, weak, readonly) UILabel *statusLabel;
-@property (nonatomic, weak, readonly) Indicator *indicator;
-@property (nonatomic, weak, readonly) Arrow *arrow;
+@property (nonatomic, strong, readonly) UILabel *statusLabel;
+@property (nonatomic, strong, readonly) Indicator *indicator;
+@property (nonatomic, strong, readonly) Arrow *arrow;
 
 // @"Pull down refresh"
 @property (nonatomic, strong) NSString *pullToRefreshing;

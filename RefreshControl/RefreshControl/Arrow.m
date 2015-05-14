@@ -84,6 +84,12 @@
 
 @implementation Arrow
 
+#ifdef LOG_DEALLOC
+- (void)dealloc {
+    NSLog(@"%s: %@", __FUNCTION__, self);
+}
+#endif
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

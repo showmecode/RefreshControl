@@ -75,7 +75,7 @@ static NSInteger count = 0;
 //            [weakSelf.tableView topRefreshControlStopRefreshing];
             [weakSelf.tableView topRefreshControlStopRefreshingWithHintText:@"刷新成功"];
         });
-    } refreshControlPullType:RefreshControlPullTypeInsensitive refreshControlStatusType:RefreshControlStatusTypeText];
+    } refreshControlPullType:RefreshControlPullTypeInsensitive refreshControlStatusType:RefreshControlStatusTypeTextAndArrow];
 
 
 //    UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 160)];

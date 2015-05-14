@@ -133,7 +133,7 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
 }
 
 - (void)bottomRefreshControlStopRefreshing {
-    [self bottomRefreshControlRefreshFailureWithHintText:nil];
+    [self bottomRefreshControlStopRefreshingWithHintText:nil];
 }
 
 - (void)bottomRefreshControlStopRefreshingWithHintText:(NSString *)hintText; {

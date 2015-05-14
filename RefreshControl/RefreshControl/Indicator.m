@@ -38,9 +38,9 @@
 
 @implementation Indicator
 
-#ifdef DEBUG
+#ifdef LOG_DEALLOC
 - (void)dealloc {
-    NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s: %@", __FUNCTION__, self);
 }
 #endif
 
