@@ -12,14 +12,15 @@
 		4609D16C19ACD0A8003D6E36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4609D16B19ACD0A8003D6E36 /* UIKit.framework */; };
 		4609D17219ACD0A8003D6E36 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4609D17019ACD0A8003D6E36 /* InfoPlist.strings */; };
 		4609D17419ACD0A8003D6E36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4609D17319ACD0A8003D6E36 /* main.m */; };
-		4617D68519B1F65400DC498C /* CHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68219B1F65400DC498C /* CHAppDelegate.m */; };
-		4617D68619B1F65400DC498C /* CHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68419B1F65400DC498C /* CHViewController.m */; };
-		4617D68E19B1F65C00DC498C /* Indicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68919B1F65C00DC498C /* Indicator.m */; };
-		4617D68F19B1F65C00DC498C /* RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68B19B1F65C00DC498C /* RefreshControl.m */; };
-		4617D69019B1F65C00DC498C /* UIScrollView+RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4617D68D19B1F65C00DC498C /* UIScrollView+RefreshControl.m */; };
-		464288471AE2222C00E30B6E /* CHIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 464288461AE2222C00E30B6E /* CHIndexViewController.m */; };
-		464EB8731AE8BBBB00EE7958 /* dinosaur.png in Resources */ = {isa = PBXBuildFile; fileRef = 464EB8721AE8BBBB00EE7958 /* dinosaur.png */; };
-		46CA05B819CBC2C5007F2A82 /* Arrow.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CA05B719CBC2C5007F2A82 /* Arrow.m */; };
+		46AB4BDF1B1705A20041D3F7 /* CHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AB4BCF1B1705A20041D3F7 /* CHAppDelegate.m */; };
+		46AB4BE01B1705A20041D3F7 /* CHIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AB4BD11B1705A20041D3F7 /* CHIndexViewController.m */; };
+		46AB4BE11B1705A20041D3F7 /* CHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AB4BD31B1705A20041D3F7 /* CHViewController.m */; };
+		46AB4BE21B1705A20041D3F7 /* CHViewController.m.trvs in Resources */ = {isa = PBXBuildFile; fileRef = 46AB4BD41B1705A20041D3F7 /* CHViewController.m.trvs */; };
+		46AB4BE31B1705A20041D3F7 /* dinosaur.png in Resources */ = {isa = PBXBuildFile; fileRef = 46AB4BD51B1705A20041D3F7 /* dinosaur.png */; };
+		46AB4BE41B1705A20041D3F7 /* Arrow.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AB4BD81B1705A20041D3F7 /* Arrow.m */; };
+		46AB4BE51B1705A20041D3F7 /* Indicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AB4BDA1B1705A20041D3F7 /* Indicator.m */; };
+		46AB4BE61B1705A20041D3F7 /* RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AB4BDC1B1705A20041D3F7 /* RefreshControl.m */; };
+		46AB4BE71B1705A20041D3F7 /* UIScrollView+RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AB4BDE1B1705A20041D3F7 /* UIScrollView+RefreshControl.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,21 +33,22 @@
 		4609D17319ACD0A8003D6E36 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4609D17519ACD0A8003D6E36 /* RefreshControl-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RefreshControl-Prefix.pch"; sourceTree = "<group>"; };
 		4609D18619ACD0A8003D6E36 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		4617D68119B1F65400DC498C /* CHAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHAppDelegate.h; sourceTree = "<group>"; };
-		4617D68219B1F65400DC498C /* CHAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHAppDelegate.m; sourceTree = "<group>"; };
-		4617D68319B1F65400DC498C /* CHViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHViewController.h; sourceTree = "<group>"; };
-		4617D68419B1F65400DC498C /* CHViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHViewController.m; sourceTree = "<group>"; };
-		4617D68819B1F65C00DC498C /* Indicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Indicator.h; sourceTree = "<group>"; };
-		4617D68919B1F65C00DC498C /* Indicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Indicator.m; sourceTree = "<group>"; };
-		4617D68A19B1F65C00DC498C /* RefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshControl.h; sourceTree = "<group>"; };
-		4617D68B19B1F65C00DC498C /* RefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshControl.m; sourceTree = "<group>"; };
-		4617D68C19B1F65C00DC498C /* UIScrollView+RefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+RefreshControl.h"; sourceTree = "<group>"; };
-		4617D68D19B1F65C00DC498C /* UIScrollView+RefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+RefreshControl.m"; sourceTree = "<group>"; };
-		464288451AE2222C00E30B6E /* CHIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHIndexViewController.h; sourceTree = "<group>"; };
-		464288461AE2222C00E30B6E /* CHIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHIndexViewController.m; sourceTree = "<group>"; };
-		464EB8721AE8BBBB00EE7958 /* dinosaur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dinosaur.png; sourceTree = "<group>"; };
-		46CA05B619CBC2C5007F2A82 /* Arrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arrow.h; sourceTree = "<group>"; };
-		46CA05B719CBC2C5007F2A82 /* Arrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Arrow.m; sourceTree = "<group>"; };
+		46AB4BCE1B1705A20041D3F7 /* CHAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHAppDelegate.h; sourceTree = "<group>"; };
+		46AB4BCF1B1705A20041D3F7 /* CHAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHAppDelegate.m; sourceTree = "<group>"; };
+		46AB4BD01B1705A20041D3F7 /* CHIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHIndexViewController.h; sourceTree = "<group>"; };
+		46AB4BD11B1705A20041D3F7 /* CHIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHIndexViewController.m; sourceTree = "<group>"; };
+		46AB4BD21B1705A20041D3F7 /* CHViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHViewController.h; sourceTree = "<group>"; };
+		46AB4BD31B1705A20041D3F7 /* CHViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHViewController.m; sourceTree = "<group>"; };
+		46AB4BD41B1705A20041D3F7 /* CHViewController.m.trvs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHViewController.m.trvs; sourceTree = "<group>"; };
+		46AB4BD51B1705A20041D3F7 /* dinosaur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dinosaur.png; sourceTree = "<group>"; };
+		46AB4BD71B1705A20041D3F7 /* Arrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arrow.h; sourceTree = "<group>"; };
+		46AB4BD81B1705A20041D3F7 /* Arrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Arrow.m; sourceTree = "<group>"; };
+		46AB4BD91B1705A20041D3F7 /* Indicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Indicator.h; sourceTree = "<group>"; };
+		46AB4BDA1B1705A20041D3F7 /* Indicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Indicator.m; sourceTree = "<group>"; };
+		46AB4BDB1B1705A20041D3F7 /* RefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshControl.h; sourceTree = "<group>"; };
+		46AB4BDC1B1705A20041D3F7 /* RefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshControl.m; sourceTree = "<group>"; };
+		46AB4BDD1B1705A20041D3F7 /* UIScrollView+RefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+RefreshControl.h"; sourceTree = "<group>"; };
+		46AB4BDE1B1705A20041D3F7 /* UIScrollView+RefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+RefreshControl.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +96,8 @@
 		4609D16D19ACD0A8003D6E36 /* RefreshControl */ = {
 			isa = PBXGroup;
 			children = (
-				4617D68719B1F65C00DC498C /* RefreshControl */,
-				4617D68019B1F65400DC498C /* Classess */,
+				46AB4BD61B1705A20041D3F7 /* Source */,
+				46AB4BCD1B1705A20041D3F7 /* Sample */,
 				4609D16E19ACD0A8003D6E36 /* Supporting Files */,
 			);
 			path = RefreshControl;
@@ -112,33 +114,34 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		4617D68019B1F65400DC498C /* Classess */ = {
+		46AB4BCD1B1705A20041D3F7 /* Sample */ = {
 			isa = PBXGroup;
 			children = (
-				464EB8721AE8BBBB00EE7958 /* dinosaur.png */,
-				4617D68119B1F65400DC498C /* CHAppDelegate.h */,
-				4617D68219B1F65400DC498C /* CHAppDelegate.m */,
-				464288451AE2222C00E30B6E /* CHIndexViewController.h */,
-				464288461AE2222C00E30B6E /* CHIndexViewController.m */,
-				4617D68319B1F65400DC498C /* CHViewController.h */,
-				4617D68419B1F65400DC498C /* CHViewController.m */,
+				46AB4BCE1B1705A20041D3F7 /* CHAppDelegate.h */,
+				46AB4BCF1B1705A20041D3F7 /* CHAppDelegate.m */,
+				46AB4BD01B1705A20041D3F7 /* CHIndexViewController.h */,
+				46AB4BD11B1705A20041D3F7 /* CHIndexViewController.m */,
+				46AB4BD21B1705A20041D3F7 /* CHViewController.h */,
+				46AB4BD31B1705A20041D3F7 /* CHViewController.m */,
+				46AB4BD41B1705A20041D3F7 /* CHViewController.m.trvs */,
+				46AB4BD51B1705A20041D3F7 /* dinosaur.png */,
 			);
-			path = Classess;
+			path = Sample;
 			sourceTree = "<group>";
 		};
-		4617D68719B1F65C00DC498C /* RefreshControl */ = {
+		46AB4BD61B1705A20041D3F7 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				46CA05B619CBC2C5007F2A82 /* Arrow.h */,
-				46CA05B719CBC2C5007F2A82 /* Arrow.m */,
-				4617D68819B1F65C00DC498C /* Indicator.h */,
-				4617D68919B1F65C00DC498C /* Indicator.m */,
-				4617D68A19B1F65C00DC498C /* RefreshControl.h */,
-				4617D68B19B1F65C00DC498C /* RefreshControl.m */,
-				4617D68C19B1F65C00DC498C /* UIScrollView+RefreshControl.h */,
-				4617D68D19B1F65C00DC498C /* UIScrollView+RefreshControl.m */,
+				46AB4BD71B1705A20041D3F7 /* Arrow.h */,
+				46AB4BD81B1705A20041D3F7 /* Arrow.m */,
+				46AB4BD91B1705A20041D3F7 /* Indicator.h */,
+				46AB4BDA1B1705A20041D3F7 /* Indicator.m */,
+				46AB4BDB1B1705A20041D3F7 /* RefreshControl.h */,
+				46AB4BDC1B1705A20041D3F7 /* RefreshControl.m */,
+				46AB4BDD1B1705A20041D3F7 /* UIScrollView+RefreshControl.h */,
+				46AB4BDE1B1705A20041D3F7 /* UIScrollView+RefreshControl.m */,
 			);
-			path = RefreshControl;
+			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,8 +197,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				464EB8731AE8BBBB00EE7958 /* dinosaur.png in Resources */,
+				46AB4BE31B1705A20041D3F7 /* dinosaur.png in Resources */,
 				4609D17219ACD0A8003D6E36 /* InfoPlist.strings in Resources */,
+				46AB4BE21B1705A20041D3F7 /* CHViewController.m.trvs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,13 +211,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4609D17419ACD0A8003D6E36 /* main.m in Sources */,
-				4617D69019B1F65C00DC498C /* UIScrollView+RefreshControl.m in Sources */,
-				4617D68E19B1F65C00DC498C /* Indicator.m in Sources */,
-				4617D68519B1F65400DC498C /* CHAppDelegate.m in Sources */,
-				464288471AE2222C00E30B6E /* CHIndexViewController.m in Sources */,
-				4617D68619B1F65400DC498C /* CHViewController.m in Sources */,
-				4617D68F19B1F65C00DC498C /* RefreshControl.m in Sources */,
-				46CA05B819CBC2C5007F2A82 /* Arrow.m in Sources */,
+				46AB4BE01B1705A20041D3F7 /* CHIndexViewController.m in Sources */,
+				46AB4BDF1B1705A20041D3F7 /* CHAppDelegate.m in Sources */,
+				46AB4BE71B1705A20041D3F7 /* UIScrollView+RefreshControl.m in Sources */,
+				46AB4BE61B1705A20041D3F7 /* RefreshControl.m in Sources */,
+				46AB4BE41B1705A20041D3F7 /* Arrow.m in Sources */,
+				46AB4BE11B1705A20041D3F7 /* CHViewController.m in Sources */,
+				46AB4BE51B1705A20041D3F7 /* Indicator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

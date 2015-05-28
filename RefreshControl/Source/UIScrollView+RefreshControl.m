@@ -77,11 +77,9 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
 }
 
 - (void)topRefreshControlStopRefreshingWithHintText:(NSString *)hintText {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        if (self.topRefreshControl) {
-            [self.topRefreshControl stopRefreshingWithHintText:hintText];
-        }
-    });
+    if (self.topRefreshControl && self.topRefreshControl.refreshControlState == RefreshControlStateRefreshing) {
+        [self.topRefreshControl stopRefreshingWithHintText:hintText];
+    }
 }
 
 - (void)removeTopRefreshControl {
@@ -137,11 +135,9 @@ static const void *BottomRefreshControlKey = &BottomRefreshControlKey;
 }
 
 - (void)bottomRefreshControlStopRefreshingWithHintText:(NSString *)hintText; {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        if (self.bottomRefreshControl) {
-            [self.bottomRefreshControl stopRefreshingWithHintText:hintText];
-        }
-    });
+    if (self.bottomRefreshControl && self.bottomRefreshControl.refreshControlState == RefreshControlStateRefreshing) {
+        [self.bottomRefreshControl stopRefreshingWithHintText:hintText];
+    }
 }
 
 - (void)removeBottomRefreshControl {

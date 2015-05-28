@@ -341,10 +341,13 @@
 - (void)stopRefreshingWithHintText:(NSString *)hintText {
     void (^animationCompletion)(BOOL finished) = ^(BOOL finished) {
         self.refreshControlState = RefreshControlStateHidden;
-        if (_endRefreshing) {
-            _endRefreshing();
-        }
-        [self removeBackgroundView];
+        // animation duration == 0.3, so waiting 0.3
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self removeBackgroundView];
+            if (_endRefreshing) {
+                _endRefreshing();
+            }
+        });
     };
 
     NSTimeInterval animationDuration = 0.5f;

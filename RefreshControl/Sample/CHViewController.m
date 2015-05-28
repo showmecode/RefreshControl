@@ -71,9 +71,10 @@ static NSInteger count = 0;
             }
         });
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [weakSelf.tableView topRefreshControlStopRefreshingWithHintText:@"刷新成功"];
             [weakSelf.tableView reloadData];
-//            [weakSelf.tableView topRefreshControlStopRefreshing];
-            [weakSelf.tableView topRefreshControlStopRefreshingWithHintText:@"刷新成功"];
+            [weakSelf.tableView topRefreshControlStopRefreshing];
+//            [weakSelf.tableView topRefreshControlStopRefreshingWithHintText:@"刷新成功"];
         });
     } refreshControlPullType:RefreshControlPullTypeInsensitive refreshControlStatusType:RefreshControlStatusTypeTextAndArrow];
 
@@ -115,9 +116,9 @@ static NSInteger count = 0;
         [weakSelf.tableView bottomRefreshControlResumeRefreshing];
     }];
     
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [self.tableView topRefreshControlStartInitializeRefreshing];
-//    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.tableView topRefreshControlStartInitializeRefreshing];
+    });
 }
 
 #pragma mark -
