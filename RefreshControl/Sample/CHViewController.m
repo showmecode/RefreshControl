@@ -87,7 +87,7 @@ static NSInteger count = 0;
     [self.tableView addBottomRefreshControlUsingBlock: ^{
         if (count < 1) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < 5 + arc4random() % 5; i++) {
                     NSString *data = [NSString stringWithFormat:@"pull up data random number: %d", arc4random() % 100];
                     CGFloat height = arc4random() % 66 + 44;
                     [weakSelf.dataSource addObject:@{ @"content":data, @"height":@(height) }];
@@ -102,9 +102,9 @@ static NSInteger count = 0;
             });
         } else {
 //            [weakSelf.tableView bottomRefreshControlStopRefreshing];
-//            [weakSelf.tableView bottomRefreshControlStopRefreshingWithHintText:@"已经加载完所有数据"];
+            [weakSelf.tableView bottomRefreshControlStopRefreshingWithHintText:@"已经加载完所有数据"];
             
-            [weakSelf.tableView bottomRefreshControlRefreshFailureWithHintText:@"加载失败，请点击重试！"];
+//            [weakSelf.tableView bottomRefreshControlRefreshFailureWithHintText:@"加载失败，请点击重试！"];
         }
     } refreshControlPullType:RefreshControlPullTypeInsensitive refreshControlStatusType:RefreshControlStatusTypeText];
     

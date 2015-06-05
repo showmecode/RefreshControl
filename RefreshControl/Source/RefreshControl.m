@@ -304,7 +304,7 @@
 }
 
 - (void)startRefreshing {
-    _scrollViewContentSizeRecord = self.superScrollView.contentSize;
+//    _scrollViewContentSizeRecord = self.superScrollView.contentSize;
 //    NSLog(@"start refreshing record contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
     
     void (^animationCompletion)(BOOL finished) = ^(BOOL finished) {
@@ -352,13 +352,14 @@
 
     NSTimeInterval animationDuration = 0.5f;
     NSTimeInterval delay = 1.0f;
+    
     CGFloat contentHeightAdded = self.superScrollView.contentSize.height - self.scrollViewContentSizeRecord.height;
+//    NSLog(@"contentHeightAdded = %@", @(contentHeightAdded));
+//    NSLog(@"last time refreshing contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
+    self.scrollViewContentSizeRecord = self.superScrollView.contentSize;
 
     if (self.refreshControlType == RefreshControlTypeTop) {
         // Drop-down control, rolled over just can not see the parent view of the head position (reduction inset)
-
-//        NSLog(@"now refreshing contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
-        
         // If do not refresh the data, the increment should be zero,
         // contentInset should be accompanied by animation, back to the initial position
         // If do refresh the data already, the increment should not be zero,

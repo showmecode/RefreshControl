@@ -15,7 +15,6 @@
 		46AB4BDF1B1705A20041D3F7 /* CHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AB4BCF1B1705A20041D3F7 /* CHAppDelegate.m */; };
 		46AB4BE01B1705A20041D3F7 /* CHIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AB4BD11B1705A20041D3F7 /* CHIndexViewController.m */; };
 		46AB4BE11B1705A20041D3F7 /* CHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AB4BD31B1705A20041D3F7 /* CHViewController.m */; };
-		46AB4BE21B1705A20041D3F7 /* CHViewController.m.trvs in Resources */ = {isa = PBXBuildFile; fileRef = 46AB4BD41B1705A20041D3F7 /* CHViewController.m.trvs */; };
 		46AB4BE31B1705A20041D3F7 /* dinosaur.png in Resources */ = {isa = PBXBuildFile; fileRef = 46AB4BD51B1705A20041D3F7 /* dinosaur.png */; };
 		46AB4BE41B1705A20041D3F7 /* Arrow.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AB4BD81B1705A20041D3F7 /* Arrow.m */; };
 		46AB4BE51B1705A20041D3F7 /* Indicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AB4BDA1B1705A20041D3F7 /* Indicator.m */; };
@@ -39,7 +38,6 @@
 		46AB4BD11B1705A20041D3F7 /* CHIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHIndexViewController.m; sourceTree = "<group>"; };
 		46AB4BD21B1705A20041D3F7 /* CHViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHViewController.h; sourceTree = "<group>"; };
 		46AB4BD31B1705A20041D3F7 /* CHViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHViewController.m; sourceTree = "<group>"; };
-		46AB4BD41B1705A20041D3F7 /* CHViewController.m.trvs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHViewController.m.trvs; sourceTree = "<group>"; };
 		46AB4BD51B1705A20041D3F7 /* dinosaur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dinosaur.png; sourceTree = "<group>"; };
 		46AB4BD71B1705A20041D3F7 /* Arrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arrow.h; sourceTree = "<group>"; };
 		46AB4BD81B1705A20041D3F7 /* Arrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Arrow.m; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 				46AB4BD11B1705A20041D3F7 /* CHIndexViewController.m */,
 				46AB4BD21B1705A20041D3F7 /* CHViewController.h */,
 				46AB4BD31B1705A20041D3F7 /* CHViewController.m */,
-				46AB4BD41B1705A20041D3F7 /* CHViewController.m.trvs */,
 				46AB4BD51B1705A20041D3F7 /* dinosaur.png */,
 			);
 			path = Sample;
@@ -199,7 +196,6 @@
 			files = (
 				46AB4BE31B1705A20041D3F7 /* dinosaur.png in Resources */,
 				4609D17219ACD0A8003D6E36 /* InfoPlist.strings in Resources */,
-				46AB4BE21B1705A20041D3F7 /* CHViewController.m.trvs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
