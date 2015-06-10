@@ -298,18 +298,25 @@
     
     if (self.refreshControlState == RefreshControlStateOveredThreshold) {
         _scrollViewInsetRecord = scrollView.contentInset;
-        self.refreshControlState = RefreshControlStateRefreshing;
-        [self startRefreshing];
+        _refreshControlState = RefreshControlStateRefreshing;
+        __weak typeof(self) weakSelf = self;
+        [self startRefreshing:^{
+            __strong __typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf adaptStateRefreshing];
+        }];
     }
 }
 
-- (void)startRefreshing {
-//    _scrollViewContentSizeRecord = self.superScrollView.contentSize;
-//    NSLog(@"start refreshing record contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
+- (void)startRefreshing:(void(^)(void))completion {
+    _scrollViewContentSizeRecord = self.superScrollView.contentSize;
+    //    NSLog(@"start refreshing record contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
     
     void (^animationCompletion)(BOOL finished) = ^(BOOL finished) {
         if (_begainRefreshing) {
             _begainRefreshing();
+        }
+        if (completion) {
+            completion();
         }
     };
     
@@ -317,14 +324,14 @@
     if (self.refreshControlType == RefreshControlTypeTop) {
         UIEdgeInsets inset = self.superScrollView.contentInset;
         inset.top = self.scrollViewInsetRecord.top + kPullControlHeight;
-
-        [UIView animateWithDuration:0.2 animations:^{
+        
+        [UIView animateWithDuration:0.3 animations:^{
             self.superScrollView.contentInset = inset;
             // Set the scroll position to stay
-            self.superScrollView.contentOffset = CGPointMake(0, -self.scrollViewInsetRecord.top - kPullControlHeight);
+            self.superScrollView.contentOffset = CGPointMake(0, -inset.top);
         } completion:animationCompletion];
     } else {
-        [UIView animateWithDuration:0.2 animations:^{
+        [UIView animateWithDuration:0.3 animations:^{
             UIEdgeInsets inset = self.superScrollView.contentInset;
             CGFloat bottom = self.scrollViewInsetRecord.bottom + kPullControlHeight;
             CGFloat overHeight = [self scrollViewOverViewHeight];
@@ -341,31 +348,27 @@
 - (void)stopRefreshingWithHintText:(NSString *)hintText {
     void (^animationCompletion)(BOOL finished) = ^(BOOL finished) {
         self.refreshControlState = RefreshControlStateHidden;
-        // animation duration == 0.3, so waiting 0.3
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self removeBackgroundView];
-            if (_endRefreshing) {
-                _endRefreshing();
-            }
-        });
+        [self removeBackgroundView];
+        if (_endRefreshing) {
+            _endRefreshing();
+        }
     };
-
+    
     NSTimeInterval animationDuration = 0.5f;
     NSTimeInterval delay = 1.0f;
-    
     CGFloat contentHeightAdded = self.superScrollView.contentSize.height - self.scrollViewContentSizeRecord.height;
-//    NSLog(@"contentHeightAdded = %@", @(contentHeightAdded));
-//    NSLog(@"last time refreshing contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
-    self.scrollViewContentSizeRecord = self.superScrollView.contentSize;
-
+    
     if (self.refreshControlType == RefreshControlTypeTop) {
         // Drop-down control, rolled over just can not see the parent view of the head position (reduction inset)
+        
+        //        NSLog(@"now refreshing contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
+        
         // If do not refresh the data, the increment should be zero,
         // contentInset should be accompanied by animation, back to the initial position
         // If do refresh the data already, the increment should not be zero,
         // contentOffset should be back to proper position directly
         BOOL contentBeyondScreenEdge = self.scrollViewContentSizeRecord.height > CGRectGetHeight(self.superScrollView.bounds);
-        if (contentHeightAdded && contentBeyondScreenEdge) {
+        if (contentHeightAdded >= kPullControlHeight && contentBeyondScreenEdge) {
             animationDuration = 0.0f;
             delay = 0.0f;
             self.superScrollView.contentOffset = CGPointMake(self.superScrollView.contentOffset.x,
@@ -378,7 +381,7 @@
         } else {
             delay = 0.0f;
         }
-
+        
         UIEdgeInsets inset = self.superScrollView.contentInset;
         inset.top = self.scrollViewInsetRecord.top;
         [UIView animateWithDuration:animationDuration delay:delay options:UIViewAnimationOptionCurveLinear animations:^{
@@ -389,11 +392,11 @@
         // Either there is no more new datas, need animation too
         CGFloat screenHeight = CGRectGetHeight([[UIScreen mainScreen] bounds]);
         CGFloat contentHeight = self.superScrollView.contentSize.height + kPullControlHeight;
-        if ((contentHeight > screenHeight) && contentHeightAdded) {
+        if ((contentHeight > screenHeight) && contentHeightAdded >= kPullControlHeight) {
             animationDuration = 0.0f;
             delay = 0.0f;
         }
-
+        
         if (hintText) {
             self.statusLabel.text = hintText;
             self.indicator.hidden = YES;
@@ -419,40 +422,52 @@
     _refreshControlState = refreshControlState;
     
     switch(refreshControlState) {
-        case RefreshControlStateHidden: {
-            [self.indicator stopAnimation];
-            self.indicator.hidden = YES;
-            self.arrow.hidden = NO;
-        }
+        case RefreshControlStateHidden:
+            [self adaptStateHidden];
             break;
-        case RefreshControlStatePulling: {
-            self.statusLabel.text = self.pullToRefreshing;
-            if (self.refreshControlType == RefreshControlTypeTop) {
-                [self.arrow rotation];
-            } else {
-                [self.arrow identity];
-            }
-        }
+        case RefreshControlStatePulling:
+            [self adaptStatePulling];
             break;
-        case RefreshControlStateOveredThreshold: {
-            self.statusLabel.text = self.pullReleaseToRefreshing;
-            if (self.refreshControlType == RefreshControlTypeTop) {
-                [self.arrow identity];
-            } else {
-                [self.arrow rotation];
-            }
-        }
+        case RefreshControlStateOveredThreshold:
+            [self adaptStateOveredThreshold];
             break;
-        case RefreshControlStateRefreshing: {
-            self.indicator.hidden = NO;
-            [self.indicator startAnimation];
-            self.statusLabel.text = nil;
-            self.arrow.hidden = YES;
-        }
+        case RefreshControlStateRefreshing:
+            [self adaptStateRefreshing];
             break;
         default:
             break;
     }
+}
+
+- (void)adaptStateHidden {
+    [self.indicator stopAnimation];
+    self.indicator.hidden = YES;
+    self.arrow.hidden = NO;
+}
+
+- (void)adaptStatePulling {
+    self.statusLabel.text = self.pullToRefreshing;
+    if (self.refreshControlType == RefreshControlTypeTop) {
+        [self.arrow rotation];
+    } else {
+        [self.arrow identity];
+    }
+}
+
+- (void)adaptStateOveredThreshold {
+    self.statusLabel.text = self.pullReleaseToRefreshing;
+    if (self.refreshControlType == RefreshControlTypeTop) {
+        [self.arrow identity];
+    } else {
+        [self.arrow rotation];
+    }
+}
+
+- (void)adaptStateRefreshing {
+    self.indicator.hidden = NO;
+    [self.indicator startAnimation];
+    self.statusLabel.text = nil;
+    self.arrow.hidden = YES;
 }
 
 - (void)refreshFailureWithHintText:(NSString *)hintText {
@@ -510,7 +525,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [super scrollViewDidScroll:scrollView];
-
+    
     [self.backgroundView setHidden:NO];
     if (!self.alreadyAddedBackgroundView && self.backgroundView) {
         self.backgroundView.frame = CGRectMake(0,
