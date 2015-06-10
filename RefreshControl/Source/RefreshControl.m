@@ -307,6 +307,11 @@
     }
 }
 
+- (void)startRefreshing {
+    [self startRefreshing:^{
+    }];
+}
+
 - (void)startRefreshing:(void(^)(void))completion {
     _scrollViewContentSizeRecord = self.superScrollView.contentSize;
     //    NSLog(@"start refreshing record contentSize: %@", NSStringFromCGSize(self.superScrollView.contentSize));
