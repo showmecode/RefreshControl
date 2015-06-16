@@ -526,6 +526,15 @@
     [super settingFrames];
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+
+    self.backgroundView.frame = CGRectMake(0,
+                                           -CGRectGetHeight(self.backgroundView.bounds),
+                                           CGRectGetWidth(self.backgroundView.bounds),
+                                           CGRectGetHeight(self.backgroundView.bounds));
+}
+
 #pragma mark - Top pull background view
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -533,10 +542,6 @@
     
     [self.backgroundView setHidden:NO];
     if (!self.alreadyAddedBackgroundView && self.backgroundView) {
-        self.backgroundView.frame = CGRectMake(0,
-                                               -CGRectGetHeight(self.backgroundView.bounds),
-                                               CGRectGetWidth(self.backgroundView.bounds),
-                                               CGRectGetHeight(self.backgroundView.bounds));
         [self.superScrollView addSubview:self.backgroundView];
         [self.superScrollView sendSubviewToBack:self.backgroundView];
         self.alreadyAddedBackgroundView = YES;
