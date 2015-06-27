@@ -325,18 +325,20 @@
         }
     };
     
+    UIViewAnimationOptions options = UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction;
+
     // Controls to scroll to the appropriate location to stay
     if (self.refreshControlType == RefreshControlTypeTop) {
         UIEdgeInsets inset = self.superScrollView.contentInset;
         inset.top = self.scrollViewInsetRecord.top + kPullControlHeight;
         
-        [UIView animateWithDuration:0.3 animations:^{
+        [UIView animateWithDuration:0.3f delay:0 options:options animations:^{
             self.superScrollView.contentInset = inset;
             // Set the scroll position to stay
             self.superScrollView.contentOffset = CGPointMake(0, -inset.top);
         } completion:animationCompletion];
     } else {
-        [UIView animateWithDuration:0.3 animations:^{
+        [UIView animateWithDuration:0.3f delay:0 options:options animations:^{
             UIEdgeInsets inset = self.superScrollView.contentInset;
             CGFloat bottom = self.scrollViewInsetRecord.bottom + kPullControlHeight;
             CGFloat overHeight = [self scrollViewOverViewHeight];
@@ -362,6 +364,7 @@
     NSTimeInterval animationDuration = 0.5f;
     NSTimeInterval delay = 1.0f;
     CGFloat contentHeightAdded = self.superScrollView.contentSize.height - self.scrollViewContentSizeRecord.height;
+    UIViewAnimationOptions options = UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction;
     
     if (self.refreshControlType == RefreshControlTypeTop) {
         // Drop-down control, rolled over just can not see the parent view of the head position (reduction inset)
@@ -389,7 +392,7 @@
         
         UIEdgeInsets inset = self.superScrollView.contentInset;
         inset.top = self.scrollViewInsetRecord.top;
-        [UIView animateWithDuration:animationDuration delay:delay options:UIViewAnimationOptionCurveLinear animations:^{
+        [UIView animateWithDuration:animationDuration delay:delay options:options animations:^{
             self.superScrollView.contentInset = inset;
         } completion:animationCompletion];
     } else {
@@ -414,7 +417,7 @@
         UIEdgeInsets inset = self.superScrollView.contentInset;
         inset.bottom = self.scrollViewInsetRecord.bottom;
         
-        [UIView animateWithDuration:animationDuration delay:delay options:UIViewAnimationOptionCurveLinear animations:^{
+        [UIView animateWithDuration:animationDuration delay:delay options:options animations:^{
             self.superScrollView.contentInset = inset;
         } completion:animationCompletion];
     }

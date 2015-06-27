@@ -151,14 +151,14 @@
     if (!self.animating) {
         return;
     }
-    
+
     [self stopRotateAnimation];
     
     self.animating = NO;
 }
 
 - (void)stopRotateAnimation {
-    [UIView animateWithDuration:0.3f animations:^{
+    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction  animations:^{
         self.alpha = 0;
     } completion:^(BOOL finished) {
         [self.layer removeAllAnimations];
